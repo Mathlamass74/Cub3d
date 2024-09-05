@@ -6,7 +6,7 @@
 /*   By: mlepesqu <mlepesqu@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/26 21:11:02 by mathieu           #+#    #+#             */
-/*   Updated: 2024/09/05 11:13:06 by mlepesqu         ###   ########.fr       */
+/*   Updated: 2024/09/05 11:42:36 by mlepesqu         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -99,6 +99,7 @@ int		check_init_done(t_data *d);
 void	update_player_dir(t_data *d);
 void	update_mlx(t_data *d);
 void	update_texture(t_data *d);
+void	print_all(t_data *data);
 
 // drawmap test
 int		draw_map(t_data *d);

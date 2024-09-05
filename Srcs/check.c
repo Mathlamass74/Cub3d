@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   check.c                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: mathieu <mathieu@student.42.fr>            +#+  +:+       +#+        */
+/*   By: mlepesqu <mlepesqu@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/04 12:51:59 by mlepesqu          #+#    #+#             */
-/*   Updated: 2024/08/10 14:15:45 by mathieu          ###   ########.fr       */
+/*   Updated: 2024/09/05 11:43:14 by mlepesqu         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,6 +32,8 @@ int	flood_fill(t_data *d, int x, int y)
 	{
 		d->map_char_counter++;
 		d->player.dir = d->map[y][x];
+		d->player.posx = x;
+		d->player.posy = y;
 	}
 	if (d->map[y][x] != 'N' && d->map[y][x] != 'S' && d->map[y][x] != 'E'
 		&& d->map[y][x] != 'W' && d->map[y][x] != '1' && d->map[y][x] != '9'

@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   main.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: mathieu <mathieu@student.42.fr>            +#+  +:+       +#+        */
+/*   By: mlepesqu <mlepesqu@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/27 10:58:11 by mlepesqu          #+#    #+#             */
-/*   Updated: 2024/08/10 13:56:44 by mathieu          ###   ########.fr       */
+/*   Updated: 2024/09/05 11:42:56 by mlepesqu         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -33,7 +33,9 @@ void	print_all(t_data *d)
 	printf("ceiling_path : %s\n", d->ceiling_path);
 	printf("floor_path : %s\n", d->floor_path);
 	printf("player direction : %c\n", d->player.dir);
-	print_map(d);
+	printf("player posx : %f\n", d->player.posx);
+	printf("player posy : %f\n", d->player.posy);
+	//print_map(d);
 }
 
 int	main(int ac, char **av)

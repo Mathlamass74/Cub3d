@@ -3,16 +3,17 @@
 /*                                                        :::      ::::::::   */
 /*   update_player.c                                    :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: mathieu <mathieu@student.42.fr>            +#+  +:+       +#+        */
+/*   By: mlepesqu <mlepesqu@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/11 09:43:02 by mlepesqu          #+#    #+#             */
-/*   Updated: 2024/08/10 14:17:05 by mathieu          ###   ########.fr       */
+/*   Updated: 2024/09/05 11:40:35 by mlepesqu         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../Includes/cub3d.h"
 
 // On met à jour les directions du player en fonction de l'orientation
+
 void	update_player_dir(t_data *d)
 {
 	if (d->player.dir == 'N')
