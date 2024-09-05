@@ -20,6 +20,9 @@
 # define P2 PI/2
 # define P3 3*PI/2
 # define DR 0.0174533 //1 degré en radian
+# define CIRCLE_RADIUS 16
+# define COLOR_WINDOW_WIDTH 200
+# define COLOR_WINDOW_HEIGHT 200
 
 typedef struct s_img
 {
@@ -78,6 +81,9 @@ typedef struct s_data
 	char			*text_e_path;
 	char			*ceiling_path;
 	char			*floor_path;
+	int				mouse_down;
+	int				draw_color;
+	void			*color_win;
 }				t_data;
 
 void	init_data(t_data *d, char *path);
@@ -98,5 +104,11 @@ void	print_all(t_data *data);
 int		draw_map(t_data *d);
 int		close_window(t_data *d);
 int		deal_key(int key, t_data *d);
+
+// draw color
+void	draw_circle(t_data *d, int x_center, int y_center, int color);
+void	draw_color_picker(t_data *d);
+int		color_picker_click(int button, int x, int y, t_data *d);
+int		close_color_window(int button, int x, int y, t_data *d);
 
 #endif

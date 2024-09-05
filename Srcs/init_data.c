@@ -58,7 +58,7 @@ void	init_data(t_data *d, char *path)
 	init_player(&d->player);
 	init_map(d);
 	d->file = file_cpy(path);
-	d->size_of_file	= 0;
+	d->size_of_file = 0;
 	d->tex_width = 0;
 	d->tex_height = 0;
 	d->floor_color = 0;
@@ -70,4 +70,7 @@ void	init_data(t_data *d, char *path)
 	d->ceiling_path = NULL;
 	d->floor_path = NULL;
 	init_texture(d);
+	d->mouse_down = 0;
+	d->draw_color = 0xFFFFFF;
+	d->color_win = NULL;
 }
