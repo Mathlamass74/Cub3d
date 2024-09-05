@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   cub3d.h                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: mathieu <mathieu@student.42.fr>            +#+  +:+       +#+        */
+/*   By: mlepesqu <mlepesqu@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/26 21:11:02 by mathieu           #+#    #+#             */
-/*   Updated: 2024/08/10 14:06:10 by mathieu          ###   ########.fr       */
+/*   Updated: 2024/09/05 11:13:06 by mlepesqu         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,10 +23,10 @@
 # include <unistd.h>
 # include <string.h>
 
-# define WIN_WIDTH 1200
-# define WIN_HEIGHT 1200
-# define MOVE_SPEED 0.1
-# define ROT_SPEED 0.05
+# define WIN_WIDTH 1280
+# define WIN_HEIGHT 1024
+# define MOVE_SPEED
+# define ROT_SPEED
 
 typedef struct s_img
 {
