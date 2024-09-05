@@ -6,7 +6,7 @@
 /*   By: mlepesqu <mlepesqu@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/26 21:11:02 by mathieu           #+#    #+#             */
-/*   Updated: 2024/09/05 11:42:36 by mlepesqu         ###   ########.fr       */
+/*   Updated: 2024/09/05 11:50:36 by mlepesqu         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,6 +27,10 @@
 # define WIN_HEIGHT 1024
 # define MOVE_SPEED
 # define ROT_SPEED
+# define PI 3.1415926535
+# define P2 PI/2
+# define P3 3*PI/2
+# define DR 0.0174533 //1 degré en radian
 
 typedef struct s_img
 {
