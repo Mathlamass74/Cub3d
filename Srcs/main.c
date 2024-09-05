@@ -39,15 +39,6 @@ int	main(int ac, char **av)
 		if (!fill_map(&data))
 			exit(0);
 		update_mlx(&data);
-		update_texture(&data);
-		mlx_hook(data.win, 2, 1L << 0, &deal_key, &data);
-		mlx_hook(data.win, 17, 0L, close_window, &data);
-		while (1)
-		{
-			mlx_clear_window(data.mlx, data.win);
-			draw_map(&data);
-			mlx_do_sync(data.mlx);
-		}
 	}
 	return (0);
 }
