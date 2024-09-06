@@ -21,8 +21,8 @@
 # define P2 PI/2
 # define P3 3*PI/2
 # define DR 0.0174533 //1 degré en radian
-# define MINIMAP_WIDTH 200
-# define MINIMAP_HEIGHT 200
+# define MINIMAP_WIDTH 256
+# define MINIMAP_HEIGHT 205
 # define DASH_LENGTH 5
 # define TILE_SIZE 64
 

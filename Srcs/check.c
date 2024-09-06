@@ -46,17 +46,17 @@ int	fill_map(t_data *d)
 		{
 			ret = flood_fill(d, x, y);
 			if (ret == 1)
-				return (exit_game(3));
+				return (exit_game(3, d));
 			else if (ret == 2)
-				return (exit_game(6));
+				return (exit_game(6, d));
 			x++;
 		}
 		y++;
 	}
 	if (d->map_char_counter > 1)
-		return (exit_game(5));
+		return (exit_game(5, d));
 	else if (d->map_char_counter < 1)
-		return (exit_game(7));
+		return (exit_game(7, d));
 	return (1);
 }
 
