@@ -35,15 +35,19 @@ void	message(char *msg, int n, t_data *d)
 	exit(0);
 }
 
-int	deal_key(int key, t_data *d)
+int	 deal_key(int key, t_data *d)
 {
 	if (key == 53)
+	{
+		d->window_closed = true;
 		message("The ESC key pressed.\n", 1, d);
+	}
 	return (0);
 }
 
 int	close_window(t_data *d)
 {
+	d->window_closed = true;
 	message("The window has been closed.\n", 1, d);
 	return (0);
 }

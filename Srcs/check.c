@@ -21,8 +21,8 @@ int	flood_fill(t_data *d, int x, int y)
 	{
 		d->map_char_counter++;
 		d->player.dir = d->map[y][x];
-		d->player.posx = x;
-		d->player.posy = y;
+		d->player.posx = x * TILE_SIZE + TILE_SIZE / 2;
+		d->player.posy = y * TILE_SIZE + TILE_SIZE / 2;
 	}
 	if (d->map[y][x] != 'N' && d->map[y][x] != 'S' && d->map[y][x] != 'E'
 		&& d->map[y][x] != 'W' && d->map[y][x] != '1' && d->map[y][x] != '9'
