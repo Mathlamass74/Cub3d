@@ -6,7 +6,7 @@
 /*   By: pcardin <pcardin@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/11 15:26:49 by mlepesqu          #+#    #+#             */
-/*   Updated: 2024/09/05 18:54:49 by pcardin          ###   ########.fr       */
+/*   Updated: 2024/09/06 10:01:10 by pcardin          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -36,7 +36,7 @@ char	*ft_strmapi(char const *s, char (*f)(unsigned int, char))
 	while (s[i])
 	{
 		str[i] = f(i, s[i]);
-			i++;
+		i++;
 	}
 	str[i] = '\0';
 	return (str);

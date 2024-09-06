@@ -42,12 +42,10 @@ int	main(int ac, char **av)
 		update_texture(&data);
 		mlx_hook(data.win, 2, 1L << 0, &deal_key, &data);
 		mlx_hook(data.win, 17, 0L, close_window, &data);
-		while (1)
-		{
-			mlx_clear_window(data.mlx, data.win);
-			draw_map(&data);
-			mlx_do_sync(data.mlx);
-		}
+		draw_map(&data);
+		mlx_loop(data.mlx);
 	}
 	return (0);
 }
+
+// Wildcards interdites dans makefile

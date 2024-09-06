@@ -7,7 +7,7 @@ MLX_DIR = minilibx-linux
 MLX_FLAGS = -L$(MLX_DIR) -lmlx -L/usr/X11/lib -lXext -lX11 -lm
 
 # Macos
-#MLX_DIR = mlx-macos
+#MLX_DIR = mlx
 #MLX_FLAGS = -L$(MLX_DIR) -lmlx -framework AppKit -framework OpenGL
 
 MLX = $(MLX_DIR)/libmlx.a
@@ -43,7 +43,7 @@ all: $(NAME)
 clean:
 	make -C $(LIBFTDIR) clean
 	rm -rf $(OBJ_DIR)
-	
+
 fclean: clean
 	make -C $(LIBFTDIR) fclean
 	rm -f $(NAME)
