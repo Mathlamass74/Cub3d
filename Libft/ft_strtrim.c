@@ -3,14 +3,14 @@
 /*                                                        :::      ::::::::   */
 /*   ft_strtrim.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: mlepesqu <mlepesqu@student.42.fr>          +#+  +:+       +#+        */
+/*   By: pcardin <pcardin@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/10 15:49:29 by mlepesqu          #+#    #+#             */
-/*   Updated: 2024/06/27 10:56:03 by mlepesqu         ###   ########.fr       */
+/*   Updated: 2024/09/05 18:55:08 by pcardin          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../Includes/libft.h"
+#include "Includes/libft.h"
 
 static int	ft_check(char c, char const *set)
 {

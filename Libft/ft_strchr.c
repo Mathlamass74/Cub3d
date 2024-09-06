@@ -3,14 +3,14 @@
 /*                                                        :::      ::::::::   */
 /*   ft_strchr.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: mlepesqu <mlepesqu@student.42.fr>          +#+  +:+       +#+        */
+/*   By: pcardin <pcardin@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/10 10:13:58 by mlepesqu          #+#    #+#             */
-/*   Updated: 2024/06/27 10:55:35 by mlepesqu         ###   ########.fr       */
+/*   Updated: 2024/09/05 18:54:05 by pcardin          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../Includes/libft.h"
+#include "Includes/libft.h"
 
 char	*ft_strchr(const char *s, int c)
 {

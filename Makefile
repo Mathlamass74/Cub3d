@@ -1,33 +1,51 @@
 NAME = cub3d
 CC = gcc
 CFLAGS = -Wall -Wextra -Werror
-MLX_DIR = mlx
+
+# Linux
+MLX_DIR = minilibx-linux
+MLX_FLAGS = -L$(MLX_DIR) -lmlx -L/usr/X11/lib -lXext -lX11 -lm
+
+# Macos
+#MLX_DIR = mlx
+#MLX_FLAGS = -L$(MLX_DIR) -lmlx -framework AppKit -framework OpenGL
+
 MLX = $(MLX_DIR)/libmlx.a
-MLX_FLAGS = -L$(MLX_DIR) -lmlx -framework OpenGL -framework AppKit
-GNL_DIR = GNL
-GNL_SRC = $(GNL_DIR)/get_next_line.c
-LIBFT_DIR = Libft
-LIBFT_SRC = $(wildcard $(LIBFT_DIR)/*.c)
-INCLUDES = -IIncludes
+
+LIBFTDIR = Libft
+LIBFT_INC = -I $(LIBFTDIR)/Includes
+LIBFT_LINK = -L $(LIBFTDIR) -lft
+
+INCLUDES = -I Includes $(LIBFT_INC)
 CUBE_DIR = Srcs
 CUBE_SRC = $(wildcard $(CUBE_DIR)/*.c)
+OBJ_DIR = obj/
 
-SRCS = $(GNL_SRC) $(LIBFT_SRC) $(CUBE_SRC)
-OBJS = $(SRCS:.c=.o)
+SRCS = $(CUBE_SRC)
+OBJ = $(patsubst %.c,$(OBJ_DIR)%.o,$(SRCS))
+
+$(OBJ_DIR)%.o: %.c
+	mkdir -p $(@D)
+	$(CC) $(CFLAGS) $(INCLUDES) -c $< -o $@
+
+$(NAME): $(OBJ) $(MLX) $(LIBFT)
+	make -C $(LIBFTDIR)
+	$(CC) $(CFLAGS) $(INCLUDES) -o $(NAME) $(OBJ) $(MLX_FLAGS) $(LIBFT_LINK)
+
+$(LIBFT):
+	make -C $(LIBFTDIR)
+
+$(MLX):
+	make -C $(MLX_DIR)
 
 all: $(NAME)
 
-$(NAME): $(OBJS) $(MLX)
-	$(CC) $(CFLAGS) $(INCLUDES) -o $(NAME) $(OBJS) $(MLX_FLAGS)
-
-$(MLX):
-	$(MAKE) -C $(MLX_DIR)
-
 clean:
-	rm -f $(OBJS)
-	$(MAKE) -C $(MLX_DIR) clean
+	make -C $(LIBFTDIR) clean
+	rm -rf $(OBJ_DIR)
 
 fclean: clean
+	make -C $(LIBFTDIR) fclean
 	rm -f $(NAME)
 	$(MAKE) -C $(MLX_DIR) clean
 

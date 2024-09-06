@@ -3,14 +3,14 @@
 /*                                                        :::      ::::::::   */
 /*   ft_strmapi.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: mlepesqu <mlepesqu@student.42.fr>          +#+  +:+       +#+        */
+/*   By: pcardin <pcardin@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/11 15:26:49 by mlepesqu          #+#    #+#             */
-/*   Updated: 2024/06/27 10:55:52 by mlepesqu         ###   ########.fr       */
+/*   Updated: 2024/09/06 10:01:10 by pcardin          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../Includes/libft.h"
+#include "Includes/libft.h"
 
 /*static char	ft_test(unsigned int i, char c)
 {
@@ -36,7 +36,7 @@ char	*ft_strmapi(char const *s, char (*f)(unsigned int, char))
 	while (s[i])
 	{
 		str[i] = f(i, s[i]);
-			i++;
+		i++;
 	}
 	str[i] = '\0';
 	return (str);

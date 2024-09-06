@@ -3,14 +3,14 @@
 /*                                                        :::      ::::::::   */
 /*   ft_itoa.c                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: mlepesqu <mlepesqu@student.42.fr>          +#+  +:+       +#+        */
+/*   By: pcardin <pcardin@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/11 14:05:56 by mlepesqu          #+#    #+#             */
-/*   Updated: 2024/06/27 10:35:22 by mlepesqu         ###   ########.fr       */
+/*   Updated: 2024/09/05 18:52:17 by pcardin          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../Includes/libft.h"
+#include "Includes/libft.h"
 
 static int	ft_countnb(long int nb)
 {

@@ -2,9 +2,9 @@
 #ifndef CUB3D_H
 # define CUB3D_H
 
-# include "../mlx/mlx.h"
-# include "get_next_line.h"
-# include "libft.h"
+# include "../minilibx-linux/mlx.h"
+// # include "../mlx/mlx.h"
+# include "../Libft/Includes/libft.h"
 # include <stdlib.h>
 # include <stdio.h>
 # include <math.h>
