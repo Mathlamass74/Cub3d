@@ -56,5 +56,6 @@ void	update_mlx(t_data *d)
 	mlx_hook(d->win, 17, 0L, close_window, d);
 	update_texture(d);
 	draw_map(d);
+	draw_ray(d, 500, 500);
 	mlx_loop(d->mlx);
 }
