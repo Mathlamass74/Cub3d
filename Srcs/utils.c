@@ -1,5 +1,17 @@
 #include "../Includes/cub3d.h"
 
+void	check_door(t_data *d, int key, int x, int y)
+{
+	if (key == 31 && ((is_colision(d, x, y_move(13, d->player.posy)))
+			|| (is_colision(d, x, y_move(1, d->player.posy)))
+			|| (is_colision(d, x_move(0, d->player.posx), y))
+			|| (is_colision(d, x_move(2, d->player.posx), y))))
+	{
+		d->door = 1;
+		printf ("Door is open\n");
+	}
+}
+
 void	message(char *msg, int n, t_data *d)
 {
 	printf("%s", msg);

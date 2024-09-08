@@ -35,7 +35,7 @@ void	draw_ray(t_data *d, float x_center, float y_center)
 				//PF2("x", x);
 			if (!is_decimal(y))
 				//PF2("y", y);
-			mlx_pixel_put(d->mlx, d->win, x, y, 0x00ff00);
+			mlx_pixel_put(d->mlx, d->win, x, y, GREEN);
 			step_length += 1;
 		}
 		j++;

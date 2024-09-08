@@ -76,4 +76,6 @@ void	init_data(t_data *d, char *path)
 	d->draw_color = 0xFFFFFF;
 	d->window_closed = false;
 	d->move = 0;
+	d->door = 0;
+	d->open = 0;
 }

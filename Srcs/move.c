@@ -25,13 +25,18 @@ bool	is_colision(t_data *d, double pos_x, double pos_y)
 
 	x = (pos_x - TILE_SIZE / 2) / TILE_SIZE;
 	y = (pos_y - TILE_SIZE / 2) / TILE_SIZE;
-	if (d->map[y][x] == '0')
+	if (d->map[y][x] == '0' || (d->map[y][x] == '2' && d->door == 1))
 	{
 		if (d->move == 0)
 		{
 			x = (d->player.posx - TILE_SIZE / 2) / TILE_SIZE;
 			y = (d->player.posy - TILE_SIZE / 2) / TILE_SIZE;
 			d->map[y][x] = '0';
+		}
+		if (d->map[y][x] == '2' && d->door == 1)
+		{
+			d->open = 1;
+			d->door = 0;
 		}
 		return (true);
 	}
@@ -51,9 +56,16 @@ int	deal_key(int key, t_data *d)
 	}
 	new_player_y = y_move(key, d->player.posy);
 	new_player_x = x_move(key, d->player.posx);
+	check_door(d, key, new_player_x, new_player_y);
 	if (is_colision(d, new_player_x, new_player_y))
 	{
 		d->move++;
+		if (d->open == 1)
+		{
+			d->open = 0;
+			new_player_y = y_move(key, new_player_y);
+			new_player_x = x_move(key, new_player_x);
+		}
 		d->player.posx = new_player_x;
 		d->player.posy = new_player_y;
 	}

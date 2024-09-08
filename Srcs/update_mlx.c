@@ -18,13 +18,13 @@ void	update_mlx(t_data *d)
 	d->mlx = mlx_init();
 	if (!d->mlx)
 	{
-		printf("Erreur d'initialisation de mlx\n");
+		printf("Error\nErreur d'initialisation de mlx\n");
 		return ;
 	}
 	d->win = mlx_new_window(d->mlx, WIN_WIDTH, WIN_HEIGHT, "Cub3D");
 	if (!d->win)
 	{
-		printf("Erreur de création de la fenêtre\n");
+		printf("Error\nErreur de création de la fenêtre\n");
 		return ;
 	}
 	create_minimap_window(d);
