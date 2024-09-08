@@ -23,7 +23,7 @@
 # define PS2(s, x) fprintf(stderr, "%s: %s\n", (s), (x));
 
 # define WIN_WIDTH 1280
-# define WIN_HEIGHT 1024
+# define WIN_HEIGHT 1280
 # define MOVE_SPEED
 # define ROT_SPEED
 # define PI 3.1415926535
@@ -41,6 +41,7 @@
 
 # define YELLOW 0xFFFF00
 # define RED 0xFF0000
+# define GREEN 0x00FF00
 
 typedef struct s_img
 {
@@ -147,6 +148,7 @@ void	update_texture(t_data *d);
 void	print_all(t_data *data);
 void	free_cube(t_data *d);
 void	message(char *msg, int n, t_data *d);
+bool	is_decimal(float n);
 
 // draw
 int		draw_map(t_data *d);
