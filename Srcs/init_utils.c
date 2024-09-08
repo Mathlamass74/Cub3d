@@ -2,7 +2,7 @@
 #include "../Includes/cub3d.h"
 
 // On copie la map dans le data->file grace à GNL
-char **file_cpy(char *path)
+char	**file_cpy(char *path)
 {
 	int		fd;
 	char	*line;

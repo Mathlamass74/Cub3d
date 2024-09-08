@@ -131,6 +131,7 @@ void	update_mlx(t_data *d);
 void	update_texture(t_data *d);
 void	print_all(t_data *data);
 void	free_cube(t_data *d);
+void	message(char *msg, int n, t_data *d);
 
 // draw
 int		draw_map(t_data *d);
@@ -140,6 +141,7 @@ void	create_minimap_window(t_data *d);
 void	draw_minimap(t_data *d);
 int		close_window(t_data *d);
 int		deal_key(int key, t_data *d);
+int		mouse_move(int x, int y, t_data *d);
 void	draw_dashed_line(t_data *d, int p_pos_x, int p_pos_y);
 
 #endif
