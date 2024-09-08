@@ -3,12 +3,12 @@ CC = gcc
 CFLAGS = -Wall -Wextra -Werror
 
 # Linux
-MLX_DIR = minilibx-linux
-MLX_FLAGS = -L$(MLX_DIR) -lmlx -L/usr/X11/lib -lXext -lX11 -lm
+#MLX_DIR = minilibx-linux
+#MLX_FLAGS = -L$(MLX_DIR) -lmlx -L/usr/X11/lib -lXext -lX11 -lm
 
 # Macos
-#MLX_DIR = mlx
-#MLX_FLAGS = -L$(MLX_DIR) -lmlx -framework AppKit -framework OpenGL
+MLX_DIR = mlx
+MLX_FLAGS = -L$(MLX_DIR) -lmlx -framework AppKit -framework OpenGL
 
 MLX = $(MLX_DIR)/libmlx.a
 

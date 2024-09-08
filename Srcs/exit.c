@@ -1,7 +1,7 @@
 
 #include "../Includes/cub3d.h"
 
-int	exit_game(int option)
+int	exit_game(int option, t_data *d)
 {
 	if (option == 0)
 		printf("Error\nFile not found\n");
@@ -21,5 +21,7 @@ int	exit_game(int option)
 		printf("Error\nMust have at least 1 player in map!\n");
 	else if (option == 8)
 		printf("Error\nTexture not loaded!\n");
+	else if (option == 99)
+		free_cube(d);
 	return (0);
 }
