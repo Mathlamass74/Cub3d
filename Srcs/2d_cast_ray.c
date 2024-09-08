@@ -20,7 +20,7 @@ void	draw_ray(t_data *d, float x_center, float y_center)
 	float	ray_angle;
 	float	x, y;
 	float	step_length;
-	int		max_distance = (d->mouse_x - d->player.posx);
+	int		max_distance = 500;
 
 	// draw_circle(d->mlx, 500, 500, 0x00ff00);
 	while (j < 60)

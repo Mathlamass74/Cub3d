@@ -19,6 +19,9 @@ int	draw_map(t_data *d)
 			if (d->map[y][x] == '1')
 				mlx_put_image_to_window(d->mlx, d->win,
 					d->south_texture.text_ptr, x * s, y * s);
+			if (d->map[y][x] == '2')
+				mlx_put_image_to_window(d->mlx, d->win,
+					d->east_texture.text_ptr, x * s, y * s);
 		}
 	}
 	return (0);

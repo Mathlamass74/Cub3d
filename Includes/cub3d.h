@@ -22,7 +22,7 @@
 # define PI2(s, x) fprintf(stderr, "%s: %d\n", (s), (x));
 # define PS2(s, x) fprintf(stderr, "%s: %s\n", (s), (x));
 
-# define WIN_WIDTH 1280
+# define WIN_WIDTH 1216
 # define WIN_HEIGHT 1280
 # define MOVE_SPEED
 # define ROT_SPEED
@@ -129,38 +129,51 @@ typedef struct s_data
 	int				mouse_down;
 	bool			window_closed;
 	int				move;
+	int				door;
+	int				open;
 }				t_data;
 
+// init
 void	init_data(t_data *d, char *path);
 void	init_ray(t_ray_params *r);
 void	init_ray_params(t_data *d, int p_pos_x, int p_pos_y);
+void	init_minimap(t_data *d);
+void	create_minimap_window(t_data *d);
+
+// update
+void	update_map(t_data *d, int	i, int j);
+void	update_player_dir(t_data *d);
+void	update_mlx(t_data *d);
+void	update_texture(t_data *d);
+
+// utils
 int		exit_game(int option, t_data *d);
 char	*ft_strdup_magic(char *s);
-void	update_map(t_data *d, int	i, int j);
 void	parse(t_data *d);
 char	**file_cpy(char *path);
 void	ft_map_len(t_data *d, int i);
 int		fill_map(t_data *d);
 int		check_init_done(t_data *d);
-void	update_player_dir(t_data *d);
-void	update_mlx(t_data *d);
-void	update_texture(t_data *d);
 void	print_all(t_data *data);
 void	free_cube(t_data *d);
 void	message(char *msg, int n, t_data *d);
 bool	is_decimal(float n);
+int		close_window(t_data *d);
 
 // draw
 int		draw_map(t_data *d);
 void	draw_minimap(t_data *d);
-void	init_minimap(t_data *d);
-void	create_minimap_window(t_data *d);
 void	draw_minimap(t_data *d);
-int		close_window(t_data *d);
-int		deal_key(int key, t_data *d);
-int		mouse_move(int x, int y, t_data *d);
 void	draw_dashed_line(t_data *d, int p_pos_x, int p_pos_y);
 void	draw_ray(t_data *d, float x_center, float y_center);
 void	draw_player(t_data *d, double pos_x, double pos_y);
+
+// move
+int		deal_key(int key, t_data *d);
+double	y_move(int key, double pos);
+double	x_move(int key, double pos);
+int		mouse_move(int x, int y, t_data *d);
+bool	is_colision(t_data *d, double pos_x, double pos_y);
+void	check_door(t_data *d, int key, int x, int y);
 
 #endif

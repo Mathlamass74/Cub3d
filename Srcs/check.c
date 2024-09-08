@@ -26,7 +26,7 @@ int	flood_fill(t_data *d, int x, int y)
 	}
 	if (d->map[y][x] != 'N' && d->map[y][x] != 'S' && d->map[y][x] != 'E'
 		&& d->map[y][x] != 'W' && d->map[y][x] != '1' && d->map[y][x] != '9'
-		&& d->map[y][x] != '0')
+		&& d->map[y][x] != '0' && d->map[y][x] != '2')
 		return (2);
 	return (0);
 }
