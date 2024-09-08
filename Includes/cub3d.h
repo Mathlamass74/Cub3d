@@ -11,6 +11,16 @@
 # include <fcntl.h>
 # include <unistd.h>
 # include <string.h>
+# include <stdbool.h>
+
+# define PL fprintf(stderr, "file: %s line: %d pid: %i\n", \
+	__FILE__, __LINE__, getpid())
+# define PF(x) fprintf(stderr, "PF: %f\n", (x));
+# define PF2(s, x) fprintf(stderr, "%s: %f\n", (s), (x));
+# define PINT(x) fprintf(stderr, "PI: %d\n", (x));
+# define PSTR(x) fprintf(stderr, "PS: %s\n", (x));
+# define PI2(s, x) fprintf(stderr, "%s: %d\n", (s), (x));
+# define PS2(s, x) fprintf(stderr, "%s: %s\n", (s), (x));
 
 # define WIN_WIDTH 1280
 # define WIN_HEIGHT 1024
@@ -23,6 +33,9 @@
 # define CIRCLE_RADIUS 16
 # define COLOR_WINDOW_WIDTH 200
 # define COLOR_WINDOW_HEIGHT 200
+# define FOV 360
+# define TRUE 1
+# define FALSE 0
 
 typedef struct s_img
 {
@@ -83,6 +96,7 @@ typedef struct s_data
 	char			*floor_path;
 	int				mouse_down;
 	int				draw_color;
+
 	void			*color_win;
 }				t_data;
 
@@ -104,6 +118,7 @@ void	print_all(t_data *data);
 int		draw_map(t_data *d);
 int		close_window(t_data *d);
 int		deal_key(int key, t_data *d);
+void	draw_ray(t_data *d, float x_center, float y_center);
 
 // draw color
 void	draw_circle(t_data *d, int x_center, int y_center, int color);
