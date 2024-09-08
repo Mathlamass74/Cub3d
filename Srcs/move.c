@@ -18,6 +18,27 @@ double	x_move(int key, double pos)
 	return (pos);
 }
 
+bool	is_colision(t_data *d, double pos_x, double pos_y)
+{
+	int	x;
+	int	y;
+
+	x = (pos_x - TILE_SIZE / 2) / TILE_SIZE;
+	y = (pos_y - TILE_SIZE / 2) / TILE_SIZE;
+	if (d->map[y][x] == '0')
+	{
+		if (d->move == 0)
+		{
+			x = (d->player.posx - TILE_SIZE / 2) / TILE_SIZE;
+			y = (d->player.posy - TILE_SIZE / 2) / TILE_SIZE;
+			d->map[y][x] = '0';
+		}
+		return (true);
+	}
+	else
+		return (false);
+}
+
 int	deal_key(int key, t_data *d)
 {
 	double	new_player_x;
@@ -30,8 +51,12 @@ int	deal_key(int key, t_data *d)
 	}
 	new_player_y = y_move(key, d->player.posy);
 	new_player_x = x_move(key, d->player.posx);
-	d->player.posx = new_player_x;
-	d->player.posy = new_player_y;
+	if (is_colision(d, new_player_x, new_player_y))
+	{
+		d->move++;
+		d->player.posx = new_player_x;
+		d->player.posy = new_player_y;
+	}
 	return (0);
 }
 
@@ -42,31 +67,9 @@ int	mouse_move(int x, int y, t_data *d)
 	mlx_clear_window(d->mlx, d->win);
 	mlx_clear_window(d->minim.minimap_mlx, d->minim.minimap_win);
 	draw_map(d);
+	draw_ray(d, d->player.posx, d->player.posy);
 	draw_minimap(d);
 	draw_dashed_line(d, d->player.posx, d->player.posy);
+	draw_player(d, d->player.posx, d->player.posy);
 	return (0);
-}
-
-void	draw_dashed_line(t_data *d, int p_pos_x, int p_pos_y)
-{
-	int	err2;
-
-	init_ray_params(d, p_pos_x, p_pos_y);
-	while (p_pos_x != d->mouse_x || p_pos_y != d->mouse_y)
-	{
-		if (d->ray_p.dashed < DASH_LENGTH)
-			mlx_pixel_put(d->mlx, d->win, p_pos_x, p_pos_y, YELLOW);
-		d->ray_p.dashed = (d->ray_p.dashed + 1) % (2 * DASH_LENGTH);
-		err2 = 2 * d->ray_p.draw_err;
-		if (err2 > -d->ray_p.dif_abs_y)
-		{
-			d->ray_p.draw_err -= d->ray_p.dif_abs_y;
-			p_pos_x += d->ray_p.step_x;
-		}
-		if (err2 < d->ray_p.dif_abs_x)
-		{
-			d->ray_p.draw_err += d->ray_p.dif_abs_x;
-			p_pos_y += d->ray_p.step_y;
-		}
-	}
 }

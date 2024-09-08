@@ -75,4 +75,5 @@ void	init_data(t_data *d, char *path)
 	d->mouse_down = 0;
 	d->draw_color = 0xFFFFFF;
 	d->window_closed = false;
+	d->move = 0;
 }

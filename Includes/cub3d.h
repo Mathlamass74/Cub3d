@@ -13,6 +13,15 @@
 # include <string.h>
 # include <stdbool.h>
 
+# define PL fprintf(stderr, "file: %s line: %d pid: %i\n", \
+	__FILE__, __LINE__, getpid())
+# define PF(x) fprintf(stderr, "PF: %f\n", (x));
+# define PF2(s, x) fprintf(stderr, "%s: %f\n", (s), (x));
+# define PINT(x) fprintf(stderr, "PI: %d\n", (x));
+# define PSTR(x) fprintf(stderr, "PS: %s\n", (x));
+# define PI2(s, x) fprintf(stderr, "%s: %d\n", (s), (x));
+# define PS2(s, x) fprintf(stderr, "%s: %s\n", (s), (x));
+
 # define WIN_WIDTH 1280
 # define WIN_HEIGHT 1024
 # define MOVE_SPEED
@@ -25,8 +34,13 @@
 # define MINIMAP_HEIGHT 205
 # define DASH_LENGTH 5
 # define TILE_SIZE 64
+# define PLAYER_SIZE 4
+# define FOV 30.0
+# define TRUE 1
+# define FALSE 0
 
 # define YELLOW 0xFFFF00
+# define RED 0xFF0000
 
 typedef struct s_img
 {
@@ -113,6 +127,7 @@ typedef struct s_data
 	int				mouse_y;
 	int				mouse_down;
 	bool			window_closed;
+	int				move;
 }				t_data;
 
 void	init_data(t_data *d, char *path);
@@ -143,5 +158,7 @@ int		close_window(t_data *d);
 int		deal_key(int key, t_data *d);
 int		mouse_move(int x, int y, t_data *d);
 void	draw_dashed_line(t_data *d, int p_pos_x, int p_pos_y);
+void	draw_ray(t_data *d, float x_center, float y_center);
+void	draw_player(t_data *d, double pos_x, double pos_y);
 
 #endif
