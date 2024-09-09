@@ -20,7 +20,7 @@ void	draw_ray(t_data *d, float x_center, float y_center)
 	float	ray_angle;
 	float	x, y;
 	float	step_length;
-	int		max_distance = 250;
+	int		max_distance = 500;
 
 	// draw_circle(d->mlx, 500, 500, 0x00ff00);
 	while (j < 60)
@@ -32,10 +32,10 @@ void	draw_ray(t_data *d, float x_center, float y_center)
 			x = x_center + cos(ray_angle) * step_length;
 			y = y_center + sin(ray_angle) * step_length;
 			if (!is_decimal(x))
-				PF2("x", x);
+				//PF2("x", x);
 			if (!is_decimal(y))
-				PF2("y", y);
-			mlx_pixel_put(d->mlx, d->win, x, y, 0x00ff00);
+				//PF2("y", y);
+			mlx_pixel_put(d->mlx, d->win, x, y, GREEN);
 			step_length += 1;
 		}
 		j++;
@@ -44,4 +44,4 @@ void	draw_ray(t_data *d, float x_center, float y_center)
 
 // - Draw a circle as the player with the mlx_pixelput
 // 	--> then draw aline from the center of the circle (Eventually in the direction the player's looking)
-// 
+// $

@@ -69,5 +69,5 @@ void	ft_map_len(t_data *d, int i)
 	}
 	d->map = (char **)malloc(sizeof(char *) * (d->map_rows + 1));
 	if (!d->map)
-		exit(exit_game(2));
+		exit(exit_game(2, d));
 }

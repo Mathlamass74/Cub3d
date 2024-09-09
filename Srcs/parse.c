@@ -53,6 +53,6 @@ void	parse(t_data *d)
 		i++;
 	}
 	if (check_init_done(d))
-		exit(exit_game(4));
+		exit(exit_game(4, d));
 }
 

@@ -21,12 +21,12 @@ int	flood_fill(t_data *d, int x, int y)
 	{
 		d->map_char_counter++;
 		d->player.dir = d->map[y][x];
-		d->player.posx = x;
-		d->player.posy = y;
+		d->player.posx = x * TILE_SIZE + TILE_SIZE / 2;
+		d->player.posy = y * TILE_SIZE + TILE_SIZE / 2;
 	}
 	if (d->map[y][x] != 'N' && d->map[y][x] != 'S' && d->map[y][x] != 'E'
 		&& d->map[y][x] != 'W' && d->map[y][x] != '1' && d->map[y][x] != '9'
-		&& d->map[y][x] != '0')
+		&& d->map[y][x] != '0' && d->map[y][x] != '2')
 		return (2);
 	return (0);
 }
@@ -46,17 +46,17 @@ int	fill_map(t_data *d)
 		{
 			ret = flood_fill(d, x, y);
 			if (ret == 1)
-				return (exit_game(3));
+				return (exit_game(3, d));
 			else if (ret == 2)
-				return (exit_game(6));
+				return (exit_game(6, d));
 			x++;
 		}
 		y++;
 	}
 	if (d->map_char_counter > 1)
-		return (exit_game(5));
+		return (exit_game(5, d));
 	else if (d->map_char_counter < 1)
-		return (exit_game(7));
+		return (exit_game(7, d));
 	return (1);
 }
 

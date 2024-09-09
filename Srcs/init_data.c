@@ -55,6 +55,7 @@ void	init_data(t_data *d, char *path)
 	d->mlx = NULL;
 	d->win = NULL;
 	init_img(&d->img);
+	init_ray(&d->ray_p);
 	init_player(&d->player);
 	init_map(d);
 	d->file = file_cpy(path);
@@ -70,7 +71,11 @@ void	init_data(t_data *d, char *path)
 	d->ceiling_path = NULL;
 	d->floor_path = NULL;
 	init_texture(d);
+	init_minimap(d);
 	d->mouse_down = 0;
 	d->draw_color = 0xFFFFFF;
-	d->color_win = NULL;
+	d->window_closed = false;
+	d->move = 0;
+	d->door = 0;
+	d->open = 0;
 }
