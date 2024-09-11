@@ -23,7 +23,6 @@ void	draw_ray(t_data *d, double x_center, double y_center)
 	int		max_distance = 500;
 
 	(void)d;
-	// draw_circle(d->mlx, 500, 500, 0x00ff00);
 	while (j < 60)
 	{
 		ray_angle = (j * FOV / 60 - (FOV / 2)) * (PI / 180);
