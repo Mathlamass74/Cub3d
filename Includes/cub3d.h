@@ -131,6 +131,7 @@ typedef struct s_data
 	int				move;
 	int				door;
 	int				open;
+	int				move_check;
 }				t_data;
 
 // init
@@ -159,6 +160,8 @@ void	free_cube(t_data *d);
 void	message(char *msg, int n, t_data *d);
 bool	is_decimal(double n);
 int		close_window(t_data *d);
+int		nxto(t_data	*d);
+void	which_key(int key, t_data *d);
 
 // draw
 int		draw_map(t_data *d);

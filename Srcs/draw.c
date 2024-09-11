@@ -30,11 +30,9 @@ int	draw_map(t_data *d)
 void	draw_dashed_line(t_data *d, int p_pos_x, int p_pos_y)
 {
 	int	err2;
-	int	x;
-	int	y;
 
 	init_ray_params(d, p_pos_x, p_pos_y);
-	while (p_pos_x != d->mouse_x || p_pos_y != d->mouse_y)
+	while (d->map[p_pos_y / TILE_SIZE][p_pos_x / TILE_SIZE] == '0')
 	{
 		mlx_pixel_put(d->mlx, d->win, p_pos_x, p_pos_y, YELLOW); // switch to cast ray function
 		d->ray_p.dashed = (d->ray_p.dashed + 1) % (2 * DASH_LENGTH);
@@ -49,10 +47,6 @@ void	draw_dashed_line(t_data *d, int p_pos_x, int p_pos_y)
 			d->ray_p.draw_err += d->ray_p.dif_abs_x;
 			p_pos_y += d->ray_p.step_y;
 		}
-		x = p_pos_x / TILE_SIZE;
-		y = p_pos_y / TILE_SIZE;
-		if (d->map[y][x] == '1')
-			break;
 	}
 }
 
