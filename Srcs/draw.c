@@ -30,15 +30,12 @@ int	draw_map(t_data *d)
 void	draw_dashed_line(t_data *d, int p_pos_x, int p_pos_y)
 {
 	int	err2;
+	int	x;
+	int	y;
 
 	init_ray_params(d, p_pos_x, p_pos_y);
-	while (/*p_pos_x != d->mouse_x || p_pos_y != d->mouse_y*/d->map[p_pos_x / TILE_SIZE][p_pos_y / TILE_SIZE] == '0')
+	while (p_pos_x != d->mouse_x || p_pos_y != d->mouse_y)
 	{
-		// break when a wall is hit, then calculate the lenght of the ray for later use;
-		// PI2("mouse_x", d->mouse_x / 64);
-		// PI2("mouse_y", d->mouse_y);
-		// PINT(d->map[(int)((p_pos_x - TILE_SIZE / 2) / TILE_SIZE)][(int)((p_pos_y - TILE_SIZE / 2) / TILE_SIZE)]);
-		// if (d->ray_p.dashed < DASH_LENGTH)
 		mlx_pixel_put(d->mlx, d->win, p_pos_x, p_pos_y, YELLOW); // switch to cast ray function
 		d->ray_p.dashed = (d->ray_p.dashed + 1) % (2 * DASH_LENGTH);
 		err2 = 2 * d->ray_p.draw_err;
@@ -52,12 +49,10 @@ void	draw_dashed_line(t_data *d, int p_pos_x, int p_pos_y)
 			d->ray_p.draw_err += d->ray_p.dif_abs_x;
 			p_pos_y += d->ray_p.step_y;
 		}
-		if (d->map[p_pos_x / TILE_SIZE][p_pos_y / TILE_SIZE] == '1')
-		{
-			PI2("x", p_pos_x);
-			PI2("y", p_pos_y);
-			break ;
-		}
+		x = p_pos_x / TILE_SIZE;
+		y = p_pos_y / TILE_SIZE;
+		if (d->map[y][x] == '1')
+			break;
 	}
 }
 
