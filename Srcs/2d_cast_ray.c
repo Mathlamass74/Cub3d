@@ -1,10 +1,10 @@
 
 #include "../Includes/cub3d.h"
 
-bool	is_decimal(float n)
+bool	is_decimal(double n)
 {
 	int		i;
-	float	f;
+	double	f;
 
 	i = n;
 	f = n - i;
@@ -14,14 +14,15 @@ bool	is_decimal(float n)
 		return (FALSE);
 }
 
-void	draw_ray(t_data *d, float x_center, float y_center)
+void	draw_ray(t_data *d, double x_center, double y_center)
 {
 	int		j = 0;
-	float	ray_angle;
-	float	x, y;
-	float	step_length;
+	double	ray_angle;
+	double	x, y;
+	double	step_length;
 	int		max_distance = 500;
 
+	(void)d;
 	// draw_circle(d->mlx, 500, 500, 0x00ff00);
 	while (j < 60)
 	{
@@ -31,10 +32,6 @@ void	draw_ray(t_data *d, float x_center, float y_center)
 		{
 			x = x_center + cos(ray_angle) * step_length;
 			y = y_center + sin(ray_angle) * step_length;
-			if (!is_decimal(x))
-				//PF2("x", x);
-			if (!is_decimal(y))
-				//PF2("y", y);
 			mlx_pixel_put(d->mlx, d->win, x, y, GREEN);
 			step_length += 1;
 		}

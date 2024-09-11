@@ -9,7 +9,6 @@ void	update_player_dir(t_data *d)
 	{
 		d->player.diry = -1;
 		d->player.planex = 0.66;
-
 	}
 	else if (d->player.dir == 'S')
 	{

@@ -61,7 +61,7 @@ int	deal_key(int key, t_data *d)
 	{
 		d->move++;
 		if (d->open == 1)
-		{
+	{
 			d->open = 0;
 			new_player_y = y_move(key, new_player_y);
 			new_player_x = x_move(key, new_player_x);
@@ -79,7 +79,6 @@ int	mouse_move(int x, int y, t_data *d)
 	mlx_clear_window(d->mlx, d->win);
 	mlx_clear_window(d->minim.minimap_mlx, d->minim.minimap_win);
 	draw_map(d);
-	draw_ray(d, d->player.posx, d->player.posy);
 	draw_minimap(d);
 	draw_dashed_line(d, d->player.posx, d->player.posy);
 	draw_player(d, d->player.posx, d->player.posy);
