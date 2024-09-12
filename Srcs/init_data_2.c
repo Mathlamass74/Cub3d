@@ -10,6 +10,19 @@ void	init_ray(t_ray_params *r)
 	r->dashed = 0;
 }
 
+void	init_minimap(t_data *d)
+{
+	d->mm.minimap_x = 0;
+	d->mm.minimap_y = 0;
+	d->mm.player_x = d->mm.minimap_x
+		+ (MINIMAP_SIZE / 2) - (PLAYER_SIZE / 2);
+	d->mm.player_y = d->mm.minimap_y
+		+ (MINIMAP_SIZE / 2) - (PLAYER_SIZE / 2);
+	d->mm.map_x = 0;
+	d->mm.map_y = 0;
+	d->mm.scale = TILE_SIZE * MINIMAP_SCALE;
+}
+
 void	init_ray_params(t_data *d, int p_pos_x, int p_pos_y)
 {
 	if (d->mouse_x - p_pos_x < 0)
@@ -29,15 +42,4 @@ void	init_ray_params(t_data *d, int p_pos_x, int p_pos_y)
 	else
 		d->ray_p.step_y = -1;
 	d->ray_p.draw_err = d->ray_p.dif_abs_x - d->ray_p.dif_abs_y;
-}	
-
-void	init_minimap(t_data *d)
-{
-	d->minim.minimap = NULL;
-	d->minim.minimap_mlx = NULL;
-	d->minim.minimap_win = NULL;
-	d->minim.x = WIN_WIDTH - MINIMAP_WIDTH;
-	d->minim.y = WIN_HEIGHT - MINIMAP_HEIGHT;
-	d->minim.map_x = 0;
-	d->minim.map_y = 0;
 }
