@@ -80,9 +80,8 @@ int	mouse_move(int x, int y, t_data *d)
 	d->mouse_x = x;
 	d->mouse_y = y;
 	mlx_clear_window(d->mlx, d->win);
-	mlx_clear_window(d->minim.minimap_mlx, d->minim.minimap_win);
+	// mlx_clear_window(d->minim.minimap_mlx, d->minim.minimap_win);
 	draw_map(d);
-	draw_minimap(d);
 	draw_dashed_line(d, d->player.posx, d->player.posy);
 	draw_player(d, d->player.posx, d->player.posy);
 	return (0);

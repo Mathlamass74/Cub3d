@@ -21,7 +21,6 @@ void	free_tab(char **tab)
 		}
 		free(tab);
 	}
-	
 }
 
 void	free_cube(t_data *d)
@@ -42,5 +41,4 @@ void	free_cube(t_data *d)
 	free_utils(d->text_w_path);
 	free_utils(d->ceiling_path);
 	free_utils(d->floor_path);
-	free_utils(d->minim.minimap);
 }

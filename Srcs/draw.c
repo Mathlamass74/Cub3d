@@ -24,8 +24,10 @@ int	draw_map(t_data *d)
 					d->east_texture.text_ptr, x * s, y * s);
 		}
 	}
+	draw_minimap(d);
 	return (0);
 }
+
 
 void	draw_dashed_line(t_data *d, int p_pos_x, int p_pos_y)
 {
@@ -34,7 +36,7 @@ void	draw_dashed_line(t_data *d, int p_pos_x, int p_pos_y)
 	init_ray_params(d, p_pos_x, p_pos_y);
 	while (d->map[p_pos_y / TILE_SIZE][p_pos_x / TILE_SIZE] == '0')
 	{
-		mlx_pixel_put(d->mlx, d->win, p_pos_x, p_pos_y, YELLOW); // switch to cast ray function
+		mlx_pixel_put(d->mlx, d->win, p_pos_x, p_pos_y, YELLOW);
 		d->ray_p.dashed = (d->ray_p.dashed + 1) % (2 * DASH_LENGTH);
 		err2 = 2 * d->ray_p.draw_err;
 		if (err2 > -d->ray_p.dif_abs_y)
