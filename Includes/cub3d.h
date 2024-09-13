@@ -35,7 +35,7 @@
 # define DASH_LENGTH 5
 # define TILE_SIZE 64
 # define PLAYER_SIZE 4
-# define FOV 30.0
+# define FOV 66.0
 # define TRUE 1
 # define FALSE 0
 
@@ -164,7 +164,7 @@ int		close_window(t_data *d);
 int		draw_map(t_data *d);
 void	draw_minimap(t_data *d);
 void	draw_minimap(t_data *d);
-void	draw_dashed_line(t_data *d, int p_pos_x, int p_pos_y);
+void	draw_dashed_line(t_data *d, int p_pos_x, int p_pos_y, double player_angle);
 void	draw_ray(t_data *d, double x_center, double y_center);
 void	draw_player(t_data *d, double pos_x, double pos_y);
 

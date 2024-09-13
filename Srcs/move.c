@@ -76,11 +76,19 @@ int	mouse_move(int x, int y, t_data *d)
 {
 	d->mouse_x = x;
 	d->mouse_y = y;
+	if (x > d->player.posx)
+		d->player.dirx = x - d->player.posx;
+	else
+		d->player.dirx = d->player.posx - x;	
+	if (y > d->player.posy)
+		d->player.diry = y - d->player.posy;
+	else
+		d->player.diry = d->player.posy - y;
 	mlx_clear_window(d->mlx, d->win);
 	mlx_clear_window(d->minim.minimap_mlx, d->minim.minimap_win);
 	draw_map(d);
 	draw_minimap(d);
-	draw_dashed_line(d, d->player.posx, d->player.posy);
+	draw_dashed_line(d, d->player.posx, d->player.posy, atan2(d->player.diry, d->player.dirx));
 	draw_player(d, d->player.posx, d->player.posy);
 	return (0);
 }

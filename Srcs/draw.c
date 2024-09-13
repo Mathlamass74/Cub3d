@@ -27,7 +27,7 @@ int	draw_map(t_data *d)
 	return (0);
 }
 
-void	draw_dashed_line(t_data *d, int p_pos_x, int p_pos_y)
+void	draw_dashed_line(t_data *d, int p_pos_x, int p_pos_y, double player_angle)
 {
 	double	ray_angle;
 	int		err2;
@@ -35,21 +35,22 @@ void	draw_dashed_line(t_data *d, int p_pos_x, int p_pos_y)
 	int		x;
 	int		y;
 	int		stepsize = 1;
-	int		distance_traveled;
 
-	init_ray_params(d, p_pos_x, p_pos_y);
+	x = p_pos_x;
+	y = p_pos_y;
 	while (j < 60)
 	{
-		ray_angle = (j * FOV / 60 - (FOV / 2)) * (PI / 180);
-		x = p_pos_x;
-		y = p_pos_y;
-		distance_traveled = 0;
+		init_ray_params(d, x, y);
+		ray_angle =  player_angle - (j * FOV / 60 - (FOV / 2)) * (PI / 180);
+		PI2("j", j);
+		PF(ray_angle);
 		while (d->map[y / TILE_SIZE][x / TILE_SIZE] == '0')
 		{
-			mlx_pixel_put(d->mlx, d->win, x, y, GREEN);
 			x += cos(ray_angle) * stepsize;
 			y += sin(ray_angle) * stepsize;
-			distance_traveled += stepsize;
+			if (d->map[y / TILE_SIZE][x / TILE_SIZE] == '1')
+				break ;
+			mlx_pixel_put(d->mlx, d->win, x, y, GREEN);
 			err2 = 2 * d->ray_p.draw_err;
 			if (err2 > -d->ray_p.dif_abs_y)
 			{

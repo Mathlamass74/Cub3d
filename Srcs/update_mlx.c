@@ -8,7 +8,7 @@ int	update(t_data *d)
 	draw_map(d);
 	// draw_ray(d, d->player.posx, d->player.posy);
 	draw_minimap(d);
-	draw_dashed_line(d, d->player.posx, d->player.posy);
+	draw_dashed_line(d, d->player.posx, d->player.posy, atan2(d->player.diry, d->player.dirx));
 	draw_player(d, d->player.posx, d->player.posy);
 	return (0);
 }

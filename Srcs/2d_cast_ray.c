@@ -38,6 +38,5 @@ void	draw_ray(t_data *d, double x_center, double y_center)
 	}
 }
 
-// - Draw a circle as the player with the mlx_pixelput
-// 	--> then draw aline from the center of the circle (Eventually in the direction the player's looking)
-// $
+// vars missing:
+// - 
