@@ -55,4 +55,3 @@ void	parse(t_data *d)
 	if (check_init_done(d))
 		exit(exit_game(4, d));
 }
-

@@ -24,6 +24,7 @@ int	draw_map(t_data *d)
 					d->east_texture.text_ptr, x * s, y * s);
 		}
 	}
+	draw_minimap(d);
 	return (0);
 }
 

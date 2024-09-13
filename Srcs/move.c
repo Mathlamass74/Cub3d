@@ -33,9 +33,11 @@ bool	is_colision(t_data *d, double pos_x, double pos_y)
 			y = (d->player.posy - TILE_SIZE / 2) / TILE_SIZE;
 			d->map[y][x] = '0';
 		}
-		if (d->map[y][x] == '2' && d->door == 1)
+		if (d->map[y][x] == '2' && d->door == 1 && nxto(d))
 		{
-			d->open = 1;
+			printf("LA\n");
+			if (d->move == d->move_check)
+				d->open = 1;
 			d->door = 0;
 		}
 		return (true);
@@ -50,18 +52,18 @@ int	deal_key(int key, t_data *d)
 	double	new_player_y;
 
 	if (key == 53)
-	{
-		d->window_closed = true;
-		message("The ESC key pressed.\n", 1, d);
-	}
+		message("The ESC key pressed.\n", 2, d);
 	new_player_y = y_move(key, d->player.posy);
 	new_player_x = x_move(key, d->player.posx);
 	check_door(d, key, new_player_x, new_player_y);
+	if (key == 31)
+		d->move_check = d->move;
+	if (d->move != d->move_check)
+		d->door = 0;
 	if (is_colision(d, new_player_x, new_player_y))
 	{
-		d->move++;
-		if (d->open == 1)
-	{
+		if (d->open == 1 && d->move == d->move_check)
+		{
 			d->open = 0;
 			new_player_y = y_move(key, new_player_y);
 			new_player_x = x_move(key, new_player_x);
@@ -69,6 +71,7 @@ int	deal_key(int key, t_data *d)
 		d->player.posx = new_player_x;
 		d->player.posy = new_player_y;
 	}
+	which_key(key, d);
 	return (0);
 }
 
@@ -85,10 +88,9 @@ int	mouse_move(int x, int y, t_data *d)
 	else
 		d->player.diry = d->player.posy - y;
 	mlx_clear_window(d->mlx, d->win);
-	mlx_clear_window(d->minim.minimap_mlx, d->minim.minimap_win);
+	// mlx_clear_window(d->minim.minimap_mlx, d->minim.minimap_win);
 	draw_map(d);
-	draw_minimap(d);
-	draw_dashed_line(d, d->player.posx, d->player.posy, atan2(d->player.diry, d->player.dirx));
+	draw_dashed_line(d, d->player.posx, d->player.posy);
 	draw_player(d, d->player.posx, d->player.posy);
 	return (0);
 }

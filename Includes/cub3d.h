@@ -35,13 +35,27 @@
 # define DASH_LENGTH 5
 # define TILE_SIZE 64
 # define PLAYER_SIZE 4
-# define FOV 66.0
+# define FOV (60 * (PI / 180))
 # define TRUE 1
 # define FALSE 0
+# define MINIMAP_SCALE 0.5
+# define MINIMAP_SIZE 160
 
-# define YELLOW 0xFFFF00
-# define RED 0xFF0000
-# define GREEN 0x00FF00
+# define YELLOW		0xFFFF00
+# define RED		0xFF0000
+# define GREEN		0x00FF00
+# define BLUE		0x0000FF
+# define CYAN		0x00FFFF
+# define MAGENTA	0xFF00FF
+# define ORANGE		0xFFA500
+# define PURPLE		0x800080
+# define PINK		0xFFC0CB
+# define BROWN		0x8B4513
+# define LIGHT_BLUE	0xADD8E6
+# define DARK_GREEN	0x006400
+# define GREY		0x808080
+# define WHITE		0xFFFFFF
+# define BLACK		0x000000
 
 typedef struct s_img
 {
@@ -82,13 +96,13 @@ typedef struct s_ray_params
 
 typedef struct s_mini
 {
-	void			*minimap;
-	void			*minimap_mlx;
-	void			*minimap_win;
 	int				map_x;
 	int				map_y;
-	int				x;
-	int				y;
+	int				scale;
+	int				minimap_x;
+	int				minimap_y;
+	int				player_x;
+	int				player_y;
 }				t_mini;
 
 typedef struct s_data
@@ -116,7 +130,7 @@ typedef struct s_data
 	t_text			east_texture;
 	t_text			west_texture;
 	t_ray_params	ray_p;
-	t_mini			minim;
+	t_mini			mm;
 	char			*text_n_path;
 	char			*text_s_path;
 	char			*text_w_path;
@@ -131,6 +145,7 @@ typedef struct s_data
 	int				move;
 	int				door;
 	int				open;
+	int				move_check;
 }				t_data;
 
 // init
@@ -141,10 +156,11 @@ void	init_minimap(t_data *d);
 void	create_minimap_window(t_data *d);
 
 // update
-void	update_map(t_data *d, int	i, int j);
+void	update_map(t_data *d, int i, int j);
 void	update_player_dir(t_data *d);
 void	update_mlx(t_data *d);
 void	update_texture(t_data *d);
+void	update_minimap(t_data *d, int x, int y, int option);
 
 // utils
 int		exit_game(int option, t_data *d);
@@ -159,6 +175,8 @@ void	free_cube(t_data *d);
 void	message(char *msg, int n, t_data *d);
 bool	is_decimal(double n);
 int		close_window(t_data *d);
+int		nxto(t_data	*d);
+void	which_key(int key, t_data *d);
 
 // draw
 int		draw_map(t_data *d);
@@ -167,6 +185,7 @@ void	draw_minimap(t_data *d);
 void	draw_dashed_line(t_data *d, int p_pos_x, int p_pos_y, double player_angle);
 void	draw_ray(t_data *d, double x_center, double y_center);
 void	draw_player(t_data *d, double pos_x, double pos_y);
+void	draw_rectangle(t_data *d, int color, int size, int o);
 
 // move
 int		deal_key(int key, t_data *d);

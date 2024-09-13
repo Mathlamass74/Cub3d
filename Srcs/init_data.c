@@ -40,6 +40,8 @@ void	init_texture(t_data *d)
 
 void	init_map(t_data *d)
 {
+	init_minimap(d);
+	init_texture(d);
 	d->map = NULL;
 	d->map_cols = 0;
 	d->map_rows = 2;
@@ -70,12 +72,11 @@ void	init_data(t_data *d, char *path)
 	d->text_e_path = NULL;
 	d->ceiling_path = NULL;
 	d->floor_path = NULL;
-	init_texture(d);
-	init_minimap(d);
 	d->mouse_down = 0;
 	d->draw_color = 0xFFFFFF;
 	d->window_closed = false;
 	d->move = 0;
 	d->door = 0;
 	d->open = 0;
+	d->move_check = 0;
 }

@@ -30,3 +30,23 @@ void	update_map(t_data *d, int i, int j)
 		d->map[d->map_index][j++] = '9';
 	d->map[d->map_index][j] = '\0';
 }
+
+void	update_minimap(t_data *d, int x, int y, int option)
+{
+	if (option == 0)
+	{
+		d->mm.map_x = d->mm.minimap_x + (x * d->mm.scale)
+			- (d->player.posx * MINIMAP_SCALE) + (MINIMAP_SIZE / 2);
+		d->mm.map_y = d->mm.minimap_y + (y * d->mm.scale)
+			- (d->player.posy * MINIMAP_SCALE) + (MINIMAP_SIZE / 2);
+	}
+	else
+	{
+		if (d->map[y][x] == '1' || d->map[y][x] == '9')
+			draw_rectangle(d, BLACK, d->mm.scale, 1);
+		else if (d->map[y][x] == '0')
+			draw_rectangle(d, WHITE, d->mm.scale, 1);
+		else if (d->map[y][x] == '2')
+			draw_rectangle(d, GREY, d->mm.scale, 1);
+	}
+}
