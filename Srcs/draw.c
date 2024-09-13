@@ -44,7 +44,7 @@ void	draw_dashed_line(t_data *d, int p_pos_x, int p_pos_y, double player_angle)
 		init_ray_params(d, x, y);
 		ray_angle =  player_angle - (j * FOV / 60 - (FOV / 2)) * (PI / 180);
 		PI2("j", j);
-		PF(ray_angle);
+		PF(ray_angle * 180 / PI);
 		while (d->map[y / TILE_SIZE][x / TILE_SIZE] == '0')
 		{
 			x += cos(ray_angle) * stepsize;

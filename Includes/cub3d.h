@@ -181,8 +181,8 @@ void	which_key(int key, t_data *d);
 // draw
 int		draw_map(t_data *d);
 void	draw_minimap(t_data *d);
-void	draw_minimap(t_data *d);
 void	draw_dashed_line(t_data *d, int p_pos_x, int p_pos_y, double player_angle);
+void	draw_dashed_line_dda(t_data *d, int p_pos_x, int p_pos_y, double player_angle);
 void	draw_ray(t_data *d, double x_center, double y_center);
 void	draw_player(t_data *d, double pos_x, double pos_y);
 void	draw_rectangle(t_data *d, int color, int size, int o);
