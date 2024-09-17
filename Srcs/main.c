@@ -46,9 +46,9 @@ int	main(int ac, char **av)
 	{
 		init_data(&data, av[1]);
 		parse(&data);
-		update_player_dir(&data);
 		if (!fill_map(&data))
 			exit(0);
+		update_player_dir(&data);
 		update_mlx(&data);
 	}
 	return (0);

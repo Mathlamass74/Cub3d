@@ -38,10 +38,7 @@ void	draw_ray(t_data *d, double x_center, double y_center)
 	}
 }
 
-// vars missing:
-// - 
-
-void draw_dashed_line_dda(t_data *d, int p_pos_x, int p_pos_y, double player_angle)
+void draw_rays_dda(t_data *d, int p_pos_x, int p_pos_y, double player_angle)
 {
     double ray_angle;
     double ray_dir_x, ray_dir_y;
@@ -50,9 +47,9 @@ void draw_dashed_line_dda(t_data *d, int p_pos_x, int p_pos_y, double player_ang
 	double camera_x;
     int map_x, map_y;
     int i = 0;
-    int hit = 0;
+    int hit;
 
-    while (i < WIN_WIDTH)
+    while (i < 60)
     {
         hit = 0;
         // Set the starting position
@@ -67,6 +64,10 @@ void draw_dashed_line_dda(t_data *d, int p_pos_x, int p_pos_y, double player_ang
         ray_dir_y = d->player.diry + d->player.planey * camera_x;
 
         // Delta distances for DDA
+		if (ray_dir_x == 0)
+			ray_dir_x = 0.01;
+		if (ray_dir_y == 0)
+			ray_dir_y = 0.01;
         delta_dist_x = fabs(1 / ray_dir_x);
         delta_dist_y = fabs(1 / ray_dir_y);
 
