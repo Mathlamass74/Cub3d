@@ -21,14 +21,18 @@ int	nxto(t_data *d)
 
 void	check_door(t_data *d, int key, int x, int y)
 {
-	if (d->map[d->mouse_y / TILE_SIZE][d->mouse_x / TILE_SIZE] == '2' && nxto(d)
-			&& key == 31 && ((is_colision(d, x, y_move(13, d->player.posy)))
-			|| (is_colision(d, x, y_move(1, d->player.posy)))
-			|| (is_colision(d, x_move(0, d->player.posx), y))
-			|| (is_colision(d, x_move(2, d->player.posx), y))))
+	if (d->mouse_x <= d->map_lgcol * TILE_SIZE
+		&& d->mouse_y <= d->map_rows * TILE_SIZE)
 	{
-		d->door = 1;
-		printf ("Door is open\n");
+		if (d->map[d->mouse_y / TILE_SIZE][d->mouse_x / TILE_SIZE] == '2' && nxto(d)
+				&& key == 31 && ((is_colision(d, x, y_move(13, d->player.posy)))
+				|| (is_colision(d, x, y_move(1, d->player.posy)))
+				|| (is_colision(d, x_move(0, d->player.posx), y))
+				|| (is_colision(d, x_move(2, d->player.posx), y))))
+		{
+			d->door = 1;
+			printf ("Door is open\n");
+		}
 	}
 }
 
