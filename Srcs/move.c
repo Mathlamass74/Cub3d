@@ -52,7 +52,7 @@ int	deal_key(int key, t_data *d)
 	double	new_player_y;
 
 	if (key == 53)
-		message("The ESC key pressed.\n", 2, d);
+		message("The ESC key pressed.\n", 2, d); // update?: return?
 	new_player_y = y_move(key, d->player.posy);
 	new_player_x = x_move(key, d->player.posx);
 	check_door(d, key, new_player_x, new_player_y);
