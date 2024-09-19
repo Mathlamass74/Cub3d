@@ -69,7 +69,6 @@ void	draw_ray(t_data *d, int p_pos_x, int p_pos_y, t_target *target)
 			d->ray_p.draw_err += d->ray_p.dif_abs_x;
 			p_pos_y += d->ray_p.step_y;
 		}
-		j++;
 	}
 }
 
