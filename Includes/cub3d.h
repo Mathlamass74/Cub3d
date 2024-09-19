@@ -35,7 +35,7 @@
 # define DASH_LENGTH 1
 # define TILE_SIZE 64
 # define PLAYER_SIZE 4
-# define NUM_RAYS 300
+# define NUM_RAYS 1216
 # define RAY_LENGTH 200
 # define FOV 60
 # define TRUE 1
@@ -190,7 +190,7 @@ void	which_key(int key, t_data *d);
 int		draw_map(t_data *d);
 void	draw_minimap(t_data *d);
 void	draw_multiple_rays(t_data *d, int p_pos_x, int p_pos_y);
-void	draw_ray(t_data *d, int p_pos_x, int p_pos_y, t_target *target);
+// void	draw_ray(t_data *d, int p_pos_x, int p_pos_y, t_target *target);
 void	draw_player(t_data *d, double pos_x, double pos_y);
 void	draw_rectangle(t_data *d, int color, int size, int o);
 
