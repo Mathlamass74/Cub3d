@@ -21,6 +21,9 @@ int	nxto(t_data *d)
 
 void	check_door(t_data *d, int key, int x, int y)
 {
+	if (d->mouse_x / TILE_SIZE >= d->map_rows
+		&& d->mouse_y / TILE_SIZE >= d->map_lgcol)
+		return ;
 	if (d->map[d->mouse_y / TILE_SIZE][d->mouse_x / TILE_SIZE] == '2' && nxto(d)
 			&& key == 31 && ((is_colision(d, x, y_move(13, d->player.posy)))
 			|| (is_colision(d, x, y_move(1, d->player.posy)))

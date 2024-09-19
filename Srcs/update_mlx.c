@@ -5,10 +5,9 @@ int	update(t_data *d)
 {
 	update_texture(d);
 	mlx_clear_window(d->mlx, d->win);
-	draw_map(d);
-	draw_multiple_rays(d, d->player.posx, d->player.posy);
-	// draw_dashed_line(d, d->player.posx, d->player.posy);
-	draw_player(d, d->player.posx, d->player.posy);
+	draw_map(d);											// switch this to rendering walls:
+	draw_multiple_rays(d, d->player.posx, d->player.posy);	// - Use this function to calculate dist
+	draw_player(d, d->player.posx, d->player.posy);			// - And draw columns instead of pixels 
 	return (0);
 }
 
