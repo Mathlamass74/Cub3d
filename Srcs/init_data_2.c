@@ -23,21 +23,21 @@ void	init_minimap(t_data *d)
 	d->mm.scale = TILE_SIZE * MINIMAP_SCALE;
 }
 
-void	init_ray_params(t_data *d, int p_pos_x, int p_pos_y)
+void	init_ray_params(t_data *d, int p_pos_x, int p_pos_y, t_target *target)
 {
-	if (d->mouse_x - p_pos_x < 0)
-		d->ray_p.dif_abs_x = (d->mouse_x - p_pos_x) * -1;
+	if (target->target_x - p_pos_x < 0)
+		d->ray_p.dif_abs_x = (target->target_x - p_pos_x) * -1;
 	else
-		d->ray_p.dif_abs_x = d->mouse_x - p_pos_x;
-	if (d->mouse_y - p_pos_y < 0)
-		d->ray_p.dif_abs_y = (d->mouse_y - p_pos_y) * -1;
+		d->ray_p.dif_abs_x = target->target_x - p_pos_x;
+	if (target->target_y - p_pos_y < 0)
+		d->ray_p.dif_abs_y = (target->target_y - p_pos_y) * -1;
 	else
-		d->ray_p.dif_abs_y = d->mouse_y - p_pos_y;
-	if (p_pos_x < d->mouse_x)
+		d->ray_p.dif_abs_y = target->target_y - p_pos_y;
+	if (p_pos_x < target->target_x)
 		d->ray_p.step_x = 1;
 	else
 		d->ray_p.step_x = -1;
-	if (p_pos_y < d->mouse_y)
+	if (p_pos_y < target->target_y)
 		d->ray_p.step_y = 1;
 	else
 		d->ray_p.step_y = -1;

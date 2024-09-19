@@ -35,7 +35,6 @@ bool	is_colision(t_data *d, double pos_x, double pos_y)
 		}
 		if (d->map[y][x] == '2' && d->door == 1 && nxto(d))
 		{
-			printf("LA\n");
 			if (d->move == d->move_check)
 				d->open = 1;
 			d->door = 0;
@@ -80,9 +79,8 @@ int	mouse_move(int x, int y, t_data *d)
 	d->mouse_x = x;
 	d->mouse_y = y;
 	mlx_clear_window(d->mlx, d->win);
-	// mlx_clear_window(d->minim.minimap_mlx, d->minim.minimap_win);
 	draw_map(d);
-	draw_dashed_line(d, d->player.posx, d->player.posy);
+	draw_multiple_rays(d, d->player.posx, d->player.posy);
 	draw_player(d, d->player.posx, d->player.posy);
 	return (0);
 }

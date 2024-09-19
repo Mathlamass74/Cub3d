@@ -28,16 +28,36 @@ int	draw_map(t_data *d)
 	return (0);
 }
 
+void	draw_multiple_rays(t_data *d, int p_pos_x, int p_pos_y)
+{
+	double		angle_step;
+	double		base_angle;
+	double		ray_angle;
+	t_target	target;
+	int			i;
 
-void	draw_dashed_line(t_data *d, int p_pos_x, int p_pos_y)
+	angle_step = FOV / (double)(NUM_RAYS - 1);
+	base_angle = atan2(d->mouse_y - p_pos_y, d->mouse_x - p_pos_x);
+	i = 0;
+	while (i < NUM_RAYS)
+	{
+		ray_angle = base_angle - (FOV / 2 * M_PI / 180)
+			+ i * angle_step * M_PI / 180;
+		target.target_x = p_pos_x + cos(ray_angle) * RAY_LENGTH;
+		target.target_y = p_pos_y + sin(ray_angle) * RAY_LENGTH;
+		draw_ray(d, p_pos_x, p_pos_y, &target);
+		i++;
+	}
+}
+
+void	draw_ray(t_data *d, int p_pos_x, int p_pos_y, t_target *target)
 {
 	int	err2;
 
-	init_ray_params(d, p_pos_x, p_pos_y);
+	init_ray_params(d, p_pos_x, p_pos_y, target);
 	while (d->map[p_pos_y / TILE_SIZE][p_pos_x / TILE_SIZE] == '0')
 	{
 		mlx_pixel_put(d->mlx, d->win, p_pos_x, p_pos_y, YELLOW);
-		d->ray_p.dashed = (d->ray_p.dashed + 1) % (2 * DASH_LENGTH);
 		err2 = 2 * d->ray_p.draw_err;
 		if (err2 > -d->ray_p.dif_abs_y)
 		{

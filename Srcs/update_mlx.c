@@ -6,7 +6,8 @@ int	update(t_data *d)
 	update_texture(d);
 	mlx_clear_window(d->mlx, d->win);
 	draw_map(d);
-	draw_dashed_line(d, d->player.posx, d->player.posy);
+	draw_multiple_rays(d, d->player.posx, d->player.posy);
+	// draw_dashed_line(d, d->player.posx, d->player.posy);
 	draw_player(d, d->player.posx, d->player.posy);
 	return (0);
 }

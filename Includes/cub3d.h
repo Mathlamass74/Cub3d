@@ -32,10 +32,12 @@
 # define DR 0.0174533 //1 degré en radian
 # define MINIMAP_WIDTH 256
 # define MINIMAP_HEIGHT 205
-# define DASH_LENGTH 5
+# define DASH_LENGTH 1
 # define TILE_SIZE 64
 # define PLAYER_SIZE 4
-# define FOV (60 * (PI / 180))
+# define NUM_RAYS 300
+# define RAY_LENGTH 200
+# define FOV 60
 # define TRUE 1
 # define FALSE 0
 # define MINIMAP_SCALE 0.5
@@ -83,6 +85,12 @@ typedef struct s_text
 	int		width;
 	int		height;
 }				t_text;
+
+typedef struct s_target
+{
+	int		target_x;
+	int		target_y;
+}				t_target;
 
 typedef struct s_ray_params
 {
@@ -151,7 +159,7 @@ typedef struct s_data
 // init
 void	init_data(t_data *d, char *path);
 void	init_ray(t_ray_params *r);
-void	init_ray_params(t_data *d, int p_pos_x, int p_pos_y);
+void	init_ray_params(t_data *d, int p_pos_x, int p_pos_y, t_target *target);
 void	init_minimap(t_data *d);
 void	create_minimap_window(t_data *d);
 
@@ -181,8 +189,8 @@ void	which_key(int key, t_data *d);
 // draw
 int		draw_map(t_data *d);
 void	draw_minimap(t_data *d);
-void	draw_dashed_line(t_data *d, int p_pos_x, int p_pos_y);
-void	draw_ray(t_data *d, double x_center, double y_center);
+void	draw_multiple_rays(t_data *d, int p_pos_x, int p_pos_y);
+void	draw_ray(t_data *d, int p_pos_x, int p_pos_y, t_target *target);
 void	draw_player(t_data *d, double pos_x, double pos_y);
 void	draw_rectangle(t_data *d, int color, int size, int o);
 
