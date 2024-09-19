@@ -1,14 +1,25 @@
 
 #include "../Includes/cub3d.h"
 
-void	print_map(t_data *d)
+void print_map(t_data *d, int x, int y)
 {
-	int	i;
+	int i;
+	int j;
 
 	i = 0;
+	j = 0;
 	while (i < d->map_rows)
 	{
-		printf("%s\n", d->map[i]);
+		j = 0;
+		while (j < d->map_lgcol)
+		{
+			if (i == y && j == x)
+				printf("%c", d->map[i][j]);
+			else
+				printf("x");
+			j++;
+		}
+		printf("\n");
 		i++;
 	}
 }
@@ -35,9 +46,9 @@ int	main(int ac, char **av)
 	{
 		init_data(&data, av[1]);
 		parse(&data);
-		update_player_dir(&data);
 		if (!fill_map(&data))
 			exit(0);
+		update_player_dir(&data);
 		update_mlx(&data);
 	}
 	return (0);

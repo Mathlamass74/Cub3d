@@ -51,7 +51,7 @@ int	deal_key(int key, t_data *d)
 	double	new_player_y;
 
 	if (key == 53)
-		message("The ESC key pressed.\n", 2, d);
+		message("The ESC key pressed.\n", 2, d); // update?: return?
 	new_player_y = y_move(key, d->player.posy);
 	new_player_x = x_move(key, d->player.posx);
 	check_door(d, key, new_player_x, new_player_y);
@@ -74,10 +74,18 @@ int	deal_key(int key, t_data *d)
 	return (0);
 }
 
-int	mouse_move(int x, int y, t_data *d)
+int	mouse_move(int x, int y, t_data *d) // dirx calculation updated
 {
 	d->mouse_x = x;
 	d->mouse_y = y;
+	if (x > d->player.posx)
+		d->player.dirx = 1;
+	else
+		d->player.dirx = -1;	
+	if (y > d->player.posy)
+		d->player.diry = 1;
+	else
+		d->player.diry = -1;
 	mlx_clear_window(d->mlx, d->win);
 	draw_map(d);
 	draw_multiple_rays(d, d->player.posx, d->player.posy);
