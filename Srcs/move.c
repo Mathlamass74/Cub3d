@@ -86,7 +86,6 @@ int	mouse_move(int x, int y, t_data *d) // dirx calculation updated
 		d->player.diry = 1;
 	else
 		d->player.diry = -1;
-	PINT(x);
 	mlx_clear_window(d->mlx, d->win);
 	draw_map(d);											//
 	draw_multiple_rays(d, d->player.posx, d->player.posy);	// switch this to rendering walls
