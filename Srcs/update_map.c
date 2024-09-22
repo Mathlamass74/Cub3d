@@ -44,7 +44,9 @@ void	update_minimap(t_data *d, int x, int y, int option)
 	{
 		if (d->map[y][x] == '1' || d->map[y][x] == '9')
 			draw_rectangle(d, BLACK, d->mm.scale, 1);
-		else if (d->map[y][x] == '0')
+		else if (d->map[y][x] == '0' || d->map[y][x] == 'N'
+			|| d->map[y][x] == 'S' || d->map[y][x] == 'E'
+			|| d->map[y][x] == 'W')
 			draw_rectangle(d, WHITE, d->mm.scale, 1);
 		else if (d->map[y][x] == '2')
 			draw_rectangle(d, GREY, d->mm.scale, 1);

@@ -48,7 +48,7 @@ void	parse(t_data *d)
 			d->ceiling_path = ft_strdup_magic(d->file[i] + 1);
 		else if (d->file[i][0] != '\n' && d->text_n_path && d->text_s_path
 			&& d->text_e_path && d->text_w_path && d->floor_path
-				&& d->ceiling_path && i == 8)
+				&& d->ceiling_path)
 			return (parse_map(d, i));
 		i++;
 	}

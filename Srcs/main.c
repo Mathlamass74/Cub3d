@@ -44,6 +44,8 @@ int	main(int ac, char **av)
 
 	if (ac == 2)
 	{
+		if (!check_format_cub(av[1]))
+			exit(exit_game(9, &data));
 		init_data(&data, av[1]);
 		parse(&data);
 		if (!fill_map(&data))

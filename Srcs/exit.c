@@ -21,6 +21,8 @@ int	exit_game(int option, t_data *d)
 		printf("Error\nMust have at least 1 player in map!\n");
 	else if (option == 8)
 		printf("Error\nTexture not loaded!\n");
+	else if (option == 9)
+		printf("Error\nMap format must be .cub!\n");
 	else if (option == 99)
 		free_cube(d);
 	return (0);

@@ -25,6 +25,7 @@
 # define WIN_WIDTH 1216
 # define WIN_HEIGHT 1280
 # define MOVE_SPEED
+# define MOVE_STEP 5.0
 # define ROT_SPEED
 # define PI 3.1415926535
 # define P2 PI/2
@@ -161,6 +162,7 @@ typedef struct s_data
 	int				open;
 	int				move_check;
 	int				face;
+	t_target		check_case;
 }				t_data;
 
 // init
@@ -170,6 +172,9 @@ void	init_ray_params(t_data *d, int p_pos_x, int p_pos_y, t_target *target);
 void	init_minimap(t_data *d);
 void	init_textures(t_data *d);
 void	create_minimap_window(t_data *d);
+
+// check
+int		check_format_cub(char *file);
 
 // update
 void	update_map(t_data *d, int i, int j);
@@ -206,8 +211,8 @@ void	draw_rectangle(t_data *d, int color, int size, int o);
 
 // move
 int		deal_key(int key, t_data *d);
-double	y_move(int key, double pos);
-double	x_move(int key, double pos);
+int		y_move(int key, t_data *d);
+int		x_move(int key, t_data *d);
 int		mouse_move(int x, int y, t_data *d);
 bool	is_colision(t_data *d, double pos_x, double pos_y);
 void	check_door(t_data *d, int key, int x, int y);

@@ -67,3 +67,27 @@ int	check_init_done(t_data *d)
 		return (0);
 	return (1);
 }
+
+bool	check_is_wall(t_data *d, int y, int x)
+{
+	if (d->map[y][x] == '0' || d->map[y][x] == 'N' || d->map[y][x] == 'S'
+		|| d->map[y][x] == 'E' || d->map[y][x] == 'W')
+		return (false);
+	else
+		return (true);
+}
+
+int	check_format_cub(char *file)
+{
+	int	i;
+	int	j;
+
+	i = ft_strlen(file);
+	j = i - 4;
+	if (file[j] == '.' && file[j + 1] == 'c' && file[j + 2] == 'u'
+		&& file[j + 3] == 'b' && file[j + 4] == '\0')
+		return (1);
+	else
+		return (0);
+
+}
