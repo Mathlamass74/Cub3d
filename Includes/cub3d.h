@@ -25,6 +25,7 @@
 # define WIN_WIDTH 1216
 # define WIN_HEIGHT 1280
 # define MOVE_SPEED
+# define MOVE_STEP 5.0
 # define ROT_SPEED
 # define PI 3.1415926535
 # define P2 PI/2
@@ -42,6 +43,7 @@
 # define FALSE 0
 # define MINIMAP_SCALE 0.5
 # define MINIMAP_SIZE 160
+# define MOUSE_SENSITIVITY 0.005
 
 # define YELLOW		0xFFFF00
 # define RED		0xFF0000
@@ -77,13 +79,18 @@ typedef struct s_player
 	double	diry;
 	double	planex;
 	double	planey;
+	double	player_angle;
 }				t_player;
 
 typedef struct s_text
 {
 	void	*text_ptr;
+	char	*addr;
 	int		width;
 	int		height;
+	int		bits_per_pixel;
+	int		line_length;
+	int		endian;
 }				t_text;
 
 typedef struct s_target
@@ -94,12 +101,12 @@ typedef struct s_target
 
 typedef struct s_ray_params
 {
-	int		dif_abs_x;
-	int		dif_abs_y;
-	int		step_x;
-	int		step_y;
-	int		draw_err;
-	int		dashed;
+	int			dif_abs_x;
+	int			dif_abs_y;
+	double		step_x;
+	double		step_y;
+	int			draw_err;
+	int			dashed;
 }				t_ray_params;
 
 typedef struct s_mini
@@ -154,6 +161,8 @@ typedef struct s_data
 	int				door;
 	int				open;
 	int				move_check;
+	int				face;
+	t_target		check_case;
 }				t_data;
 
 // init
@@ -161,14 +170,19 @@ void	init_data(t_data *d, char *path);
 void	init_ray(t_ray_params *r);
 void	init_ray_params(t_data *d, int p_pos_x, int p_pos_y, t_target *target);
 void	init_minimap(t_data *d);
+void	init_textures(t_data *d);
 void	create_minimap_window(t_data *d);
+
+// check
+int		check_format_cub(char *file);
 
 // update
 void	update_map(t_data *d, int i, int j);
 void	update_player_dir(t_data *d);
 void	update_mlx(t_data *d);
-void	update_texture(t_data *d);
+void	load_textures(t_data *d);
 void	update_minimap(t_data *d, int x, int y, int option);
+t_text	*face_texture(t_data *d);
 
 // utils
 int		exit_game(int option, t_data *d);
@@ -185,6 +199,7 @@ bool	is_decimal(double n);
 int		close_window(t_data *d);
 int		nxto(t_data	*d);
 void	which_key(int key, t_data *d);
+void	wall_facing(t_data *d);
 
 // draw
 int		draw_map(t_data *d);
@@ -196,8 +211,8 @@ void	draw_rectangle(t_data *d, int color, int size, int o);
 
 // move
 int		deal_key(int key, t_data *d);
-double	y_move(int key, double pos);
-double	x_move(int key, double pos);
+int		y_move(int key, t_data *d);
+int		x_move(int key, t_data *d);
 int		mouse_move(int x, int y, t_data *d);
 bool	is_colision(t_data *d, double pos_x, double pos_y);
 void	check_door(t_data *d, int key, int x, int y);

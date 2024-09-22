@@ -3,11 +3,12 @@
 
 int	update(t_data *d)
 {
-	update_texture(d);
+	load_textures(d);
 	mlx_clear_window(d->mlx, d->win);
-	draw_map(d);											// switch this to rendering walls:
+	//draw_map(d);											// switch this to rendering walls:
 	draw_multiple_rays(d, d->player.posx, d->player.posy);	// - Use this function to calculate dist
-	draw_player(d, d->player.posx, d->player.posy);			// - And draw columns instead of pixels 
+	draw_minimap(d);										// - And draw columns instead of pixels 
+	//draw_player(d, d->player.posx, d->player.posy);
 	return (0);
 }
 
