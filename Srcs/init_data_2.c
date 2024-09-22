@@ -10,19 +10,6 @@ void	init_ray(t_ray_params *r)
 	r->dashed = 0;
 }
 
-void	init_minimap(t_data *d)
-{
-	d->mm.minimap_x = 0;
-	d->mm.minimap_y = 0;
-	d->mm.player_x = d->mm.minimap_x
-		+ (MINIMAP_SIZE / 2) - (PLAYER_SIZE / 2);
-	d->mm.player_y = d->mm.minimap_y
-		+ (MINIMAP_SIZE / 2) - (PLAYER_SIZE / 2);
-	d->mm.map_x = 0;
-	d->mm.map_y = 0;
-	d->mm.scale = TILE_SIZE * MINIMAP_SCALE;
-}
-
 void	init_ray_params(t_data *d, int p_pos_x, int p_pos_y, t_target *target)
 {
 	if (target->target_x - p_pos_x < 0)
@@ -34,12 +21,30 @@ void	init_ray_params(t_data *d, int p_pos_x, int p_pos_y, t_target *target)
 	else
 		d->ray_p.dif_abs_y = target->target_y - p_pos_y;
 	if (p_pos_x < target->target_x)
-		d->ray_p.step_x = 1;
+		d->ray_p.step_x = 1.0;
 	else
-		d->ray_p.step_x = -1;
+		d->ray_p.step_x = -1.0;
 	if (p_pos_y < target->target_y)
-		d->ray_p.step_y = 1;
+		d->ray_p.step_y = 1.0;
 	else
-		d->ray_p.step_y = -1;
+		d->ray_p.step_y = -1.0;
 	d->ray_p.draw_err = d->ray_p.dif_abs_x - d->ray_p.dif_abs_y;
+}
+
+void	init_texture(t_text *texture)
+{
+	texture->text_ptr = NULL;
+	texture->addr = NULL;
+	texture->height = 0;
+	texture->width = 0;
+	texture->line_length = 0;
+	texture->bits_per_pixel = 0;
+}
+
+void	init_textures(t_data *d)
+{
+	init_texture(&d->north_texture);
+	init_texture(&d->south_texture);
+	init_texture(&d->east_texture);
+	init_texture(&d->west_texture);
 }

@@ -76,19 +76,19 @@ int	deal_key(int key, t_data *d)
 
 int	mouse_move(int x, int y, t_data *d) // dirx calculation updated
 {
-	d->mouse_x = x;
-	d->mouse_y = y;
-	if (x > d->player.posx)
-		d->player.dirx = 1;
-	else
-		d->player.dirx = -1;	
-	if (y > d->player.posy)
-		d->player.diry = 1;
-	else
-		d->player.diry = -1;
+	int	delta_x;
+
+	(void)y;
+	delta_x = x - (WIN_WIDTH / 2);
+	d->player.player_angle += delta_x * (M_PI / 180) * MOUSE_SENSITIVITY;
+	if (d->player.player_angle < 0)
+		d->player.player_angle += 2 * M_PI;
+	else if (d->player.player_angle > 2 * M_PI)
+		d->player.player_angle -= 2 * M_PI;
+	d->player.dirx = cos(d->player.player_angle);
+	d->player.diry = sin(d->player.player_angle);
 	mlx_clear_window(d->mlx, d->win);
-	draw_map(d);											//
-	draw_multiple_rays(d, d->player.posx, d->player.posy);	// switch this to rendering walls
-	draw_player(d, d->player.posx, d->player.posy);			//
+	draw_multiple_rays(d, d->player.posx, d->player.posy);
+	draw_minimap(d);
 	return (0);
 }

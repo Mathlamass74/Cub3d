@@ -11,6 +11,7 @@ void	init_player(t_player *p)
 	p->diry = 0.0;
 	p->planex = 0.0;
 	p->planey = 0.0;
+	p->player_angle = 0.0;
 }
 
 void	init_img(t_img *i)
@@ -22,26 +23,23 @@ void	init_img(t_img *i)
 	i->endian = 0;
 }
 
-void	init_texture(t_data *d)
+void	init_minimap(t_data *d)
 {
-	d->north_texture.text_ptr = NULL;
-	d->north_texture.height = 0;
-	d->north_texture.width = 0;
-	d->south_texture.text_ptr = NULL;
-	d->south_texture.height = 0;
-	d->south_texture.width = 0;
-	d->east_texture.text_ptr = NULL;
-	d->east_texture.height = 0;
-	d->east_texture.width = 0;
-	d->west_texture.text_ptr = NULL;
-	d->west_texture.height = 0;
-	d->west_texture.width = 0;
+	d->mm.minimap_x = 0;
+	d->mm.minimap_y = 0;
+	d->mm.player_x = d->mm.minimap_x
+		+ (MINIMAP_SIZE / 2) - (PLAYER_SIZE / 2);
+	d->mm.player_y = d->mm.minimap_y
+		+ (MINIMAP_SIZE / 2) - (PLAYER_SIZE / 2);
+	d->mm.map_x = 0;
+	d->mm.map_y = 0;
+	d->mm.scale = TILE_SIZE * MINIMAP_SCALE;
 }
 
 void	init_map(t_data *d)
 {
 	init_minimap(d);
-	init_texture(d);
+	init_textures(d);
 	d->map = NULL;
 	d->map_cols = 0;
 	d->map_rows = 2;
