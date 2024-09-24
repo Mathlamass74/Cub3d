@@ -48,3 +48,16 @@ void	init_textures(t_data *d)
 	init_texture(&d->east_texture);
 	init_texture(&d->west_texture);
 }
+
+void	init_dda(t_data *d, t_dda *dda)
+{
+	dda->map_pos_x = d->player.posx / 64;
+	dda->map_pos_y = d->player.posy / 64;
+	dda->side_dist_x = 0;
+	dda->side_dist_y = 0;
+	dda->delta_dist_x = 0;
+	dda->delta_dist_y = 0;
+	dda->ray_angle = 0;
+	dda->ray_dir_x = 0;
+	dda->ray_dir_y = 0;
+}

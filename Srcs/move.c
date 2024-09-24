@@ -115,6 +115,8 @@ int	deal_key(int key, t_data *d)
 
 	x = 0;
 	y = 0;
+	if (key == LEFT_ARROW || key == RIGHT_ARROW)
+		return (arrow_move(key, d));
 	if (d->move == 0)
 	{
 		d->check_case.target_x = d->player.posx;

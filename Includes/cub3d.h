@@ -13,8 +13,7 @@
 # include <string.h>
 # include <stdbool.h>
 
-# define PL fprintf(stderr, "file: %s line: %d pid: %i\n", \
-	__FILE__, __LINE__, getpid())
+# define PL printf("file: %s line: %d\n", __FILE__, __LINE__)
 # define PF(x) fprintf(stderr, "PF: %f\n", (x));
 # define PF2(s, x) fprintf(stderr, "%s: %f\n", (s), (x));
 # define PINT(x) fprintf(stderr, "PI: %d\n", (x));
@@ -44,6 +43,16 @@
 # define MINIMAP_SCALE 0.5
 # define MINIMAP_SIZE 160
 # define MOUSE_SENSITIVITY 0.005
+# define ROT_ANGLE 0.05
+
+//## Macos Keys ##//
+
+# define A_KEY 0
+# define S_KEY 1
+# define D_KEY 2
+# define W_KEY 13
+# define LEFT_ARROW 123
+# define RIGHT_ARROW 124
 
 # define YELLOW		0xFFFF00
 # define RED		0xFF0000
@@ -98,6 +107,19 @@ typedef struct s_target
 	int		target_x;
 	int		target_y;
 }				t_target;
+
+typedef	struct s_dda
+{
+	int		map_pos_x;
+	int		map_pos_y;
+	double	side_dist_x;
+	double	side_dist_y;
+	double	delta_dist_x;
+	double	delta_dist_y;
+	double	ray_angle;
+	double	ray_dir_x;
+	double	ray_dir_y;
+}				t_dda;
 
 typedef struct s_ray_params
 {
@@ -168,6 +190,7 @@ typedef struct s_data
 // init
 void	init_data(t_data *d, char *path);
 void	init_ray(t_ray_params *r);
+void	init_dda(t_data *d, t_dda *dda);
 void	init_ray_params(t_data *d, int p_pos_x, int p_pos_y, t_target *target);
 void	init_minimap(t_data *d);
 void	init_textures(t_data *d);
@@ -216,5 +239,6 @@ int		x_move(int key, t_data *d);
 int		mouse_move(int x, int y, t_data *d);
 bool	is_colision(t_data *d, double pos_x, double pos_y);
 void	check_door(t_data *d, int key, int x, int y);
+int		arrow_move(int key, t_data *d);
 
 #endif
