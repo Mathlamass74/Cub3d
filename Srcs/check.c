@@ -18,12 +18,7 @@ int	flood_fill(t_data *d, int x, int y)
 		return (1);
 	if (d->map[y][x] == 'N' || d->map[y][x] == 'S'
 		|| d->map[y][x] == 'E' || d->map[y][x] == 'W')
-	{
-		d->map_char_counter++;
-		d->player.dir = d->map[y][x];
-		d->player.posx = x * TILE_SIZE + TILE_SIZE / 2;
-		d->player.posy = y * TILE_SIZE + TILE_SIZE / 2;
-	}
+		update_player_pos_in_map(d, y, x);
 	if (d->map[y][x] != 'N' && d->map[y][x] != 'S' && d->map[y][x] != 'E'
 		&& d->map[y][x] != 'W' && d->map[y][x] != '1' && d->map[y][x] != '9'
 		&& d->map[y][x] != '0' && d->map[y][x] != '2')
