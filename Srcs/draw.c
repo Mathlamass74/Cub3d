@@ -1,32 +1,32 @@
 #include "../Includes/cub3d.h"
 
-int	draw_map(t_data *d)
-{
-	int	x;
-	int	y;
-	int	s;
+// int	draw_map(t_data *d)
+// {
+// 	int	x;
+// 	int	y;
+// 	int	s;
 
-	s = 0;
-	y = -1;
-	while (++y < d->map_rows)
-	{
-		x = -1;
-		while (++x < d->map_lgcol)
-		{
-			if (d->map[y][x] == '0')
-				mlx_put_image_to_window(d->mlx, d->win,
-										d->north_texture.text_ptr, x * s, y * s);
-			if (d->map[y][x] == '1')
-				mlx_put_image_to_window(d->mlx, d->win,
-										d->south_texture.text_ptr, x * s, y * s);
-			if (d->map[y][x] == '2')
-				mlx_put_image_to_window(d->mlx, d->win,
-										d->east_texture.text_ptr, x * s, y * s);
-		}
-	}
-	draw_minimap(d);
-	return (0);
-}
+// 	s = 0;
+// 	y = -1;
+// 	while (++y < d->map_rows)
+// 	{
+// 		x = -1;
+// 		while (++x < d->map_lgcol)
+// 		{
+// 			if (d->map[y][x] == '0')
+// 				mlx_put_image_to_window(d->mlx, d->win,
+// 										d->north_texture.text_ptr, x * s, y * s);
+// 			if (d->map[y][x] == '1')
+// 				mlx_put_image_to_window(d->mlx, d->win,
+// 										d->south_texture.text_ptr, x * s, y * s);
+// 			if (d->map[y][x] == '2')
+// 				mlx_put_image_to_window(d->mlx, d->win,
+// 										d->east_texture.text_ptr, x * s, y * s);
+// 		}
+// 	}
+// 	draw_minimap(d);
+// 	return (0);
+// }
 
 int	get_pixel_from_texture(t_text *texture, int x, int y)
 {
@@ -37,33 +37,6 @@ int	get_pixel_from_texture(t_text *texture, int x, int y)
 	color = *(unsigned int *)pixel;
 	return (color);
 }
-
-// void	render_wall_slice(t_data *d, int ray_ind, double ray_dist, t_target t)
-// {
-// 	int		wall_height;
-// 	int		start_y;
-// 	int		end_y;
-// 	int		i;
-// 	t_text	*texture;
-
-// 	wall_height = (int)(TILE_SIZE / ray_dist * (WIN_WIDTH / 2));
-// 	start_y = (WIN_HEIGHT / 2) - (wall_height / 2);
-// 	end_y = start_y + wall_height;
-// 	if (start_y < 0)
-// 		start_y = 0;
-// 	if (end_y >= WIN_HEIGHT)
-// 		end_y = WIN_HEIGHT - 1;
-// 	texture = face_texture(d);
-// 	i = start_y;
-// 	while (i < end_y)
-// 	{
-// 		t.target_x = (ray_ind % TILE_SIZE);
-// 		t.target_y = (i - start_y) * texture->height / wall_height;
-// 		mlx_pixel_put(d->mlx, d->win, ray_ind, i,
-// 			get_pixel_from_texture(texture, t.target_x, t.target_y));
-// 		i++;
-// 	}
-// }
 
 void	put_pixel_to_image(t_img *img, int x, int y, int color)
 {
@@ -91,14 +64,14 @@ void	render_wall_slice(t_data *d, int ray_ind, double ray_dist, t_target t)
 		start_y = 0;
 	if (end_y >= WIN_HEIGHT)
 		end_y = WIN_HEIGHT - 1;
-	texture = face_texture(d); // On sélectionne la bonne texture
+	texture = face_texture(d);
 	i = start_y;
 	while (i < end_y)
 	{
-		t.target_x = (ray_ind % TILE_SIZE); // Calcul de la position dans la texture
-		t.target_y = (i - start_y) * texture->height / wall_height; // Position verticale dans la texture
+		t.target_x = (ray_ind % TILE_SIZE);
+		t.target_y = (i - start_y) * texture->height / wall_height;
 		int color = get_pixel_from_texture(texture, t.target_x, t.target_y);
-		put_pixel_to_image(&d->img, ray_ind, i, color); // On dessine dans l'image en mémoire
+		put_pixel_to_image(&d->img, ray_ind, i, color);
 		i++;
 	}
 }
@@ -202,9 +175,9 @@ void	draw_multiple_rays(t_data *d, int p_pos_x, int p_pos_y)
 		target.target_x = p_pos_x + cos(ray_angle) * RAY_LENGTH;
 		target.target_y = p_pos_y + sin(ray_angle) * RAY_LENGTH;
 		distance = draw_ray(d, p_pos_x, p_pos_y, &target);
-		wall_facing(d); // Détermine quelle face est touchée pour choisir la texture
-		distance *= cos(ray_angle - atan2(d->player.diry, d->player.dirx)); // Correction de la distance
-		render_wall_slice(d, i, distance, target); // Dessin de la tranche de mur avec texture
+		wall_facing(d);
+		distance *= cos(ray_angle - atan2(d->player.diry, d->player.dirx));
+		render_wall_slice(d, i, distance, target);
 		i++;
 	}
 }
