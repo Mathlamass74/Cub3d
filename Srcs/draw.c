@@ -1,76 +1,32 @@
 #include "../Includes/cub3d.h"
 
-// void	draw_player(t_data *d, double pos_x, double pos_y)
-// {
-// 	int	start_x;
-// 	int	start_y;
-// 	int	x;
-// 	int	y;
+int	draw_map(t_data *d)
+{
+	int	x;
+	int	y;
+	int	s;
 
-// 	start_x = (int)pos_x - PLAYER_SIZE / 2;
-// 	start_y = (int)pos_y - PLAYER_SIZE / 2;
-// 	x = start_x;
-// 	while (x < start_x + PLAYER_SIZE)
-// 	{
-// 		y = start_y;
-// 		while (y < start_y + PLAYER_SIZE)
-// 		{
-// 			mlx_pixel_put(d->mlx, d->win, x, y, RED);
-// 			y++;
-// 		}
-// 		x++;
-// 	}
-// }
-
-// int	draw_map(t_data *d)
-// {
-// 	int	x;
-// 	int	y;
-// 	int	s;
-
-// 	s = 64;
-// 	y = -1;
-// 	while (++y < d->map_rows)
-// 	{
-// 		x = -1;
-// 		while (++x < d->map_lgcol)
-// 		{
-// 			if (d->map[y][x] == '0')
-// 				mlx_put_image_to_window(d->mlx, d->win,
-// 										d->north_texture.text_ptr, x * s, y * s);
-// 			if (d->map[y][x] == '1')
-// 				mlx_put_image_to_window(d->mlx, d->win,
-// 										d->south_texture.text_ptr, x * s, y * s);
-// 			if (d->map[y][x] == '2')
-// 				mlx_put_image_to_window(d->mlx, d->win,
-// 										d->east_texture.text_ptr, x * s, y * s);
-// 		}
-// 	}
-// 	return (0);
-// }
-
-// void	render_wall_slice(t_data *d, int ray_index, double ray_distance)
-// {
-// 	int	wall_height;
-// 	int	start_y;
-// 	int	end_y;
-// 	int	i;
-// 	int	color;
-
-// 	wall_height = (int)(TILE_SIZE / ray_distance * (WIN_WIDTH / 2));
-// 	start_y = (WIN_HEIGHT / 2) - (wall_height / 2);
-// 	end_y = start_y + wall_height;
-// 	if (start_y < 0)
-// 		start_y = 0;
-// 	if (end_y >= WIN_HEIGHT)
-// 		end_y = WIN_HEIGHT - 1;
-// 	i = start_y;
-// 	while (i++ < end_y)
-// 	{
-// 		color = get_pixel_from_texture();
-// 		mlx_pixel_put(d->mlx, d->win, ray_index, i, color);
-// 	}
-// }
+	s = 0;
+	y = -1;
+	while (++y < d->map_rows)
+	{
+		x = -1;
+		while (++x < d->map_lgcol)
+		{
+			if (d->map[y][x] == '0')
+				mlx_put_image_to_window(d->mlx, d->win,
+										d->north_texture.text_ptr, x * s, y * s);
+			if (d->map[y][x] == '1')
+				mlx_put_image_to_window(d->mlx, d->win,
+										d->south_texture.text_ptr, x * s, y * s);
+			if (d->map[y][x] == '2')
+				mlx_put_image_to_window(d->mlx, d->win,
+										d->east_texture.text_ptr, x * s, y * s);
+		}
+	}
+	draw_minimap(d);
+	return (0);
+}
 
 int	get_pixel_from_texture(t_text *texture, int x, int y)
 {

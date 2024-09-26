@@ -44,6 +44,9 @@
 # define MINIMAP_SCALE 0.5
 # define MINIMAP_SIZE 160
 # define MOUSE_SENSITIVITY 0.005
+# define ROT_ANGLE 0.05
+# define LEFT_ARROW 123
+# define RIGHT_ARROW 124
 
 # define YELLOW		0xFFFF00
 # define RED		0xFF0000
@@ -216,5 +219,6 @@ int		x_move(int key, t_data *d);
 int		mouse_move(int x, int y, t_data *d);
 bool	is_colision(t_data *d, double pos_x, double pos_y);
 void	check_door(t_data *d, int key, int x, int y);
+int		arrow_move(int key, t_data *d);
 
 #endif
