@@ -30,3 +30,10 @@ char	**file_cpy(char *path)
 	close(fd);
 	return (file);
 }
+
+void	init_image(t_data *d)
+{
+	d->img.img_ptr = mlx_new_image(d->mlx, WIN_WIDTH, WIN_HEIGHT);
+	d->img.addr = mlx_get_data_addr(d->img.img_ptr, &d->img.bits_per_pixel,
+			&d->img.line_length, &d->img.endian);
+}

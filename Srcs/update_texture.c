@@ -15,12 +15,19 @@ void	load_texture(t_data *d, t_text *texture, char *file_path)
 			&texture->endian);
 }
 
+void	update_floor_ceiling(t_data *d)
+{
+	d->floor_color = parse_color(d->floor_path);
+	d->ceiling_color = parse_color(d->ceiling_path);
+}
+
 void	load_textures(t_data *d)
 {
 	load_texture(d, &d->north_texture, d->text_n_path);
 	load_texture(d, &d->south_texture, d->text_s_path);
 	load_texture(d, &d->east_texture, d->text_e_path);
 	load_texture(d, &d->west_texture, d->text_w_path);
+	update_floor_ceiling(d);
 }
 
 t_text	*face_texture(t_data *d)
@@ -33,4 +40,26 @@ t_text	*face_texture(t_data *d)
 		return (&d->east_texture);
 	else
 		return (&d->west_texture);
+}
+
+int	parse_color(const char *path)
+{
+	int	r;
+	int	g;
+	int	b;
+	int	i;
+
+	r = 0;
+	g = 0;
+	b = 0;
+	i = 0;
+	while (path[i] >= '0' && path[i] <= '9')
+		r = r * 10 + (path[i++] - '0');
+	i++;
+	while (path[i] >= '0' && path[i] <= '9')
+		g = g * 10 + (path[i++] - '0');
+	i++;
+	while (path[i] >= '0' && path[i] <= '9')
+		b = b * 10 + (path[i++] - '0');
+	return ((r << 16) | (g << 8) | b);
 }

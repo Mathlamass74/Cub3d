@@ -151,13 +151,6 @@ double	draw_ray(t_data *d, int p_pos_x, int p_pos_y, t_target *target)
 	return (distance);
 }
 
-void	init_image(t_data *d)
-{
-    d->img.img_ptr = mlx_new_image(d->mlx, WIN_WIDTH, WIN_HEIGHT);
-    d->img.addr = mlx_get_data_addr(d->img.img_ptr, &d->img.bits_per_pixel,
-                                    &d->img.line_length, &d->img.endian);
-}
-
 void	draw_multiple_rays(t_data *d, int p_pos_x, int p_pos_y)
 {
 	double		angle_step;
