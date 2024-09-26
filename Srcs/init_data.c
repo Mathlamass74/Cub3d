@@ -16,7 +16,7 @@ void	init_player(t_player *p)
 
 void	init_img(t_img *i)
 {
-	i->img = NULL;
+	i->img_ptr = NULL;
 	i->addr = NULL;
 	i->bits_per_pixel = 0;
 	i->line_length = 0;

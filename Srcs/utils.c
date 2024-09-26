@@ -59,18 +59,12 @@ int	close_window(t_data *d)
 
 void	wall_facing(t_data *d)
 {
-	if (fabs(d->ray_p.step_x) > fabs(d->ray_p.step_y))
-	{
-		if (d->ray_p.step_x > 0)
-			d->face = 2;
-		else
-			d->face = 3;
-	}
-	else
-	{
-		if (d->ray_p.step_y > 0)
-			d->face = 1;
-		else
-			d->face = 0;
-	}
+	if (d->ray_p.step_x > d->ray_p.step_y)
+		d->face = 0;
+	if (d->ray_p.step_x < d->ray_p.step_y)
+		d->face = 1;
+	if (d->ray_p.step_x == d->ray_p.step_y && d->ray_p.step_y < 0)
+		d->face = 2;
+	if (d->ray_p.step_x == d->ray_p.step_y && d->ray_p.step_y > 0)
+		d->face = 3;
 }

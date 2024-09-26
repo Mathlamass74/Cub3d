@@ -27,7 +27,7 @@ void	free_cube(t_data *d)
 {
 	free_utils(d->mlx);
 	free_utils(d->win);
-	free_utils(d->img.img);
+	free_utils(d->img.img_ptr);
 	free_utils(d->img.addr);
 	free_utils(d->north_texture.text_ptr);
 	free_utils(d->south_texture.text_ptr);
