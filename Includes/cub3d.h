@@ -180,6 +180,7 @@ void	init_image(t_data *d);
 
 // check
 int		check_format_cub(char *file);
+bool	check_is_wall(t_data *d, int y, int x);
 
 // update
 void	update_map(t_data *d, int i, int j);
@@ -187,6 +188,7 @@ void	update_player_dir(t_data *d);
 void	update_mlx(t_data *d);
 void	load_textures(t_data *d);
 void	update_minimap(t_data *d, int x, int y, int option);
+void	update_player_pos_in_map(t_data *d, int y, int x);
 t_text	*face_texture(t_data *d);
 
 // utils
@@ -205,6 +207,7 @@ int		close_window(t_data *d);
 int		nxto(t_data	*d);
 void	which_key(int key, t_data *d);
 void	wall_facing(t_data *d);
+int		is_possible_move(t_data *d, double move_angle, double step);
 
 // draw
 int		draw_map(t_data *d);

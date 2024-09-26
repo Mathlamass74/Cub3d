@@ -1,52 +1,26 @@
 #include "../Includes/cub3d.h"
 
-// int	draw_map(t_data *d)
-// {
-// 	int	x;
-// 	int	y;
-// 	int	s;
-
-// 	s = 0;
-// 	y = -1;
-// 	while (++y < d->map_rows)
-// 	{
-// 		x = -1;
-// 		while (++x < d->map_lgcol)
-// 		{
-// 			if (d->map[y][x] == '0')
-// 				mlx_put_image_to_window(d->mlx, d->win,
-// 										d->north_texture.text_ptr, x * s, y * s);
-// 			if (d->map[y][x] == '1')
-// 				mlx_put_image_to_window(d->mlx, d->win,
-// 										d->south_texture.text_ptr, x * s, y * s);
-// 			if (d->map[y][x] == '2')
-// 				mlx_put_image_to_window(d->mlx, d->win,
-// 										d->east_texture.text_ptr, x * s, y * s);
-// 		}
-// 	}
-// 	draw_minimap(d);
-// 	return (0);
-// }
-
 int	get_pixel_from_texture(t_text *texture, int x, int y)
 {
 	char	*pixel;
 	int		color;
 
-	pixel = texture->addr + (y * texture->line_length + x * (texture->bits_per_pixel / 8));
+	pixel = texture->addr + (y * texture->line_length + x
+			* (texture->bits_per_pixel / 8));
 	color = *(unsigned int *)pixel;
 	return (color);
 }
 
 void	put_pixel_to_image(t_img *img, int x, int y, int color)
 {
-    char	*dst;
+	char	*dst;
 
-    if (x >= 0 && x < WIN_WIDTH && y >= 0 && y < WIN_HEIGHT)
-    {
-        dst = img->addr + (y * img->line_length + x * (img->bits_per_pixel / 8));
-        *(unsigned int *)dst = color;
-    }
+	if (x >= 0 && x < WIN_WIDTH && y >= 0 && y < WIN_HEIGHT)
+	{
+		dst = img->addr + (y * img->line_length + x
+				* (img->bits_per_pixel / 8));
+		*(unsigned int *)dst = color;
+	}
 }
 
 void	render_wall_slice(t_data *d, int ray_ind, double ray_dist, t_target t)
@@ -70,61 +44,11 @@ void	render_wall_slice(t_data *d, int ray_ind, double ray_dist, t_target t)
 	{
 		t.target_x = (ray_ind % TILE_SIZE);
 		t.target_y = (i - start_y) * texture->height / wall_height;
-		int color = get_pixel_from_texture(texture, t.target_x, t.target_y);
-		put_pixel_to_image(&d->img, ray_ind, i, color);
+		put_pixel_to_image(&d->img, ray_ind, i,
+			get_pixel_from_texture(texture, t.target_x, t.target_y));
 		i++;
 	}
 }
-
-// double	draw_ray(t_data *d, int p_pos_x, int p_pos_y, t_target *target)
-// {
-// 	int		err2;
-// 	double	distance;
-
-// 	init_ray_params(d, p_pos_x, p_pos_y, target);
-// 	distance = 0;
-// 	while (d->map[p_pos_y / TILE_SIZE][p_pos_x / TILE_SIZE] == '0')
-// 	{
-// 		distance += sqrt(pow(d->ray_p.step_x, 2) + pow(d->ray_p.step_y, 2));
-// 		// mlx_pixel_put(d->mlx, d->win, p_pos_x, p_pos_y, YELLOW);
-// 		err2 = 2 * d->ray_p.draw_err;
-// 		if (err2 > -d->ray_p.dif_abs_y)
-// 		{
-// 			d->ray_p.draw_err -= d->ray_p.dif_abs_y;
-// 			p_pos_x += d->ray_p.step_x;
-// 		}
-// 		if (err2 < d->ray_p.dif_abs_x)
-// 		{
-// 			d->ray_p.draw_err += d->ray_p.dif_abs_x;
-// 			p_pos_y += d->ray_p.step_y;
-// 		}
-// 	}
-// 	return (distance);
-// }
-
-// void	draw_multiple_rays(t_data *d, int p_pos_x, int p_pos_y)
-// {
-// 	double		angle_step;
-// 	double		ray_angle;
-// 	t_target	target;
-// 	int			i;
-// 	double		distance;
-
-// 	angle_step = FOV / (double)(WIN_WIDTH - 1);
-// 	i = 0;
-// 	while (i < WIN_WIDTH)
-// 	{
-// 		ray_angle = d->player.player_angle - (FOV / 2 * M_PI / 180)
-// 			+ i * angle_step * M_PI / 180;
-// 		target.target_x = p_pos_x + cos(ray_angle) * RAY_LENGTH;
-// 		target.target_y = p_pos_y + sin(ray_angle) * RAY_LENGTH;
-// 		distance = draw_ray(d, p_pos_x, p_pos_y, &target);
-// 		wall_facing(d);
-// 		distance *= cos(ray_angle - atan2(d->player.diry, d->player.dirx));
-// 		render_wall_slice(d, i, distance, target);
-// 		i++;
-// 	}
-// }
 
 double	draw_ray(t_data *d, int p_pos_x, int p_pos_y, t_target *target)
 {
