@@ -25,7 +25,7 @@ void	draw_player_direction(t_data *d)
 	scale = 15;
 	dir_x = d->mm.player_x + cos(angle) * scale;
 	dir_y = d->mm.player_y + sin(angle) * scale;
-	mlx_pixel_put(d->mlx, d->win, dir_x, dir_y, RED);
+	put_pixel_to_image(&d->img, dir_x, dir_y, RED);
 }
 
 void	draw_rectangle(t_data *d, int color, int size, int o)
@@ -43,34 +43,33 @@ void	draw_rectangle(t_data *d, int color, int size, int o)
 		j = 0;
 		while (j < size)
 		{
-			mlx_pixel_put(d->mlx, d->win, x + i, y + j, color);
+			put_pixel_to_image(&d->img, x + i, y + j, color);
 			j++;
 		}
 		i++;
 	}
 }
 
-void	draw_border(t_data *d, int width, int height, int color)
-{
-	int	i;
+// void	draw_border(t_data *d, int width, int height, int color)
+// {
+// 	int	i;
 
-	i = 0;
-	while (i < width)
-		mlx_pixel_put(d->mlx, d->win, d->mm.minimap_x
-			+ i++, d->mm.minimap_y, color);
-	i = 0;
-	while (i < width)
-		mlx_pixel_put(d->mlx, d->win, d->mm.minimap_x
-			+ i++, d->mm.minimap_y + height - 1, color);
-	i = 0;
-	while (i < height)
-		mlx_pixel_put(d->mlx, d->win, d->mm.minimap_x,
-			d->mm.minimap_y + i++, color);
-	i = 0;
-	while (i < height)
-		mlx_pixel_put(d->mlx, d->win, d->mm.minimap_x
-			+ width - 1, d->mm.minimap_y + i++, color);
-}
+// 	i = 0;
+// 	while (i < width)
+// 		put_pixel_to_image(&d->img, d->mm.minimap_x
+// 			+ i++, d->mm.minimap_y, color);
+// 	i = 0;
+// 	while (i < width)
+// 		put_pixel_to_image(&d->img, d->mm.minimap_x + i++, d->mm.minimap_y + height - 1, color);
+// 	i = 0;
+// 	while (i < height)
+// 		put_pixel_to_image(&d->img, d->mm.minimap_x,
+// 			d->mm.minimap_y + i++, color);
+// 	i = 0;
+// 	while (i < height)
+// 		put_pixel_to_image(&d->img, d->mm.minimap_x
+// 			+ width - 1, d->mm.minimap_y + i++, color);
+// }
 
 void	draw_minimap(t_data *d)
 {
@@ -95,5 +94,4 @@ void	draw_minimap(t_data *d)
 	}
 	draw_rectangle(d, RED, PLAYER_SIZE, 0);
 	draw_player_direction(d);
-	draw_border(d, MINIMAP_SIZE, MINIMAP_SIZE, BLACK);
 }

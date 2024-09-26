@@ -66,7 +66,7 @@
 
 typedef struct s_img
 {
-	void	*img;
+	void	*img_ptr;
 	char	*addr;
 	int		bits_per_pixel;
 	int		line_length;
@@ -175,6 +175,7 @@ void	init_ray_params(t_data *d, int p_pos_x, int p_pos_y, t_target *target);
 void	init_minimap(t_data *d);
 void	init_textures(t_data *d);
 void	create_minimap_window(t_data *d);
+void	init_image(t_data *d);
 
 // check
 int		check_format_cub(char *file);
@@ -211,6 +212,7 @@ void	draw_multiple_rays(t_data *d, int p_pos_x, int p_pos_y);
 // void	draw_ray(t_data *d, int p_pos_x, int p_pos_y, t_target *target);
 void	draw_player(t_data *d, double pos_x, double pos_y);
 void	draw_rectangle(t_data *d, int color, int size, int o);
+void	put_pixel_to_image(t_img *img, int x, int y, int color);
 
 // move
 int		deal_key(int key, t_data *d);
