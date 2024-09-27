@@ -65,5 +65,6 @@ void	update_mlx(t_data *d)
 	mlx_loop_hook(d->mlx, update, d);
 	if (d->window_closed == true)
 		exit_game(99, d);
+	mlx_mouse_hook(d->win, mouse_click, d);
 	mlx_loop(d->mlx);
 }
