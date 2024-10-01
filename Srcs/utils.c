@@ -29,6 +29,11 @@ int	close_window(t_data *d)
 
 void	wall_facing(t_data *d)
 {
+	if (d->face == 5)
+	{
+		d->door = 1;
+		return ;
+	}
 	if (d->ray_p.step_x > d->ray_p.step_y)
 		d->face = 0;
 	if (d->ray_p.step_x < d->ray_p.step_y)

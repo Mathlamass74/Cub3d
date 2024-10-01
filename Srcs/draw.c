@@ -38,10 +38,10 @@ void	render_wall_slice(t_data *d, int ray_ind, double ray_dist, t_target t)
 		start_y = 0;
 	if (end_y >= WIN_HEIGHT)
 		end_y = WIN_HEIGHT - 1;
-	texture = face_texture(d);
 	i = start_y;
 	while (i < end_y)
 	{
+		texture = face_texture(d);
 		t.target_x = (ray_ind % TILE_SIZE);
 		t.target_y = (i - start_y) * texture->height / wall_height;
 		put_pixel_to_image(&d->img, ray_ind, i,
@@ -71,6 +71,8 @@ double	draw_ray(t_data *d, int p_pos_x, int p_pos_y, t_target *target)
 			d->ray_p.draw_err += d->ray_p.dif_abs_x;
 			p_pos_y += d->ray_p.step_y;
 		}
+		d->x_door = p_pos_x / TILE_SIZE;
+		d->y_door = p_pos_y / TILE_SIZE;
 	}
 	return (distance);
 }

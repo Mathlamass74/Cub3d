@@ -44,6 +44,7 @@
 # define MINIMAP_SCALE 0.5
 # define MINIMAP_SIZE 160
 # define MOUSE_SENSITIVITY 0.005
+# define MOUSE_LEFT_BUTTON 1
 # define ROT_ANGLE 0.05
 # define LEFT_ARROW 123
 # define RIGHT_ARROW 124
@@ -147,6 +148,8 @@ typedef struct s_data
 	t_text			south_texture;
 	t_text			east_texture;
 	t_text			west_texture;
+	t_text			door_o_text;
+	t_text			door_c_text;
 	t_ray_params	ray_p;
 	t_mini			mm;
 	char			*text_n_path;
@@ -155,12 +158,16 @@ typedef struct s_data
 	char			*text_e_path;
 	char			*ceiling_path;
 	char			*floor_path;
+	char			*door_o_path;
+	char			*door_c_path;
 	int				draw_color;
 	int				mouse_x;
 	int				mouse_y;
 	int				mouse_down;
 	bool			window_closed;
 	int				move;
+	int				y_door;
+	int				x_door;
 	int				door;
 	int				open;
 	int				move_check;
@@ -208,12 +215,12 @@ int		nxto(t_data	*d);
 void	which_key(int key, t_data *d);
 void	wall_facing(t_data *d);
 int		is_possible_move(t_data *d, double move_angle, double step);
+int		mouse_click(int button, int x, int y, t_data *d);
 
 // draw
 int		draw_map(t_data *d);
 void	draw_minimap(t_data *d);
 void	draw_multiple_rays(t_data *d, int p_pos_x, int p_pos_y);
-// void	draw_ray(t_data *d, int p_pos_x, int p_pos_y, t_target *target);
 void	draw_player(t_data *d, double pos_x, double pos_y);
 void	draw_rectangle(t_data *d, int color, int size, int o);
 void	put_pixel_to_image(t_img *img, int x, int y, int color);
