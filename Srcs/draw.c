@@ -1,26 +1,31 @@
 #include "../Includes/cub3d.h"
 
-int	get_pixel_from_texture(t_text *texture, int x, int y)
+int	draw_map(t_data *d)
 {
-	char	*pixel;
-	int		color;
+	int	x;
+	int	y;
+	int	s;
 
-	pixel = texture->addr + (y * texture->line_length + x
-			* (texture->bits_per_pixel / 8));
-	color = *(unsigned int *)pixel;
-	return (color);
-}
-
-void	put_pixel_to_image(t_img *img, int x, int y, int color)
-{
-	char	*dst;
-
-	if (x >= 0 && x < WIN_WIDTH && y >= 0 && y < WIN_HEIGHT)
+	s = 64;
+	y = -1;
+	while (++y < d->map_rows)
 	{
-		dst = img->addr + (y * img->line_length + x
-				* (img->bits_per_pixel / 8));
-		*(unsigned int *)dst = color;
+		x = -1;
+		while (++x < d->map_lgcol)
+		{
+			if (d->map[y][x] == '0')
+				mlx_put_image_to_window(d->mlx, d->win,
+					d->north_texture.text_ptr, x * s, y * s);
+			if (d->map[y][x] == '1')
+				mlx_put_image_to_window(d->mlx, d->win,
+					d->south_texture.text_ptr, x * s, y * s);
+			if (d->map[y][x] == '2')
+				mlx_put_image_to_window(d->mlx, d->win,
+					d->east_texture.text_ptr, x * s, y * s);
+		}
 	}
+	draw_minimap(d);
+	return (0);
 }
 
 void	render_wall_slice(t_data *d, int ray_ind, double ray_dist, t_target t)
@@ -75,26 +80,24 @@ double	draw_ray(t_data *d, int p_pos_x, int p_pos_y, t_target *target)
 	return (distance);
 }
 
-void	draw_multiple_rays(t_data *d, int p_pos_x, int p_pos_y)
+void	draw_player(t_data *d, double pos_x, double pos_y)
 {
-	double		angle_step;
-	double		ray_angle;
-	t_target	target;
-	int			i;
-	double		distance;
+	int	start_x;
+	int	start_y;
+	int	x;
+	int	y;
 
-	angle_step = FOV / (double)(WIN_WIDTH - 1);
-	i = 0;
-	while (i < WIN_WIDTH)
+	start_x = (int)pos_x - PLAYER_SIZE / 2;
+	start_y = (int)pos_y - PLAYER_SIZE / 2;
+	x = start_x;
+	while (x < start_x + PLAYER_SIZE)
 	{
-		ray_angle = d->player.player_angle - (FOV / 2 * M_PI / 180)
-			+ i * angle_step * M_PI / 180;
-		target.target_x = p_pos_x + cos(ray_angle) * RAY_LENGTH;
-		target.target_y = p_pos_y + sin(ray_angle) * RAY_LENGTH;
-		distance = draw_ray(d, p_pos_x, p_pos_y, &target);
-		wall_facing(d);
-		distance *= cos(ray_angle - atan2(d->player.diry, d->player.dirx));
-		render_wall_slice(d, i, distance, target);
-		i++;
+		y = start_y;
+		while (y < start_y + PLAYER_SIZE)
+		{
+			mlx_pixel_put(d->mlx, d->win, x, y, RED);
+			y++;
+		}
+		x++;
 	}
 }
