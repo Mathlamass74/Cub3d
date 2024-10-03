@@ -5,18 +5,18 @@ double	try_move(t_data *d, double move_angle)
 	int	try;
 
 	try = 0.0;
-	while (try <= 4.0)
+	while (try <= 0.04)
 	{
 		if (is_possible_move(d, move_angle, MOVE_STEP - try))
 			return (try);
-		try += 0.1;
+		try += 0.01;
 	}
-	return (-0.5);
+	return (-0.05);
 }
 
 int	y_move(int key, t_data *d)
 {
-	int	stepyx;
+	double	stepyx;
 
 	if (key == 13)
 	{
@@ -41,7 +41,7 @@ int	y_move(int key, t_data *d)
 
 int	x_move(int key, t_data *d)
 {
-	int	stepyx;
+	double	stepyx;
 
 	if (key == 0)
 	{

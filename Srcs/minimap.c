@@ -19,12 +19,10 @@ void	draw_player_direction(t_data *d)
 	double	scale;
 	double	dir_x;
 	double	dir_y;
-	double	angle;
 
-	angle = d->player.player_angle;
 	scale = 15;
-	dir_x = d->mm.player_x + cos(angle) * scale;
-	dir_y = d->mm.player_y + sin(angle) * scale;
+	dir_x = d->mm.player_x + cos(d->player.player_angle) * scale;
+	dir_y = d->mm.player_y + sin(d->player.player_angle) * scale;
 	put_pixel_to_image(&d->img, dir_x, dir_y, RED);
 }
 

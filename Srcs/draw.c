@@ -25,13 +25,13 @@ void	put_pixel_to_image(t_img *img, int x, int y, int color)
 
 void	render_wall_slice(t_data *d, int ray_ind, double ray_dist, t_target t)
 {
-	int		wall_height;
-	int		start_y;
-	int		end_y;
+	double	wall_height;
+	double	start_y;
+	double	end_y;
 	int		i;
 	t_text	*texture;
 
-	wall_height = (int)(WIN_HEIGHT / ray_dist);
+	wall_height = (WIN_HEIGHT / ray_dist);
 	start_y = (WIN_HEIGHT / 2) - (wall_height / 2);
 	end_y = start_y + wall_height;
 	if (start_y < 0)

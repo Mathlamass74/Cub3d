@@ -10,7 +10,7 @@ void	init_ray(t_ray_params *r)
 	r->dashed = 0;
 }
 
-void	init_ray_params(t_data *d, int p_pos_x, int p_pos_y, t_target *target)
+void	init_ray_params(t_data *d, double p_pos_x, double p_pos_y, t_target *target)
 {
 	if (target->target_x - p_pos_x < 0)
 		d->ray_p.dif_abs_x = (target->target_x - p_pos_x) * -1;

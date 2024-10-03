@@ -25,7 +25,7 @@
 # define WIN_WIDTH 1216
 # define WIN_HEIGHT 1280
 # define MOVE_SPEED
-# define MOVE_STEP 0.5
+# define MOVE_STEP 0.05
 # define ROT_SPEED
 # define PI 3.1415926535
 # define P2 PI/2
@@ -178,7 +178,7 @@ typedef struct s_data
 // init
 void	init_data(t_data *d, char *path);
 void	init_ray(t_ray_params *r);
-void	init_ray_params(t_data *d, int p_pos_x, int p_pos_y, t_target *target);
+void	init_ray_params(t_data *d, double p_pos_x, double p_pos_y, t_target *target);
 void	init_minimap(t_data *d);
 void	init_textures(t_data *d);
 int		parse_color(const char *path);
