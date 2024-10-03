@@ -47,4 +47,8 @@ void	init_textures(t_data *d)
 	init_texture(&d->south_texture);
 	init_texture(&d->east_texture);
 	init_texture(&d->west_texture);
+	init_texture(&d->door_c_text);
+	init_texture(&d->door_o_text);
+	d->door_c_path = ft_strdup("textures/door_close.xpm");
+	d->door_o_path = ft_strdup("textures/door_open.xpm");
 }

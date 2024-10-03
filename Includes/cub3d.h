@@ -44,6 +44,7 @@
 # define MINIMAP_SCALE 32
 # define MINIMAP_SIZE 160
 # define MOUSE_SENSITIVITY 0.005
+# define MOUSE_LEFT_BUTTON 1
 # define ROT_ANGLE 0.05
 # define LEFT_ARROW 123
 # define RIGHT_ARROW 124
@@ -147,6 +148,8 @@ typedef struct s_data
 	t_text			south_texture;
 	t_text			east_texture;
 	t_text			west_texture;
+	t_text			door_o_text;
+	t_text			door_c_text;
 	t_ray_params	ray_p;
 	t_mini			mm;
 	char			*text_n_path;
@@ -155,6 +158,8 @@ typedef struct s_data
 	char			*text_e_path;
 	char			*ceiling_path;
 	char			*floor_path;
+	char			*door_o_path;
+	char			*door_c_path;
 	int				draw_color;
 	int				mouse_x;
 	int				mouse_y;
@@ -210,6 +215,7 @@ int		nxto(t_data	*d);
 void	which_key(int key, t_data *d);
 void	wall_facing(t_data *d);
 int		is_possible_move(t_data *d, double move_angle, double step);
+int		mouse_click(int button, int x, int y, t_data *d);
 
 // draw
 int		draw_map(t_data *d);

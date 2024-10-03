@@ -3,6 +3,7 @@
 
 // On remplace tous les 0 et les espaces de la map par des 9 pour pouvoir filler la map plus facilement ensuite,
 // on copie les 1 et N, S, E ou W de data->file dans data->map
+
 void	update_map(t_data *d, int i, int j)
 {
 	int	k;
