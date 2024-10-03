@@ -35,7 +35,7 @@ void	update_player_pos_in_map(t_data *d, int y, int x)
 {
 	d->map_char_counter++;
 	d->player.dir = d->map[y][x];
-	d->player.posx = x * TILE_SIZE + TILE_SIZE / 2;
-	d->player.posy = y * TILE_SIZE + TILE_SIZE / 2;
+	d->player.posx = x + 0.5;
+	d->player.posy = y + 0.5;
 	d->map[y][x] = '0';
 }

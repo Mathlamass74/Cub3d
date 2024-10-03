@@ -25,7 +25,7 @@
 # define WIN_WIDTH 1216
 # define WIN_HEIGHT 1280
 # define MOVE_SPEED
-# define MOVE_STEP 5.0
+# define MOVE_STEP 0.5
 # define ROT_SPEED
 # define PI 3.1415926535
 # define P2 PI/2
@@ -37,7 +37,7 @@
 # define TILE_SIZE 64
 # define PLAYER_SIZE 4
 # define NUM_RAYS 60
-# define RAY_LENGTH 200
+# define RAY_LENGTH 2
 # define FOV 60
 # define TRUE 1
 # define FALSE 0
@@ -161,6 +161,8 @@ typedef struct s_data
 	int				mouse_down;
 	bool			window_closed;
 	int				move;
+	int				x_door;
+	int				y_door;
 	int				door;
 	int				open;
 	int				move_check;

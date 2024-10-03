@@ -67,3 +67,26 @@ void	update_mlx(t_data *d)
 		exit_game(99, d);
 	mlx_loop(d->mlx);
 }
+
+// 
+
+// TILESIZE To update:
+
+// update_player.c:
+// 	- posx
+// 	- posy
+// That's the player coordinate on the map, set as the pixel of the window for now but
+// needs to be updated as the relative position store as double between 0 and N, N being the rightmost column of the map;
+// So when we move, ie. update posx, we will move a certain floating amount, rather than a int.
+
+// draw.c:
+// 	- wall_height,
+//	That's the proportion of the window screen which will be rendered as wall texture
+//	Which seems correct but needs to find an alternative to the tilesize calculs
+//	- x_door
+//	- y_door
+//	- target_x
+
+// utils2.c:
+//	- new_y
+//	- new_x
