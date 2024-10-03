@@ -33,7 +33,7 @@ void	init_minimap(t_data *d)
 		+ (MINIMAP_SIZE / 2) - (PLAYER_SIZE / 2);
 	d->mm.map_x = 0;
 	d->mm.map_y = 0;
-	d->mm.scale = TILE_SIZE * MINIMAP_SCALE;
+	d->mm.scale = MINIMAP_SCALE;
 }
 
 void	init_map(t_data *d)

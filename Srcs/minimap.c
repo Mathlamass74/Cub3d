@@ -1,6 +1,6 @@
 #include "../Includes/cub3d.h"
 
-int	draw_rectangle_utils(t_data *d, int o, char c)
+double	draw_rectangle_utils(t_data *d, int o, char c)
 {
 	if (o == 0 && c == 'x')
 		return (d->mm.player_x);
@@ -17,8 +17,8 @@ int	draw_rectangle_utils(t_data *d, int o, char c)
 void	draw_player_direction(t_data *d)
 {
 	double	scale;
-	int		dir_x;
-	int		dir_y;
+	double	dir_x;
+	double	dir_y;
 	double	angle;
 
 	angle = d->player.player_angle;
@@ -32,8 +32,8 @@ void	draw_rectangle(t_data *d, int color, int size, int o)
 {
 	int	i;
 	int	j;
-	int	x;
-	int	y;
+	double	x;
+	double	y;
 
 	x = draw_rectangle_utils(d, o, 'x');
 	y = draw_rectangle_utils(d, o, 'y');

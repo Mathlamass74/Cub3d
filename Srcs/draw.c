@@ -50,14 +50,14 @@ void	render_wall_slice(t_data *d, int ray_ind, double ray_dist, t_target t)
 	}
 }
 
-double	calcul_dist(t_data *d, int p_pos_x, int p_pos_y, t_target *target)
+double	calcul_dist(t_data *d, double p_pos_x, double p_pos_y, t_target *target)
 {
-	int		err2;
+	double		err2;
 	double	distance;
 
 	init_ray_params(d, p_pos_x, p_pos_y, target);
 	distance = 0;
-	while (d->map[p_pos_y][p_pos_x] == '0')
+	while (d->map[(int)p_pos_y][(int)p_pos_x] == '0')
 	{
 		distance += sqrt(pow(d->ray_p.step_x, 2) + pow(d->ray_p.step_y, 2));
 		err2 = 2 * d->ray_p.draw_err;
@@ -77,7 +77,7 @@ double	calcul_dist(t_data *d, int p_pos_x, int p_pos_y, t_target *target)
 	return (distance);
 }
 
-void	draw_multiple_rays(t_data *d, int p_pos_x, int p_pos_y)
+void	draw_multiple_rays(t_data *d, double p_pos_x, double p_pos_y)
 {
 	double		angle_step;
 	double		ray_angle;
@@ -91,8 +91,8 @@ void	draw_multiple_rays(t_data *d, int p_pos_x, int p_pos_y)
 	{
 		ray_angle = d->player.player_angle - (FOV / 2 * M_PI / 180)
 			+ i * angle_step * M_PI / 180;
-		target.target_x = p_pos_x + cos(ray_angle) * 0.1;
-		target.target_y = p_pos_y + sin(ray_angle) * 0.1;
+		target.target_x = p_pos_x + cos(ray_angle);
+		target.target_y = p_pos_y + sin(ray_angle);
 		distance = calcul_dist(d, p_pos_x, p_pos_y, &target);
 		wall_facing(d);
 		distance *= cos(ray_angle - atan2(d->player.diry, d->player.dirx));

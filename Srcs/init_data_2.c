@@ -6,7 +6,7 @@ void	init_ray(t_ray_params *r)
 	r->dif_abs_y = 0;
 	r->step_x = 0;
 	r->step_y = 0;
-	r->draw_err = r->dif_abs_x - r->dif_abs_y;
+	r->draw_err = 0;
 	r->dashed = 0;
 }
 

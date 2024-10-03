@@ -41,7 +41,7 @@
 # define FOV 60
 # define TRUE 1
 # define FALSE 0
-# define MINIMAP_SCALE 0.5
+# define MINIMAP_SCALE 32
 # define MINIMAP_SIZE 160
 # define MOUSE_SENSITIVITY 0.005
 # define ROT_ANGLE 0.05
@@ -98,17 +98,17 @@ typedef struct s_text
 
 typedef struct s_target
 {
-	int		target_x;
-	int		target_y;
+	double		target_x;
+	double		target_y;
 }				t_target;
 
 typedef struct s_ray_params
 {
-	int			dif_abs_x;
-	int			dif_abs_y;
+	double		dif_abs_x;
+	double		dif_abs_y;
 	double		step_x;
 	double		step_y;
-	int			draw_err;
+	double		draw_err;
 	int			dashed;
 }				t_ray_params;
 
@@ -117,10 +117,10 @@ typedef struct s_mini
 	int				map_x;
 	int				map_y;
 	int				scale;
-	int				minimap_x;
-	int				minimap_y;
-	int				player_x;
-	int				player_y;
+	double			minimap_x;
+	double			minimap_y;
+	double			player_x;
+	double			player_y;
 }				t_mini;
 
 typedef struct s_data
@@ -214,7 +214,7 @@ int		is_possible_move(t_data *d, double move_angle, double step);
 // draw
 int		draw_map(t_data *d);
 void	draw_minimap(t_data *d);
-void	draw_multiple_rays(t_data *d, int p_pos_x, int p_pos_y);
+void	draw_multiple_rays(t_data *d, double p_pos_x, double p_pos_y);
 // void	draw_ray(t_data *d, int p_pos_x, int p_pos_y, t_target *target);
 void	draw_player(t_data *d, double pos_x, double pos_y);
 void	draw_rectangle(t_data *d, int color, int size, int o);

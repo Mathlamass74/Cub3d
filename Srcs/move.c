@@ -1,37 +1,37 @@
 #include "../Includes/cub3d.h"
 
-int	try_move(t_data *d, double move_angle)
+double	try_move(t_data *d, double move_angle)
 {
 	int	try;
 
-	try = 0;
-	while (try <= 4)
+	try = 0.0;
+	while (try <= 4.0)
 	{
 		if (is_possible_move(d, move_angle, MOVE_STEP - try))
 			return (try);
-		try++;
+		try += 0.1;
 	}
-	return (-5);
+	return (-0.5);
 }
 
 int	y_move(int key, t_data *d)
 {
-	int	stepyx = 0;
+	int	stepyx;
 
 	if (key == 13)
 	{
-		// stepyx = try_move(d, d->player.player_angle);
-		// if (stepyx < 0)
-		// 	return (0);
+		stepyx = try_move(d, d->player.player_angle);
+		if (stepyx < 0)
+			return (0);
 		d->player.posx += cos(d->player.player_angle) * (MOVE_STEP - stepyx);
 		d->player.posy += sin(d->player.player_angle) * (MOVE_STEP - stepyx);
 		return (1);
 	}
 	else if (key == 1)
 	{
-		// stepyx = try_move(d, d->player.player_angle + M_PI);
-		// if (stepyx < 0)
-		// 	return (0);
+		stepyx = try_move(d, d->player.player_angle + M_PI);
+		if (stepyx < 0)
+			return (0);
 		d->player.posx -= cos(d->player.player_angle) * (MOVE_STEP - stepyx);
 		d->player.posy -= sin(d->player.player_angle) * (MOVE_STEP - stepyx);
 		return (1);
@@ -41,22 +41,22 @@ int	y_move(int key, t_data *d)
 
 int	x_move(int key, t_data *d)
 {
-	int	stepyx = 0;
+	int	stepyx;
 
 	if (key == 0)
 	{
-		// stepyx = try_move(d, d->player.player_angle - (M_PI / 2));
-		// if (stepyx < 0)
-		// 	return (0);
+		stepyx = try_move(d, d->player.player_angle - (M_PI / 2));
+		if (stepyx < 0)
+			return (0);
 		d->player.posx += sin(d->player.player_angle) * (MOVE_STEP - stepyx);
 		d->player.posy -= cos(d->player.player_angle) * (MOVE_STEP - stepyx);
 		return (1);
 	}
 	else if (key == 2)
 	{
-		// stepyx = try_move(d, d->player.player_angle + (M_PI / 2));
-		// if (stepyx < 0)
-		// 	return (0);
+		stepyx = try_move(d, d->player.player_angle + (M_PI / 2));
+		if (stepyx < 0)
+			return (0);
 		d->player.posx -= sin(d->player.player_angle) * (MOVE_STEP - stepyx);
 		d->player.posy += cos(d->player.player_angle) * (MOVE_STEP - stepyx);
 		return (1);
