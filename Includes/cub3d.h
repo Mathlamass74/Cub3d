@@ -173,6 +173,7 @@ typedef struct s_data
 	int				move_check;
 	int				face;
 	t_target		check_case;
+	int				cross_door;
 }				t_data;
 
 // init
@@ -216,6 +217,7 @@ void	which_key(int key, t_data *d);
 void	wall_facing(t_data *d);
 int		is_possible_move(t_data *d, double move_angle, double step);
 int		mouse_click(int button, int x, int y, t_data *d);
+double	cross_door(t_data *d, double step, int option);
 
 // draw
 int		draw_map(t_data *d);

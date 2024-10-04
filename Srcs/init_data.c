@@ -77,4 +77,5 @@ void	init_data(t_data *d, char *path)
 	d->door = 0;
 	d->open = 0;
 	d->move_check = 0;
+	d->cross_door = 0;
 }

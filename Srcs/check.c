@@ -21,7 +21,7 @@ int	flood_fill(t_data *d, int x, int y)
 		update_player_pos_in_map(d, y, x);
 	if (d->map[y][x] != 'N' && d->map[y][x] != 'S' && d->map[y][x] != 'E'
 		&& d->map[y][x] != 'W' && d->map[y][x] != '1' && d->map[y][x] != '9'
-		&& d->map[y][x] != '0' && d->map[y][x] != '2')
+		&& d->map[y][x] != '0' && d->map[y][x] != 'D')
 		return (2);
 	return (0);
 }
@@ -68,6 +68,11 @@ bool	check_is_wall(t_data *d, int y, int x)
 	if (d->map[y][x] == '0' || d->map[y][x] == 'N' || d->map[y][x] == 'S'
 		|| d->map[y][x] == 'E' || d->map[y][x] == 'W')
 		return (false);
+	else if ((d->map[y][x] == 'D' && d->open == 1))
+	{
+		d->cross_door = 1;
+		return (false);
+	}
 	else
 		return (true);
 }

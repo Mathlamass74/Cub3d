@@ -34,7 +34,7 @@ void	load_textures(t_data *d)
 
 t_text	*face_texture(t_data *d)
 {
-	if (d->map[d->y_door][d->x_door] == '2')
+	if (d->map[d->y_door][d->x_door] == 'D')
 	{
 		if (d->open == 1)
 			return (&d->door_o_text);

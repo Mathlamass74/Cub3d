@@ -17,14 +17,17 @@ double	try_move(t_data *d, double move_angle)
 int	y_move(int key, t_data *d)
 {
 	double	stepyx;
+	double	step;
 
+	step = MOVE_STEP;
 	if (key == 13)
 	{
 		stepyx = try_move(d, d->player.player_angle);
 		if (stepyx < 0)
 			return (0);
-		d->player.posx += cos(d->player.player_angle) * (MOVE_STEP - stepyx);
-		d->player.posy += sin(d->player.player_angle) * (MOVE_STEP - stepyx);
+		step = cross_door(d, step, 0);
+		d->player.posx += cos(d->player.player_angle) * (step - stepyx);
+		d->player.posy += sin(d->player.player_angle) * (step - stepyx);
 		return (1);
 	}
 	else if (key == 1)
@@ -32,8 +35,9 @@ int	y_move(int key, t_data *d)
 		stepyx = try_move(d, d->player.player_angle + M_PI);
 		if (stepyx < 0)
 			return (0);
-		d->player.posx -= cos(d->player.player_angle) * (MOVE_STEP - stepyx);
-		d->player.posy -= sin(d->player.player_angle) * (MOVE_STEP - stepyx);
+		step = cross_door(d, step, 1);
+		d->player.posx -= cos(d->player.player_angle) * (step - stepyx);
+		d->player.posy -= sin(d->player.player_angle) * (step - stepyx);
 		return (1);
 	}
 	return (0);
@@ -42,14 +46,17 @@ int	y_move(int key, t_data *d)
 int	x_move(int key, t_data *d)
 {
 	double	stepyx;
+	double	step;
 
+	step = MOVE_STEP;
 	if (key == 0)
 	{
 		stepyx = try_move(d, d->player.player_angle - (M_PI / 2));
 		if (stepyx < 0)
 			return (0);
-		d->player.posx += sin(d->player.player_angle) * (MOVE_STEP - stepyx);
-		d->player.posy -= cos(d->player.player_angle) * (MOVE_STEP - stepyx);
+		step = cross_door(d, step, 2);
+		d->player.posx += sin(d->player.player_angle) * (step - stepyx);
+		d->player.posy -= cos(d->player.player_angle) * (step - stepyx);
 		return (1);
 	}
 	else if (key == 2)
@@ -57,8 +64,9 @@ int	x_move(int key, t_data *d)
 		stepyx = try_move(d, d->player.player_angle + (M_PI / 2));
 		if (stepyx < 0)
 			return (0);
-		d->player.posx -= sin(d->player.player_angle) * (MOVE_STEP - stepyx);
-		d->player.posy += cos(d->player.player_angle) * (MOVE_STEP - stepyx);
+		step = cross_door(d, step, 3);
+		d->player.posx -= sin(d->player.player_angle) * (step - stepyx);
+		d->player.posy += cos(d->player.player_angle) * (step - stepyx);
 		return (1);
 	}
 	return (0);
