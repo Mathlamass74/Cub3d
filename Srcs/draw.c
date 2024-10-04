@@ -42,7 +42,7 @@ void	render_wall_slice(t_data *d, int ray_ind, double ray_dist, t_target t)
 	while (i < end_y)
 	{
 		texture = face_texture(d);
-		t.target_x = (ray_ind % TILE_SIZE);
+		t.target_x = ray_ind;
 		t.target_y = (i - start_y) * texture->height / wall_height;
 		put_pixel_to_image(&d->img, ray_ind, i,
 			get_pixel_from_texture(texture, t.target_x, t.target_y));
@@ -59,7 +59,10 @@ double	calcul_dist(t_data *d, double p_pos_x, double p_pos_y, t_target *target)
 	distance = 0;
 	while (d->map[(int)p_pos_y][(int)p_pos_x] == '0')
 	{
+		PF2("x", p_pos_x);
+		PF2("y", p_pos_y);
 		distance += sqrt(pow(d->ray_p.step_x, 2) + pow(d->ray_p.step_y, 2));
+		// PF2("dist", distance);
 		err2 = 2 * d->ray_p.draw_err;
 		if (err2 > -d->ray_p.dif_abs_y)
 		{
@@ -87,10 +90,22 @@ void	draw_multiple_rays(t_data *d, double p_pos_x, double p_pos_y)
 
 	angle_step = FOV / (double)(WIN_WIDTH - 1);
 	i = 0;
+	printf("-------------------------\n");
+	PF2("x", p_pos_x);
+	PF2("y", p_pos_y);
 	while (i < WIN_WIDTH)
 	{
-		ray_angle = d->player.player_angle - (FOV / 2 * M_PI / 180)
-			+ i * angle_step * M_PI / 180;
+		ray_angle = d->player.player_angle - (FOV / 2 * M_PI / 180) + i * angle_step * M_PI / 180;
+		// if (i == 0 || i == WIN_WIDTH - 1)
+		// {
+		// 	PF(d->player.player_angle);
+		// 	PF(ray_angle);
+		// }
+		if (cos(ray_angle) > 0 && sin(ray_angle) > 0)
+		{
+			PF2("cos", cos(ray_angle));
+			PF2("sin", sin(ray_angle));
+		}
 		target.target_x = p_pos_x + cos(ray_angle);
 		target.target_y = p_pos_y + sin(ray_angle);
 		distance = calcul_dist(d, p_pos_x, p_pos_y, &target);

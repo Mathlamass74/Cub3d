@@ -10,16 +10,18 @@ void	init_ray(t_ray_params *r)
 	r->dashed = 0;
 }
 
+// 
+
 void	init_ray_params(t_data *d, double p_pos_x, double p_pos_y, t_target *target)
 {
-	if (target->target_x - p_pos_x < 0)
-		d->ray_p.dif_abs_x = (target->target_x - p_pos_x) * -1;
-	else
-		d->ray_p.dif_abs_x = target->target_x - p_pos_x;
-	if (target->target_y - p_pos_y < 0)
-		d->ray_p.dif_abs_y = (target->target_y - p_pos_y) * -1;
-	else
-		d->ray_p.dif_abs_y = target->target_y - p_pos_y;
+	// if (target->target_x - p_pos_x < 0)
+		d->ray_p.dif_abs_x = fabs(target->target_x - p_pos_x);
+	// else
+		// d->ray_p.dif_abs_x = target->target_x - p_pos_x;
+	// if (target->target_y - p_pos_y < 0)
+		d->ray_p.dif_abs_y = fabs(target->target_y - p_pos_y);
+	// else
+		// d->ray_p.dif_abs_y = target->target_y - p_pos_y;
 	if (p_pos_x < target->target_x)
 		d->ray_p.step_x = 1.0;
 	else
