@@ -25,20 +25,22 @@ void	put_pixel_to_image(t_img *img, int x, int y, int color)
 
 void	render_wall_slice(t_data *d, int ray_ind, double ray_dist, t_target t)
 {
-	double	wall_height;
-	double	start_y;
-	double	end_y;
-	int		i;
+	int	wall_height;
+	int	start_y;
+	int	end_y;
+	int	i;
 	t_text	*texture;
 
 	wall_height = (WIN_HEIGHT / ray_dist);
-	start_y = (WIN_HEIGHT / 2) - (wall_height / 2);
-	end_y = start_y + wall_height;
+	start_y = -wall_height / 2 + WIN_HEIGHT / 2;
+	end_y = wall_height / 2 + WIN_HEIGHT / 2;
 	if (start_y < 0)
 		start_y = 0;
 	if (end_y >= WIN_HEIGHT)
 		end_y = WIN_HEIGHT - 1;
 	i = start_y;
+	PI2("end", end_y);
+	PI2("i", i);
 	while (i < end_y)
 	{
 		texture = face_texture(d);
@@ -50,68 +52,51 @@ void	render_wall_slice(t_data *d, int ray_ind, double ray_dist, t_target t)
 	}
 }
 
-double	calcul_dist(t_data *d, double p_pos_x, double p_pos_y, t_target *target)
+void	go_dda(t_data *d)
 {
-	double		err2;
-	double	distance;
+	int hit;
 
-	init_ray_params(d, p_pos_x, p_pos_y, target);
-	distance = 0;
-	while (d->map[(int)p_pos_y][(int)p_pos_x] == '0')
+	hit = 0;
+	while (hit == 0 && d->dda.mapx < d->map_lgcol && d->dda.mapy < d->map_rows) // Layer 2, maybe swap to hit == 0;
 	{
-		PF2("x", p_pos_x);
-		PF2("y", p_pos_y);
-		distance += sqrt(pow(d->ray_p.step_x, 2) + pow(d->ray_p.step_y, 2));
-		// PF2("dist", distance);
-		err2 = 2 * d->ray_p.draw_err;
-		if (err2 > -d->ray_p.dif_abs_y)
+		if (d->dda.sidedist_x < d->dda.sidedist_y)
 		{
-			d->ray_p.draw_err -= d->ray_p.dif_abs_y;
-			p_pos_x += d->ray_p.step_x;
+			d->dda.sidedist_x += d->dda.deltadist_x;
+			d->dda.mapx += d->dda.step_x;
+			d->dda.side = 0;
 		}
-		if (err2 < d->ray_p.dif_abs_x)
+		else
 		{
-			d->ray_p.draw_err += d->ray_p.dif_abs_x;
-			p_pos_y += d->ray_p.step_y;
+			d->dda.sidedist_y += d->dda.deltadist_y;
+			d->dda.mapy += d->dda.step_y;
+			d->dda.side = 1;
 		}
-		d->x_door = p_pos_x;
-		d->y_door = p_pos_y;
+		if (d->map[d->dda.mapy][d->dda.mapx] != '0')
+			hit = 1;
 	}
-	return (distance);
+	d->x_door = d->dda.mapx; // check if right
+	d->y_door = d->dda.mapy;
+	if (d->dda.side == 0)
+		d->dda.perpwalldist = (d->dda.sidedist_x - d->dda.deltadist_x);
+	else
+		d->dda.perpwalldist = (d->dda.sidedist_y - d->dda.deltadist_y);
 }
 
 void	draw_multiple_rays(t_data *d, double p_pos_x, double p_pos_y)
 {
-	double		angle_step;
-	double		ray_angle;
+	int			x;
 	t_target	target;
-	int			i;
-	double		distance;
 
-	angle_step = FOV / (double)(WIN_WIDTH - 1);
-	i = 0;
-	printf("-------------------------\n");
-	PF2("x", p_pos_x);
-	PF2("y", p_pos_y);
-	while (i < WIN_WIDTH)
+	x = 0;
+	target.target_x = 0;
+	target.target_y = 0;
+	while (x < WIN_WIDTH) // Layer 1
 	{
-		ray_angle = d->player.player_angle - (FOV / 2 * M_PI / 180) + i * angle_step * M_PI / 180;
-		// if (i == 0 || i == WIN_WIDTH - 1)
-		// {
-		// 	PF(d->player.player_angle);
-		// 	PF(ray_angle);
-		// }
-		if (cos(ray_angle) > 0 && sin(ray_angle) > 0)
-		{
-			PF2("cos", cos(ray_angle));
-			PF2("sin", sin(ray_angle));
-		}
-		target.target_x = p_pos_x + cos(ray_angle);
-		target.target_y = p_pos_y + sin(ray_angle);
-		distance = calcul_dist(d, p_pos_x, p_pos_y, &target);
+		init_dda_params(d, x, p_pos_x, p_pos_y);
+		init_steps(d, p_pos_x, p_pos_y);
+		go_dda(d);
 		wall_facing(d);
-		distance *= cos(ray_angle - atan2(d->player.diry, d->player.dirx));
-		render_wall_slice(d, i, distance, target);
-		i++;
+		render_wall_slice(d, x, d->dda.perpwalldist, target);
+		x++;
 	}
 }

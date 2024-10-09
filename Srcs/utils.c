@@ -34,13 +34,13 @@ void	wall_facing(t_data *d)
 		d->door = 1;
 		return ;
 	}
-	if (d->ray_p.step_x > d->ray_p.step_y)
+	if (d->dda.step_x > d->dda.step_y)
 		d->face = 0;
-	if (d->ray_p.step_x < d->ray_p.step_y)
+	if (d->dda.step_x < d->dda.step_y)
 		d->face = 1;
-	if (d->ray_p.step_x == d->ray_p.step_y && d->ray_p.step_y < 0)
+	if (d->dda.step_x == d->dda.step_y && d->dda.step_y < 0)
 		d->face = 2;
-	if (d->ray_p.step_x == d->ray_p.step_y && d->ray_p.step_y > 0)
+	if (d->dda.step_x == d->dda.step_y && d->dda.step_y > 0)
 		d->face = 3;
 }
 

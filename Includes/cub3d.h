@@ -83,6 +83,7 @@ typedef struct s_player
 	double	diry;
 	double	planex;
 	double	planey;
+	double	camerax;
 	double	player_angle;
 }				t_player;
 
@@ -103,15 +104,21 @@ typedef struct s_target
 	double		target_y;
 }				t_target;
 
-typedef struct s_ray_params
+typedef struct dda
 {
-	double		dif_abs_x;
-	double		dif_abs_y;
+	int			mapx;
+	int			mapy;
+	int			side;
+	double		raydir_x;
+	double		raydir_y;
 	double		step_x;
 	double		step_y;
-	double		draw_err;
-	int			dashed;
-}				t_ray_params;
+	double		sidedist_x;
+	double		sidedist_y;
+	double		deltadist_x;
+	double		deltadist_y;
+	double		perpwalldist;
+}				t_dda;
 
 typedef struct s_mini
 {
@@ -150,7 +157,7 @@ typedef struct s_data
 	t_text			west_texture;
 	t_text			door_o_text;
 	t_text			door_c_text;
-	t_ray_params	ray_p;
+	t_dda			dda;
 	t_mini			mm;
 	char			*text_n_path;
 	char			*text_s_path;
@@ -177,8 +184,8 @@ typedef struct s_data
 
 // init
 void	init_data(t_data *d, char *path);
-void	init_ray(t_ray_params *r);
-void	init_ray_params(t_data *d, double p_pos_x, double p_pos_y, t_target *target);
+void	init_steps(t_data *d, double posx, double posy);
+void	init_dda_params(t_data *d, double p_pos_x, double p_pos_y , int x);
 void	init_minimap(t_data *d);
 void	init_textures(t_data *d);
 int		parse_color(const char *path);

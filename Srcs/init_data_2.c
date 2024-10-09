@@ -1,38 +1,5 @@
 #include "../Includes/cub3d.h"
 
-void	init_ray(t_ray_params *r)
-{
-	r->dif_abs_x = 0;
-	r->dif_abs_y = 0;
-	r->step_x = 0;
-	r->step_y = 0;
-	r->draw_err = 0;
-	r->dashed = 0;
-}
-
-// 
-
-void	init_ray_params(t_data *d, double p_pos_x, double p_pos_y, t_target *target)
-{
-	// if (target->target_x - p_pos_x < 0)
-		d->ray_p.dif_abs_x = fabs(target->target_x - p_pos_x);
-	// else
-		// d->ray_p.dif_abs_x = target->target_x - p_pos_x;
-	// if (target->target_y - p_pos_y < 0)
-		d->ray_p.dif_abs_y = fabs(target->target_y - p_pos_y);
-	// else
-		// d->ray_p.dif_abs_y = target->target_y - p_pos_y;
-	if (p_pos_x < target->target_x)
-		d->ray_p.step_x = 1.0;
-	else
-		d->ray_p.step_x = -1.0;
-	if (p_pos_y < target->target_y)
-		d->ray_p.step_y = 1.0;
-	else
-		d->ray_p.step_y = -1.0;
-	d->ray_p.draw_err = d->ray_p.dif_abs_x - d->ray_p.dif_abs_y;
-}
-
 void	init_texture(t_text *texture)
 {
 	texture->text_ptr = NULL;

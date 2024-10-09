@@ -55,7 +55,6 @@ void	init_data(t_data *d, char *path)
 	d->mlx = NULL;
 	d->win = NULL;
 	init_img(&d->img);
-	init_ray(&d->ray_p);
 	init_player(&d->player);
 	init_map(d);
 	d->file = file_cpy(path);

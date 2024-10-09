@@ -56,6 +56,7 @@ void	ft_map_len(t_data *d, int i)
 	j = 0;
 	while (d->file[i])
 	{
+		PL;
 		if (d->file[i][0] != '\n')
 			d->map_rows++;
 		else if (d->file[i][0] == '\n')
