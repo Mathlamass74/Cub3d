@@ -10,21 +10,21 @@ void	init_ray(t_ray_params *r)
 	r->dashed = 0;
 }
 
-void	init_ray_params(t_data *d, double p_pos_x, double p_pos_y, t_target *target)
+void	init_ray_params(t_data *d, double p_pos_x, double p_pos_y, t_target *t)
 {
-	if (target->target_x - p_pos_x < 0)
-		d->ray_p.dif_abs_x = (target->target_x - p_pos_x) * -1;
+	if (t->target_x - p_pos_x < 0)
+		d->ray_p.dif_abs_x = (t->target_x - p_pos_x) * -1;
 	else
-		d->ray_p.dif_abs_x = target->target_x - p_pos_x;
-	if (target->target_y - p_pos_y < 0)
-		d->ray_p.dif_abs_y = (target->target_y - p_pos_y) * -1;
+		d->ray_p.dif_abs_x = t->target_x - p_pos_x;
+	if (t->target_y - p_pos_y < 0)
+		d->ray_p.dif_abs_y = (t->target_y - p_pos_y) * -1;
 	else
-		d->ray_p.dif_abs_y = target->target_y - p_pos_y;
-	if (p_pos_x < target->target_x)
+		d->ray_p.dif_abs_y = t->target_y - p_pos_y;
+	if (p_pos_x < t->target_x)
 		d->ray_p.step_x = 1.0;
 	else
 		d->ray_p.step_x = -1.0;
-	if (p_pos_y < target->target_y)
+	if (p_pos_y < t->target_y)
 		d->ray_p.step_y = 1.0;
 	else
 		d->ray_p.step_y = -1.0;
@@ -51,4 +51,12 @@ void	init_textures(t_data *d)
 	init_texture(&d->door_o_text);
 	d->door_c_path = ft_strdup("textures/door_close.xpm");
 	d->door_o_path = ft_strdup("textures/door_open.xpm");
+}
+
+void	init_hit_position(t_data *d, t_target t)
+{
+	if (t.face == 'N' || t.face == 'S')
+		d->hit_position = t.target_x - floor(t.target_x);
+	else
+		d->hit_position = t.target_y - floor(t.target_y);
 }

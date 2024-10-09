@@ -32,22 +32,23 @@ void	load_textures(t_data *d)
 	update_floor_ceiling(d);
 }
 
-t_text	*face_texture(t_data *d)
+t_text	*face_texture(t_data *d, t_target t)
 {
-	if (d->map[d->y_door][d->x_door] == 'D')
+	if (d->map[d->y_door][d->x_door] == 'D'
+		|| d->map[d->y_door][d->x_door] == 'O')
 	{
-		if (d->open == 1)
+		if (d->map[d->y_door][d->x_door] == 'O')
 			return (&d->door_o_text);
 		else
 			return (&d->door_c_text);
 		d->y_door = 0;
 		d->x_door = 0;
 	}
-	if (d->face == 0)
+	if (t.face == 'N')
 		return (&d->north_texture);
-	else if (d->face == 1)
+	else if (t.face == 'S')
 		return (&d->south_texture);
-	else if (d->face == 2)
+	else if (t.face == 'E')
 		return (&d->east_texture);
 	else
 		return (&d->west_texture);

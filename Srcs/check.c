@@ -68,7 +68,7 @@ bool	check_is_wall(t_data *d, int y, int x)
 	if (d->map[y][x] == '0' || d->map[y][x] == 'N' || d->map[y][x] == 'S'
 		|| d->map[y][x] == 'E' || d->map[y][x] == 'W')
 		return (false);
-	else if ((d->map[y][x] == 'D' && d->open == 1))
+	else if ((d->map[y][x] == 'O' && d->open == 1))
 	{
 		d->cross_door = 1;
 		return (false);

@@ -101,6 +101,7 @@ typedef struct s_target
 {
 	double		target_x;
 	double		target_y;
+	char face;
 }				t_target;
 
 typedef struct s_ray_params
@@ -140,8 +141,6 @@ typedef struct s_data
 	int				size_of_file;
 	int				map_width;
 	int				map_height;
-	int				tex_width;
-	int				tex_height;
 	unsigned int	floor_color;
 	unsigned int	ceiling_color;
 	t_text			north_texture;
@@ -163,15 +162,13 @@ typedef struct s_data
 	int				draw_color;
 	int				mouse_x;
 	int				mouse_y;
-	int				mouse_down;
 	bool			window_closed;
 	int				move;
 	int				x_door;
 	int				y_door;
 	int				door;
 	int				open;
-	int				move_check;
-	int				face;
+	double			hit_position;
 	t_target		check_case;
 	int				cross_door;
 }				t_data;
@@ -179,12 +176,13 @@ typedef struct s_data
 // init
 void	init_data(t_data *d, char *path);
 void	init_ray(t_ray_params *r);
-void	init_ray_params(t_data *d, double p_pos_x, double p_pos_y, t_target *target);
+void	init_ray_params(t_data *d, double p_pos_x, double p_pos_y, t_target *t);
 void	init_minimap(t_data *d);
 void	init_textures(t_data *d);
 int		parse_color(const char *path);
 void	create_minimap_window(t_data *d);
 void	init_image(t_data *d);
+void	init_hit_position(t_data *d, t_target t);
 
 // check
 int		check_format_cub(char *file);
@@ -197,7 +195,7 @@ void	update_mlx(t_data *d);
 void	load_textures(t_data *d);
 void	update_minimap(t_data *d, int x, int y, int option);
 void	update_player_pos_in_map(t_data *d, int y, int x);
-t_text	*face_texture(t_data *d);
+t_text	*face_texture(t_data *d, t_target t);
 
 // utils
 int		exit_game(int option, t_data *d);
@@ -214,10 +212,11 @@ bool	is_decimal(double n);
 int		close_window(t_data *d);
 int		nxto(t_data	*d);
 void	which_key(int key, t_data *d);
-void	wall_facing(t_data *d);
+void	wall_facing(t_data *d, t_target *target, int option);
 int		is_possible_move(t_data *d, double move_angle, double step);
 int		mouse_click(int button, int x, int y, t_data *d);
 double	cross_door(t_data *d, double step, int option);
+void	print_map(t_data *d);
 
 // draw
 int		draw_map(t_data *d);

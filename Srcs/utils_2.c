@@ -17,7 +17,7 @@ int	is_door_at_position(double x, double y, t_data *d)
 
 	map_x = (int)x;
 	map_y = (int)y;
-	if (d->map[map_y][map_x] == 'D')
+	if (d->map[map_y][map_x] == 'D' || d->map[map_y][map_x] == 'O')
 		return (1);
 	return (0);
 }
@@ -37,6 +37,10 @@ int	mouse_click(int button, int x, int y, t_data *d)
 			d->open = 1;
 		else if (button == MOUSE_LEFT_BUTTON && d->open == 1)
 			d->open = 0;
+		if (d->open == 1)
+			d->map[(int)front_y][(int)front_x] = 'O';
+		else if (d->open == 0)
+			d->map[(int)front_y][(int)front_x] = 'D';
 	}
 	return (0);
 }
@@ -51,19 +55,19 @@ double	cross_door_utils(t_data *d, double step, int option)
 	if (option == 1)
 	{
 		while (d->map[(int)(pos_y - sin(d->player.player_angle) * step)]
-			[(int)(pos_x - cos(d->player.player_angle) * step)] == 'D')
+			[(int)(pos_x - cos(d->player.player_angle) * step)] == 'O')
 			step += 0.01;
 	}
 	else if (option == 2)
 	{
 		while (d->map[(int)(pos_y + cos(d->player.player_angle) * step)]
-			[(int)(pos_x - sin(d->player.player_angle) * step)] == 'D')
+			[(int)(pos_x - sin(d->player.player_angle) * step)] == 'O')
 			step += 0.01;
 	}
 	else
 	{
 		while (d->map[(int)(pos_y - cos(d->player.player_angle) * step)]
-			[(int)(pos_x + sin(d->player.player_angle) * step)] == 'D')
+			[(int)(pos_x + sin(d->player.player_angle) * step)] == 'O')
 			step += 0.01;
 	}
 	return (step);
@@ -81,7 +85,7 @@ double	cross_door(t_data *d, double step, int option)
 		if (option == 0)
 		{
 			while (d->map[(int)(pos_y + sin(d->player.player_angle) * step)]
-				[(int)(pos_x + cos(d->player.player_angle) * step)] == 'D')
+				[(int)(pos_x + cos(d->player.player_angle) * step)] == 'O')
 				step += 0.01;
 		}
 		else

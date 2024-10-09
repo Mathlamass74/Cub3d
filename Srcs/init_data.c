@@ -60,8 +60,6 @@ void	init_data(t_data *d, char *path)
 	init_map(d);
 	d->file = file_cpy(path);
 	d->size_of_file = 0;
-	d->tex_width = 0;
-	d->tex_height = 0;
 	d->floor_color = 0;
 	d->ceiling_color = 0;
 	d->text_n_path = NULL;
@@ -70,12 +68,10 @@ void	init_data(t_data *d, char *path)
 	d->text_e_path = NULL;
 	d->ceiling_path = NULL;
 	d->floor_path = NULL;
-	d->mouse_down = 0;
 	d->draw_color = 0xFFFFFF;
 	d->window_closed = false;
 	d->move = 0;
 	d->door = 0;
 	d->open = 0;
-	d->move_check = 0;
 	d->cross_door = 0;
 }

@@ -27,21 +27,22 @@ int	close_window(t_data *d)
 	return (0);
 }
 
-void	wall_facing(t_data *d)
+void	wall_facing(t_data *d, t_target *target, int option)
 {
-	if (d->face == 5)
+	if (option == 0)
 	{
-		d->door = 1;
-		return ;
+		if (d->ray_p.step_x > 0)
+			target->face = 'E';
+		else
+			target->face = 'W';
 	}
-	if (d->ray_p.step_x > d->ray_p.step_y)
-		d->face = 0;
-	if (d->ray_p.step_x < d->ray_p.step_y)
-		d->face = 1;
-	if (d->ray_p.step_x == d->ray_p.step_y && d->ray_p.step_y < 0)
-		d->face = 2;
-	if (d->ray_p.step_x == d->ray_p.step_y && d->ray_p.step_y > 0)
-		d->face = 3;
+	else
+	{
+		if (d->ray_p.step_y > 0)
+			target->face = 'S';
+		else
+			target->face = 'N';
+	}
 }
 
 void	render_floor_ceiling(t_data *d)

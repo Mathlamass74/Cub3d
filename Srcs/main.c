@@ -1,7 +1,7 @@
 
 #include "../Includes/cub3d.h"
 
-void print_map(t_data *d, int x, int y)
+void print_map(t_data *d)
 {
 	int i;
 	int j;
@@ -13,10 +13,7 @@ void print_map(t_data *d, int x, int y)
 		j = 0;
 		while (j < d->map_lgcol)
 		{
-			if (i == y && j == x)
-				printf("%c", d->map[i][j]);
-			else
-				printf("x");
+			printf("%c", d->map[i][j]);
 			j++;
 		}
 		printf("\n");
