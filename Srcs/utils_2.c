@@ -58,18 +58,8 @@ double	cross_door_utils(t_data *d, double step, int option)
 			[(int)(pos_x - cos(d->player.player_angle) * step)] == 'O')
 			step += 0.01;
 	}
-	else if (option == 2)
-	{
-		while (d->map[(int)(pos_y + cos(d->player.player_angle) * step)]
-			[(int)(pos_x - sin(d->player.player_angle) * step)] == 'O')
-			step += 0.01;
-	}
 	else
-	{
-		while (d->map[(int)(pos_y - cos(d->player.player_angle) * step)]
-			[(int)(pos_x + sin(d->player.player_angle) * step)] == 'O')
-			step += 0.01;
-	}
+		return (0);
 	return (step);
 }
 
@@ -77,9 +67,11 @@ double	cross_door(t_data *d, double step, int option)
 {
 	double	pos_x;
 	double	pos_y;
+	double	step2;
 
 	pos_x = d->player.posx;
 	pos_y = d->player.posy;
+	step2 = step;
 	if (d->cross_door == 1)
 	{
 		if (option == 0)
@@ -90,9 +82,9 @@ double	cross_door(t_data *d, double step, int option)
 		}
 		else
 			step = cross_door_utils(d, step, option);
-		d->cross_door = 0;
-		return (step);
+		step2 = check_cross_door_is_valid_move(d, step, option);
+		return (step2);
 	}
 	else
-		return (step);
+		return (step2);
 }

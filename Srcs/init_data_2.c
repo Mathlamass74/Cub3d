@@ -21,13 +21,13 @@ void	init_ray_params(t_data *d, double p_pos_x, double p_pos_y, t_target *t)
 	else
 		d->ray_p.dif_abs_y = t->target_y - p_pos_y;
 	if (p_pos_x < t->target_x)
-		d->ray_p.step_x = 1.0;
+		d->ray_p.step_x = MOVE_STEP;
 	else
-		d->ray_p.step_x = -1.0;
+		d->ray_p.step_x = -MOVE_STEP;
 	if (p_pos_y < t->target_y)
-		d->ray_p.step_y = 1.0;
+		d->ray_p.step_y = MOVE_STEP;
 	else
-		d->ray_p.step_y = -1.0;
+		d->ray_p.step_y = -MOVE_STEP;
 	d->ray_p.draw_err = d->ray_p.dif_abs_x - d->ray_p.dif_abs_y;
 }
 
@@ -49,7 +49,7 @@ void	init_textures(t_data *d)
 	init_texture(&d->west_texture);
 	init_texture(&d->door_c_text);
 	init_texture(&d->door_o_text);
-	d->door_c_path = ft_strdup("textures/door_close.xpm");
+	d->door_c_path = ft_strdup("textures/Door-close.xpm");
 	d->door_o_path = ft_strdup("textures/door_open.xpm");
 }
 

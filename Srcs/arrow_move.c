@@ -26,6 +26,5 @@ int	arrow_move(int key, t_data *d)
 		move_camera_left(d, -ROT_ANGLE);
 	else if (key == RIGHT_ARROW)
 		move_camera_right(d, ROT_ANGLE);
-	printf("Angle: %f\n", d->player.player_angle);
 	return (0);
 }

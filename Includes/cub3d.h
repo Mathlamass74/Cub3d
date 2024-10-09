@@ -24,7 +24,7 @@
 
 # define WIN_WIDTH 1216
 # define WIN_HEIGHT 1280
-# define MOVE_SPEED
+# define MOVE_SPEED 0.05
 # define MOVE_STEP 0.05
 # define ROT_SPEED
 # define PI 3.1415926535
@@ -38,7 +38,7 @@
 # define PLAYER_SIZE 4
 # define NUM_RAYS 60
 # define RAY_LENGTH 2
-# define FOV 60
+# define FOV 90
 # define TRUE 1
 # define FALSE 0
 # define MINIMAP_SCALE 32
@@ -187,6 +187,7 @@ void	init_hit_position(t_data *d, t_target t);
 // check
 int		check_format_cub(char *file);
 bool	check_is_wall(t_data *d, int y, int x);
+double	check_cross_door_is_valid_move(t_data *d, double step, int option);
 
 // update
 void	update_map(t_data *d, int i, int j);

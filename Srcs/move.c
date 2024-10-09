@@ -2,7 +2,7 @@
 
 double	try_move(t_data *d, double move_angle)
 {
-	int	try;
+	double	try;
 
 	try = 0.0;
 	while (try <= 0.04)
