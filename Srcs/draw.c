@@ -99,7 +99,7 @@ void	draw_multiple_rays(t_data *d, double dir_x, double dir_y)
 		dir_y = sin(ray_angle);
 		d->ray_dist = calcul_dist(d, &t, dir_x, dir_y);
 		render_wall_slice(d, i, &t, ray_angle);
-		if (i > (WIN_WIDTH / 10))
+		if (i > 1)
 		{
 			if (d->file_ != NULL)
 			{
