@@ -1,88 +1,74 @@
 #include "../Includes/cub3d.h"
 
-double	try_move(t_data *d, double move_angle)
+static int	is_collision(t_data *d, int x, int y, int option)
 {
-	double	try;
-
-	try = 0.0;
-	while (try <= 0.04)
+	if (option == 0)
 	{
-		if (is_possible_move(d, move_angle, MOVE_STEP - try))
-			return (try);
-		try += 0.01;
+		if (d->map[(int)y][(int)d->player.posx] != '1'
+			&& d->map[(int)y][(int)d->player.posx] != 'D')
+			return (0);
 	}
-	return (-0.05);
+	else
+	{
+		if (d->map[(int)d->player.posy][(int)x] != '1'
+			&& d->map[(int)d->player.posy][(int)x] != 'D')
+			return (0);
+	}
+	return (1);
 }
 
-int	y_move(int key, t_data *d)
+void	move_front_back(t_data *d)
 {
-	double	stepyx;
-	double	step;
+	double	speed;
+	double	x;
+	double	y;
 
-	step = MOVE_STEP;
-	if (key == 13)
+	speed = MOVE_SPEED;
+	if (d->move->x)
 	{
-		stepyx = try_move(d, d->player.player_angle);
-		if (stepyx < 0)
-			return (0);
-		step = cross_door(d, step, 0);
-		d->player.posx += cos(d->player.player_angle) * (step - stepyx);
-		d->player.posy += sin(d->player.player_angle) * (step - stepyx);
-		return (1);
+		x = d->player.posx + d->player.dirx * speed * 3;
+		y = d->player.posy + d->player.diry * speed * 3;
+		if (!is_collision(d, x, y, 0))
+			d->player.posy += d->player.diry * speed;
+		if (!is_collision(d, x, y, 1))
+			d->player.posx += d->player.dirx * speed;
 	}
-	else if (key == 1)
+	if (d->move->y)
 	{
-		stepyx = try_move(d, d->player.player_angle + M_PI);
-		if (stepyx < 0)
-			return (0);
-		step = cross_door(d, step, 1);
-		d->player.posx -= cos(d->player.player_angle) * (step - stepyx);
-		d->player.posy -= sin(d->player.player_angle) * (step - stepyx);
-		return (1);
+		x = d->player.posx - d->player.dirx * speed * 3;
+		y = d->player.posy - d->player.diry * speed * 3;
+		if (!is_collision(d, x, y, 0))
+			d->player.posy -= d->player.diry * speed;
+		if (!is_collision(d, x, y, 1))
+			d->player.posx -= d->player.dirx * speed;
 	}
-	return (0);
 }
 
-int	x_move(int key, t_data *d)
+void	move_left_right(t_data *d)
 {
-	double	stepyx;
-	double	step;
+	double	speed;
+	double	x;
+	double	y;
 
-	step = MOVE_STEP;
-	if (key == 0)
+	speed = MOVE_SPEED / 2;
+	if (d->move->lateral_x)
 	{
-		stepyx = try_move(d, d->player.player_angle - (M_PI / 2));
-		if (stepyx < 0)
-			return (0);
-		step = cross_door(d, step, 2);
-		d->player.posx += sin(d->player.player_angle) * (step - stepyx);
-		d->player.posy -= cos(d->player.player_angle) * (step - stepyx);
-		return (1);
+		x = d->player.posx - d->player.diry * speed * -2;
+		y = d->player.posy + d->player.dirx * speed * -2;
+		if (!is_collision(d, x, y, 0))
+			d->player.posy -= d->player.dirx * speed;
+		if (!is_collision(d, x, y, 1))
+			d->player.posx += d->player.diry * speed;
 	}
-	else if (key == 2)
+	if (d->move->lateral_y)
 	{
-		stepyx = try_move(d, d->player.player_angle + (M_PI / 2));
-		if (stepyx < 0)
-			return (0);
-		step = cross_door(d, step, 3);
-		d->player.posx -= sin(d->player.player_angle) * (step - stepyx);
-		d->player.posy += cos(d->player.player_angle) * (step - stepyx);
-		return (1);
+		x = d->player.posx + d->player.diry * speed * -2;
+		y = d->player.posy - d->player.dirx * speed * -2;
+		if (!is_collision(d, x, y, 0))
+			d->player.posy += d->player.dirx * speed;
+		if (!is_collision(d, x, y, 1))
+			d->player.posx -= d->player.diry * speed;
 	}
-	return (0);
-}
-
-int	deal_key(int key, t_data *d)
-{
-	if (key == LEFT_ARROW || key == RIGHT_ARROW)
-		arrow_move(key, d);
-	if (key == 53)
-		message("The ESC key pressed.\n", 2, d);
-	if (y_move(key, d))
-		d->move++;
-	if (x_move(key, d))
-		d->move++;
-	return (0);
 }
 
 int	mouse_move(int x, int y, t_data *d)
@@ -91,6 +77,8 @@ int	mouse_move(int x, int y, t_data *d)
 
 	(void)y;
 	delta_x = x - (WIN_WIDTH / 2);
+	if (abs(delta_x) < 5)
+		return (0);
 	d->player.player_angle += delta_x * (M_PI / 180) * MOUSE_SENSITIVITY;
 	if (d->player.player_angle < 0)
 		d->player.player_angle += 2 * M_PI;

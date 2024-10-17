@@ -3,6 +3,7 @@
 
 // On met à jour les directions du player en fonction de l'orientation
 
+
 void	update_player_dir(t_data *d)
 {
 	if (d->player.dir == 'N')
@@ -38,4 +39,24 @@ void	update_player_pos_in_map(t_data *d, int y, int x)
 	d->player.posx = x + 0.5;
 	d->player.posy = y + 0.5;
 	d->map[y][x] = '0';
+}
+
+void	update_pos(t_data *d)
+{
+	if (d->move->x || d->move->y)
+		move_front_back(d);
+	if (d->move->lateral_x || d->move->lateral_y)
+		move_left_right(d);
+	if (d->move->dirx || d->move->diry)
+		arrow_move(d);
+	if (d->map[(int)d->player.posy][(int)d->player.posx] == 'O')
+	{
+		d->sdoor->x = (int)d->player.posx;
+		d->sdoor->y = (int)d->player.posy;
+		d->map[d->sdoor->y][d->sdoor->x] = 'C';
+	}
+	if (((int)d->player.posx != d->sdoor->x
+		|| (int)d->player.posy != d->sdoor->y)
+		&& d->map[d->sdoor->y][d->sdoor->x] == 'C')
+		d->map[d->sdoor->y][d->sdoor->x] = 'D';
 }

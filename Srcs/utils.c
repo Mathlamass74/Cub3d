@@ -1,11 +1,5 @@
 #include "../Includes/cub3d.h"
 
-void	which_key(int key, t_data *d)
-{
-	if (key == 0 || key == 1 || key == 2 || key == 13)
-		d->move++;
-}
-
 void	message(char *msg, int n, t_data *d)
 {
 	printf("%s", msg);
@@ -27,24 +21,6 @@ int	close_window(t_data *d)
 	return (0);
 }
 
-void	wall_facing(t_data *d, t_target *target, int option)
-{
-	if (option == 0)
-	{
-		if (d->ray_p.step_x > 0)
-			target->face = 'E';
-		else
-			target->face = 'W';
-	}
-	else
-	{
-		if (d->ray_p.step_y > 0)
-			target->face = 'S';
-		else
-			target->face = 'N';
-	}
-}
-
 void	render_floor_ceiling(t_data *d)
 {
 	int	x;
@@ -63,5 +39,39 @@ void	render_floor_ceiling(t_data *d)
 			x++;
 		}
 		y++;
+	}
+}
+
+void	set_wall_face(t_data *d, t_target *target, double side)
+{
+	if (side == 0)
+	{
+		if (d->player.posx < target->target_x)
+			target->face = 'S';
+		else
+			target->face = 'N';
+	}
+	else
+	{
+		if (d->player.posy < target->target_y)
+			target->face = 'E';
+		else
+			target->face = 'W';
+	}
+}
+
+int	set_face_side(t_data *d)
+{
+	if (d->ray.dist_x < d->ray.dist_y)
+	{
+		d->ray.dist_x += d->ray.dif_abs_x;
+		d->map_x += d->ray.step_x;
+		return (0);
+	}
+	else
+	{
+		d->ray.dist_y += d->ray.dif_abs_y;
+		d->map_y += d->ray.step_y;
+		return (1);
 	}
 }

@@ -55,7 +55,7 @@ void	init_data(t_data *d, char *path)
 	d->mlx = NULL;
 	d->win = NULL;
 	init_img(&d->img);
-	init_ray(&d->ray_p);
+	init_ray(&d->ray);
 	init_player(&d->player);
 	init_map(d);
 	d->file = file_cpy(path);
@@ -70,8 +70,24 @@ void	init_data(t_data *d, char *path)
 	d->floor_path = NULL;
 	d->draw_color = 0xFFFFFF;
 	d->window_closed = false;
-	d->move = 0;
+	d->move2 = 0;
 	d->door = 0;
 	d->open = 0;
 	d->cross_door = 0;
+	d->map_x = 0;
+	d->map_y = 0;
+	d->hit_pos = 0;
+	d->move = (t_move *)malloc(sizeof(t_move));
+	if (!d->move)
+	{
+		printf("Erreur : impossible d'allouer la mémoire pour la structure move\n");
+		exit(EXIT_FAILURE);
+	}
+	d->sdoor = (t_door *)malloc(sizeof(t_door));
+	if (!d->sdoor)
+	{
+		printf("Erreur : impossible d'allouer la mémoire pour la structure sdoor\n");
+		exit(EXIT_FAILURE);
+	}
 }
+ 

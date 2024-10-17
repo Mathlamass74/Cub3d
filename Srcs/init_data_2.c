@@ -10,25 +10,30 @@ void	init_ray(t_ray_params *r)
 	r->dashed = 0;
 }
 
-void	init_ray_params(t_data *d, double p_pos_x, double p_pos_y, t_target *t)
+void	init_ray_params(t_data *d, double dir_x, double dir_y)
 {
-	if (t->target_x - p_pos_x < 0)
-		d->ray_p.dif_abs_x = (t->target_x - p_pos_x) * -1;
+	d->ray.dif_abs_x = fabs(1 / dir_x);
+	d->ray.dif_abs_y = fabs(1 / dir_y);
+	if (dir_x < 0)
+	{
+		d->ray.step_x = -1;
+		d->ray.dist_x = (d->player.posx - d->map_x) * d->ray.dif_abs_x;
+	}
 	else
-		d->ray_p.dif_abs_x = t->target_x - p_pos_x;
-	if (t->target_y - p_pos_y < 0)
-		d->ray_p.dif_abs_y = (t->target_y - p_pos_y) * -1;
+	{
+		d->ray.step_x = 1;
+		d->ray.dist_x = (d->map_x + 1.0 - d->player.posx) * d->ray.dif_abs_x;
+	}
+	if (dir_y < 0)
+	{
+		d->ray.step_y = -1;
+		d->ray.dist_y = (d->player.posy - d->map_y) * d->ray.dif_abs_y;
+	}
 	else
-		d->ray_p.dif_abs_y = t->target_y - p_pos_y;
-	if (p_pos_x < t->target_x)
-		d->ray_p.step_x = MOVE_STEP;
-	else
-		d->ray_p.step_x = -MOVE_STEP;
-	if (p_pos_y < t->target_y)
-		d->ray_p.step_y = MOVE_STEP;
-	else
-		d->ray_p.step_y = -MOVE_STEP;
-	d->ray_p.draw_err = d->ray_p.dif_abs_x - d->ray_p.dif_abs_y;
+	{
+		d->ray.step_y = 1;
+		d->ray.dist_y = (d->map_y + 1.0 - d->player.posy) * d->ray.dif_abs_y;
+	}
 }
 
 void	init_texture(t_text *texture)
@@ -39,6 +44,8 @@ void	init_texture(t_text *texture)
 	texture->width = 0;
 	texture->line_length = 0;
 	texture->bits_per_pixel = 0;
+	texture->tex_x = 0;
+	texture->tex_y = 0;
 }
 
 void	init_textures(t_data *d)
@@ -53,10 +60,13 @@ void	init_textures(t_data *d)
 	d->door_o_path = ft_strdup("textures/door_open.xpm");
 }
 
-void	init_hit_position(t_data *d, t_target t)
+int	init_hit_pos(t_data *d, int ray_dist, t_target *t)
 {
-	if (t.face == 'N' || t.face == 'S')
-		d->hit_position = t.target_x - floor(t.target_x);
+	int	hit_pos;
+
+	if (t->face == 'N' || t->face == 'S')
+		hit_pos = d->player.posy + ray_dist * sin(d->player.player_angle);
 	else
-		d->hit_position = t.target_y - floor(t.target_y);
+		hit_pos = d->player.posx + ray_dist * cos(d->player.player_angle);
+	return (hit_pos);
 }

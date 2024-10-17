@@ -1,4 +1,4 @@
-NO      textures/faces.xpm
+NO      textures/door_open.xpm
 SO 			textures/sponge.xpm
 EA  	 	 	textures/portal.xpm
 WE textures/maxinose.xpm
@@ -12,6 +12,10 @@ C 153,204,255
     10000000001
     10000000001
     10000S00001
+    10000000001
+    10000000001
+    10000000001
+    10000000001
     10000000001
     10000000001
 1111111111111111111

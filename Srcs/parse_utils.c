@@ -5,16 +5,21 @@ static size_t	ft_strlen_magic(char *s)
 {
 	size_t	i;
 	size_t	j;
+	size_t	k;
 
 	i = 0;
 	j = 0;
+	k = 0;
 	while (s[i] && s[i] != '\n')
 	{
 		if (s[i] == ' ' || s[i] == '\t')
 		{
 			while (s[i] == ' ' || s[i] == '\t')
+			{
+				k++;
 				i++;
-			j = i;
+			}
+			j = k;
 		}
 		i++;
 	}

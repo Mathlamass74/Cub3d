@@ -48,7 +48,14 @@ int	main(int ac, char **av)
 		if (!fill_map(&data))
 			exit(0);
 		update_player_dir(&data);
+		data.file_ = fopen("tex_x_values.txt", "w");
+		if (data.file_ == NULL)
+		{
+			printf("Erreur lors de l'ouverture du fichier.\n");
+			return (0);
+		}
 		update_mlx(&data);
+		mlx_destroy_image(data.mlx, data.img.img_ptr);
 	}
 	return (0);
 }

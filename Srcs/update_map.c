@@ -49,7 +49,8 @@ void	update_minimap(t_data *d, int x, int y, int option)
 			|| d->map[y][x] == 'S' || d->map[y][x] == 'E'
 			|| d->map[y][x] == 'W')
 			draw_rectangle(d, WHITE, d->mm.scale, 1);
-		else if (d->map[y][x] == 'D' || d->map[y][x] == 'O')
+		else if (d->map[y][x] == 'D' || d->map[y][x] == 'O'
+			|| d->map[y][x] == 'C')
 			draw_rectangle(d, GREY, d->mm.scale, 1);
 	}
 }

@@ -95,24 +95,41 @@ typedef struct s_text
 	int		bits_per_pixel;
 	int		line_length;
 	int		endian;
+	int		tex_x;
+	int		tex_y;
 }				t_text;
 
 typedef struct s_target
 {
 	double		target_x;
 	double		target_y;
-	char face;
+	char		face;
+	int			end_y;
 }				t_target;
 
 typedef struct s_ray_params
 {
 	double		dif_abs_x;
 	double		dif_abs_y;
-	double		step_x;
-	double		step_y;
+	double		dist_x;
+	double		dist_y;
+	int			step_x;
+	int			step_y;
 	double		draw_err;
 	int			dashed;
 }				t_ray_params;
+
+typedef struct s_move
+{
+	bool	x;
+	bool	y;
+	bool	z;
+	bool	lateral_x;
+	bool	lateral_y;
+	bool	dirx;
+	bool	diry;
+	bool	dirz;
+}	t_move;
 
 typedef struct s_mini
 {
@@ -125,11 +142,18 @@ typedef struct s_mini
 	double			player_y;
 }				t_mini;
 
+typedef struct s_door
+{
+	int				x;
+	int				y;
+}				t_door;
+
 typedef struct s_data
 {
 	void			*mlx;
 	void			*win;
 	t_img			img;
+	t_move			*move;
 	char			**map;
 	int				map_rows;
 	int				map_cols;
@@ -149,7 +173,7 @@ typedef struct s_data
 	t_text			west_texture;
 	t_text			door_o_text;
 	t_text			door_c_text;
-	t_ray_params	ray_p;
+	t_ray_params	ray;
 	t_mini			mm;
 	char			*text_n_path;
 	char			*text_s_path;
@@ -163,26 +187,33 @@ typedef struct s_data
 	int				mouse_x;
 	int				mouse_y;
 	bool			window_closed;
-	int				move;
+	int				move2;
 	int				x_door;
 	int				y_door;
 	int				door;
 	int				open;
-	double			hit_position;
+	int				hit;
+	int				map_x;
+	int				map_y;
 	t_target		check_case;
 	int				cross_door;
+	double			dist;
+	double			hit_pos;
+	t_door			*sdoor;
+	FILE			*file_;
+	double			ray_dist;
 }				t_data;
 
 // init
 void	init_data(t_data *d, char *path);
 void	init_ray(t_ray_params *r);
-void	init_ray_params(t_data *d, double p_pos_x, double p_pos_y, t_target *t);
+void	init_ray_params(t_data *d, double dir_x, double dir_y);
 void	init_minimap(t_data *d);
 void	init_textures(t_data *d);
 int		parse_color(const char *path);
 void	create_minimap_window(t_data *d);
 void	init_image(t_data *d);
-void	init_hit_position(t_data *d, t_target t);
+int		init_hit_pos(t_data *d, int ray_dist, t_target *t);
 
 // check
 int		check_format_cub(char *file);
@@ -196,7 +227,7 @@ void	update_mlx(t_data *d);
 void	load_textures(t_data *d);
 void	update_minimap(t_data *d, int x, int y, int option);
 void	update_player_pos_in_map(t_data *d, int y, int x);
-t_text	*face_texture(t_data *d, t_target t);
+t_text	*get_wall_texture(t_data *d, t_target *target);
 
 // utils
 int		exit_game(int option, t_data *d);
@@ -211,31 +242,28 @@ void	free_cube(t_data *d);
 void	message(char *msg, int n, t_data *d);
 bool	is_decimal(double n);
 int		close_window(t_data *d);
-int		nxto(t_data	*d);
-void	which_key(int key, t_data *d);
-void	wall_facing(t_data *d, t_target *target, int option);
-int		is_possible_move(t_data *d, double move_angle, double step);
+void	set_wall_face(t_data *d, t_target *target, double side);
 int		mouse_click(int button, int x, int y, t_data *d);
-double	cross_door(t_data *d, double step, int option);
 void	print_map(t_data *d);
+int		set_face_side(t_data *d);
 
 // draw
 int		draw_map(t_data *d);
 void	draw_minimap(t_data *d);
-void	draw_multiple_rays(t_data *d, double p_pos_x, double p_pos_y);
-// void	draw_ray(t_data *d, int p_pos_x, int p_pos_y, t_target *target);
+void	draw_multiple_rays(t_data *d, double dir_x, double dir_y);
 void	draw_player(t_data *d, double pos_x, double pos_y);
 void	draw_rectangle(t_data *d, int color, int size, int o);
 void	put_pixel_to_image(t_img *img, int x, int y, int color);
 void	render_floor_ceiling(t_data *d);
 
 // move
-int		deal_key(int key, t_data *d);
-int		y_move(int key, t_data *d);
-int		x_move(int key, t_data *d);
+int		key_press(int key, t_data *d);
+int		key_release(int key, t_data *d);
+void	move_front_back(t_data *d);
+void	move_left_right(t_data *d);
 int		mouse_move(int x, int y, t_data *d);
-bool	is_colision(t_data *d, double pos_x, double pos_y);
 void	check_door(t_data *d, int key, int x, int y);
-int		arrow_move(int key, t_data *d);
+int		arrow_move(t_data *d);
+void	update_pos(t_data *data);
 
 #endif
