@@ -1,55 +1,23 @@
 
 #include "../Includes/cub3d.h"
 
-// int	update(t_data *d)
-// {
-// 	mlx_clear_window(d->mlx, d->win);
-// 	draw_map(d);
-// 	draw_multiple_rays(d, d->player.posx, d->player.posy);
-// 	return (0);
-// }
-
-// void	update_mlx(t_data *d)
-// {
-// 	d->mlx = mlx_init();
-// 	if (!d->mlx)
-// 	{
-// 		printf("Error\nErreur d'initialisation de mlx\n");
-// 		return ;
-// 	}
-// 	d->win = mlx_new_window(d->mlx, WIN_WIDTH, WIN_HEIGHT, "Cub3D");
-// 	if (!d->win)
-// 	{
-// 		printf("Error\nErreur de création de la fenêtre\n");
-// 		return ;
-// 	}
-// 	load_textures(d);
-// 	mlx_hook(d->win, 6, 1L << 6, mouse_move, d);
-// 	mlx_hook(d->win, 2, 1L << 0, &deal_key, d);
-// 	mlx_hook(d->win, 17, 0L, close_window, d);
-// 	mlx_loop_hook(d->mlx, update, d);
-// 	if (d->window_closed == true)
-// 		exit_game(99, d);
-// 	mlx_loop(d->mlx);
-// }
-
 void	draw_zizi(t_data *d)
 {
 	t_target	t;
-	int			sword_width;
-	int			sword_height;
+	int			zizi_width;
+	int			zizi_height;
 	int			start_x;
 	int			start_y;
 
-	sword_width = d->zizi_texture.width;
-	sword_height = d->zizi_texture.height;
-	start_x = (WIN_WIDTH - sword_width) / 1.24;
-	start_y = (WIN_HEIGHT - sword_height) / 1.24;
+	zizi_width = d->zizi_texture.width;
+	zizi_height = d->zizi_texture.height;
+	start_x = (WIN_WIDTH - zizi_width) / 2;
+	start_y = (WIN_HEIGHT - zizi_height) / 1.24;
 	t.target_y = 0;
-	while (t.target_y < sword_height)
+	while (t.target_y < zizi_height)
 	{
 		t.target_x = 0;
-		while (t.target_x < sword_width)
+		while (t.target_x < zizi_width)
 		{
 			if (get_pixel_from_texture
 				(&d->zizi_texture, t.target_x, t.target_y) != 0xFFFFFF)
@@ -99,26 +67,3 @@ void	update_mlx(t_data *d)
 	mlx_mouse_hook(d->win, mouse_click, d);
 	mlx_loop(d->mlx);
 }
-
-// 
-
-// TILESIZE To update:
-
-// update_player.c:
-// 	- posx
-// 	- posy
-// That's the player coordinate on the map, set as the pixel of the window for now but
-// needs to be updated as the relative position store as double between 0 and N, N being the rightmost column of the map;
-// So when we move, ie. update posx, we will move a certain floating amount, rather than a int.
-
-// draw.c:
-// 	- wall_height,
-//	That's the proportion of the window screen which will be rendered as wall texture
-//	Which seems correct but needs to find an alternative to the tilesize calculs
-//	- x_door
-//	- y_door
-//	- target_x
-
-// utils2.c:
-//	- new_y
-//	- new_x

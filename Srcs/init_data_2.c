@@ -59,5 +59,5 @@ void	init_textures(t_data *d)
 	init_texture(&d->zizi_texture);
 	d->door_c_path = ft_strdup("textures/Door-close.xpm");
 	d->door_o_path = ft_strdup("textures/door_open.xpm");
-	d->zizi_path = ft_strdup("textures/Doigt.xpm");
+	d->zizi_path = ft_strdup("textures/Teub.xpm");
 }
