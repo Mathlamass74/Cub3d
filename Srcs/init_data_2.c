@@ -56,17 +56,8 @@ void	init_textures(t_data *d)
 	init_texture(&d->west_texture);
 	init_texture(&d->door_c_text);
 	init_texture(&d->door_o_text);
+	init_texture(&d->zizi_texture);
 	d->door_c_path = ft_strdup("textures/Door-close.xpm");
 	d->door_o_path = ft_strdup("textures/door_open.xpm");
-}
-
-int	init_hit_pos(t_data *d, int ray_dist, t_target *t)
-{
-	int	hit_pos;
-
-	if (t->face == 'N' || t->face == 'S')
-		hit_pos = d->player.posy + ray_dist * sin(d->player.player_angle);
-	else
-		hit_pos = d->player.posx + ray_dist * cos(d->player.player_angle);
-	return (hit_pos);
+	d->zizi_path = ft_strdup("textures/Doigt.xpm");
 }

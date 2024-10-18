@@ -173,6 +173,7 @@ typedef struct s_data
 	t_text			west_texture;
 	t_text			door_o_text;
 	t_text			door_c_text;
+	t_text			zizi_texture;
 	t_ray_params	ray;
 	t_mini			mm;
 	char			*text_n_path;
@@ -183,6 +184,7 @@ typedef struct s_data
 	char			*floor_path;
 	char			*door_o_path;
 	char			*door_c_path;
+	char			*zizi_path;
 	int				draw_color;
 	int				mouse_x;
 	int				mouse_y;
@@ -254,6 +256,7 @@ void	draw_multiple_rays(t_data *d, double dir_x, double dir_y);
 void	draw_player(t_data *d, double pos_x, double pos_y);
 void	draw_rectangle(t_data *d, int color, int size, int o);
 void	put_pixel_to_image(t_img *img, int x, int y, int color);
+int		get_pixel_from_texture(t_text *texture, int x, int y);
 void	render_floor_ceiling(t_data *d);
 
 // move

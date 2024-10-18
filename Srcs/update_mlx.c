@@ -33,12 +33,42 @@
 // 	mlx_loop(d->mlx);
 // }
 
+void	draw_zizi(t_data *d)
+{
+	t_target	t;
+	int			sword_width;
+	int			sword_height;
+	int			start_x;
+	int			start_y;
+
+	sword_width = d->zizi_texture.width;
+	sword_height = d->zizi_texture.height;
+	start_x = (WIN_WIDTH - sword_width) / 1.24;
+	start_y = (WIN_HEIGHT - sword_height) / 1.24;
+	t.target_y = 0;
+	while (t.target_y < sword_height)
+	{
+		t.target_x = 0;
+		while (t.target_x < sword_width)
+		{
+			if (get_pixel_from_texture
+				(&d->zizi_texture, t.target_x, t.target_y) != 0xFFFFFF)
+				put_pixel_to_image(&d->img, start_x + t.target_x, start_y
+					+ t.target_y, get_pixel_from_texture(&d->zizi_texture,
+						t.target_x, t.target_y));
+			t.target_x++;
+		}
+		t.target_y++;
+	}
+}
+
 int	update(t_data *d)
 {
 	update_pos(d);
 	render_floor_ceiling(d);
 	draw_multiple_rays(d, 0, 0);
 	draw_minimap(d);
+	draw_zizi(d);
 	mlx_put_image_to_window(d->mlx, d->win, d->img.img_ptr, 0, 0);
 	return (0);
 }

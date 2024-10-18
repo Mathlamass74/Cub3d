@@ -28,13 +28,13 @@ void	load_textures(t_data *d)
 	load_texture(d, &d->east_texture, d->text_e_path);
 	load_texture(d, &d->west_texture, d->text_w_path);
 	load_texture(d, &d->door_c_text, d->door_c_path);
-	load_texture(d, &d->door_o_text, d->door_o_path);
+	load_texture(d, &d->zizi_texture, d->zizi_path);
 	update_floor_ceiling(d);
 }
 
 t_text	*get_wall_texture(t_data *d, t_target *target)
 {
-	if (target->face == 'D')
+	if (target->face == 'D' || target->face == 'P')
 		return (&d->door_c_text);
 	else if (target->face == 'N')
 		return (&d->north_texture);

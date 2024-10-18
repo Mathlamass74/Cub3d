@@ -46,14 +46,18 @@ void	set_wall_face(t_data *d, t_target *target, double side)
 {
 	if (side == 0)
 	{
-		if (d->player.posx < target->target_x)
+		if (d->map[d->map_y][d->map_x] == 'D')
+			target->face = 'D';
+		else if (d->player.posx < target->target_x)
 			target->face = 'S';
 		else
 			target->face = 'N';
 	}
 	else
 	{
-		if (d->player.posy < target->target_y)
+		if (d->map[d->map_y][d->map_x] == 'D')
+			target->face = 'P';
+		else if (d->player.posy < target->target_y)
 			target->face = 'E';
 		else
 			target->face = 'W';

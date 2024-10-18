@@ -43,8 +43,6 @@ double	calcul_dist(t_data *d, t_target *target, double dir_x, double dir_y)
 			target->target_y = d->map_y;
 			set_wall_face(d, target, side);
 		}
-		if (d->map[d->map_y][d->map_x] == 'D')
-			target->face = 'D';
 	}
 	if (side == 0)
 		return ((d->map_x - d->player.posx + (1 - d->ray.step_x) / 2) / dir_x);
@@ -68,16 +66,16 @@ void	render_wall_slice(t_data *d, int ray_ind, t_target *t, double ray_angle)
 	if (t->end_y >= WIN_HEIGHT)
 		t->end_y = WIN_HEIGHT;
 	i = start_y;
-	if (t->face == 'N' || t->face == 'S')
+	if (t->face == 'N' || t->face == 'S' || t->face == 'D')
 		d->hit_pos = d->player.posy + d->ray_dist * sin(ray_angle);
 	else
 		d->hit_pos = d->player.posx + d->ray_dist * cos(ray_angle);
 	texture->tex_x = (d->hit_pos - floor(d->hit_pos)) * texture->width;
 	while (i++ < t->end_y)
 	{
+		texture->tex_y = ((i - start_y) * texture->height) / wall_height;
 		if (d->file_ != NULL)
 			fprintf(d->file_, "Ray Index: %d, tex_x: %d, tex_y: %d, ray_dist: %f\n", ray_ind, texture->tex_x, texture->tex_y, d->ray_dist);
-		texture->tex_y = ((i - start_y) * texture->height) / wall_height;
 		put_pixel_to_image(&d->img, ray_ind, i,
 			get_pixel_from_texture(texture, texture->tex_x, texture->tex_y));
 	}
@@ -99,7 +97,7 @@ void	draw_multiple_rays(t_data *d, double dir_x, double dir_y)
 		dir_y = sin(ray_angle);
 		d->ray_dist = calcul_dist(d, &t, dir_x, dir_y);
 		render_wall_slice(d, i, &t, ray_angle);
-		if (i > 1)
+		if (i > 100)
 		{
 			if (d->file_ != NULL)
 			{

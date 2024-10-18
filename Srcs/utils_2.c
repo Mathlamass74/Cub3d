@@ -35,6 +35,6 @@ int	mouse_click(int button, int x, int y, t_data *d)
 	{
 		if (button == MOUSE_LEFT_BUTTON)
 			d->map[(int)front_y][(int)front_x] = 'O';
-		}
+	}
 	return (0);
 }
