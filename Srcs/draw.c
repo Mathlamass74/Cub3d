@@ -58,8 +58,10 @@ void	render_wall_slice(t_data *d, int ray_ind, t_target *t, double ray_angle)
 	int		i;
 
 	texture = get_wall_texture(d, t);
-	wall_height = WIN_HEIGHT / d->ray_dist;
+	wall_height = WIN_HEIGHT / (d->ray_dist * cos(d->player.player_angle - ray_angle));
 	start_y = (WIN_HEIGHT / 2) - (wall_height / 2);
+	if (start_y < 0 && d->ray_dist)
+		start_y = 0;
 	if (start_y < 0)
 		start_y = 0;
 	t->end_y = (start_y + wall_height);
