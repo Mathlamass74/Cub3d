@@ -37,3 +37,16 @@ void	init_image(t_data *d)
 	d->img.addr = mlx_get_data_addr(d->img.img_ptr, &d->img.bits_per_pixel,
 			&d->img.line_length, &d->img.endian);
 }
+
+int	init_wall_dimensions(double *start_y, double wall_height, t_target *t)
+{
+	*start_y = (WIN_HEIGHT / 2) - (wall_height / 2);
+	if (*start_y < 0)
+		*start_y = 0;
+	t->end_y = (*start_y + wall_height);
+	if (t->end_y >= WIN_HEIGHT)
+		t->end_y = WIN_HEIGHT;
+	return (start_y);
+}
+
+void	

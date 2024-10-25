@@ -1,10 +1,10 @@
 
 #include "../Includes/cub3d.h"
 
-void print_map(t_data *d)
+void	print_map(t_data *d)
 {
-	int i;
-	int j;
+	int	i;
+	int	j;
 
 	i = 0;
 	j = 0;
@@ -32,8 +32,8 @@ void	print_all(t_data *d)
 	printf("player direction : %c\n", d->player.dir);
 	printf("player posx : %f\n", d->player.posx);
 	printf("player posy : %f\n", d->player.posy);
-	//print_map(d);
 }
+	//print_map(d);
 
 int	main(int ac, char **av)
 {

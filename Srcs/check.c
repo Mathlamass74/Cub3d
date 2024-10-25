@@ -1,7 +1,8 @@
 
 #include "../Includes/cub3d.h"
 
-// On vérifie que la map ne possède pas de trous ni de caractères invalides ni de doublons de perso
+// On vérifie que la map ne possède 
+// pas de trous ni de caractères invalides ni de doublons de perso
 int	flood_fill(t_data *d, int x, int y)
 {
 	if (y >= 0 && y < d->map_rows - 1 && d->map[y][x] == '9'

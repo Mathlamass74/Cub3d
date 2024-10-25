@@ -2,8 +2,6 @@
 #include "../Includes/cub3d.h"
 
 // On met à jour les directions du player en fonction de l'orientation
-
-
 void	update_player_dir(t_data *d)
 {
 	if (d->player.dir == 'N')
@@ -56,7 +54,7 @@ void	update_pos(t_data *d)
 		d->map[d->sdoor->y][d->sdoor->x] = 'C';
 	}
 	if (((int)d->player.posx != d->sdoor->x
-		|| (int)d->player.posy != d->sdoor->y)
+			|| (int)d->player.posy != d->sdoor->y)
 		&& d->map[d->sdoor->y][d->sdoor->x] == 'C')
-		d->map[d->sdoor->y][d->sdoor->x] = 'D';
+				d->map[d->sdoor->y][d->sdoor->x] = 'D';
 }

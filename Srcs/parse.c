@@ -26,7 +26,8 @@ void	parse_map(t_data *d, int i)
 	update_map(d, i - 1, 0);
 }
 
-// On parse le fichier map pour vérifier que toutes les infos nécessaires sont bien présentes
+// On parse le fichier map pour vérifier
+// que toutes les infos nécessaires sont bien présentes
 void	parse(t_data *d)
 {
 	int	i;

@@ -248,6 +248,7 @@ void	set_wall_face(t_data *d, t_target *target, double side);
 int		mouse_click(int button, int x, int y, t_data *d);
 void	print_map(t_data *d);
 int		set_face_side(t_data *d);
+void	init_wall_dimensions(double *start_y, double wall_height, t_target *t);
 
 // draw
 int		draw_map(t_data *d);

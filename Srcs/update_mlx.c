@@ -36,7 +36,6 @@ int	update(t_data *d)
 	render_floor_ceiling(d);
 	draw_multiple_rays(d, 0, 0);
 	draw_minimap(d);
-	//draw_zizi(d);
 	mlx_put_image_to_window(d->mlx, d->win, d->img.img_ptr, 0, 0);
 	return (0);
 }

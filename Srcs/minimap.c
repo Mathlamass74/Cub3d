@@ -28,8 +28,8 @@ void	draw_player_direction(t_data *d)
 
 void	draw_rectangle(t_data *d, int color, int size, int o)
 {
-	int	i;
-	int	j;
+	int		i;
+	int		j;
 	double	x;
 	double	y;
 
@@ -58,7 +58,8 @@ void	draw_rectangle(t_data *d, int color, int size, int o)
 // 			+ i++, d->mm.minimap_y, color);
 // 	i = 0;
 // 	while (i < width)
-// 		put_pixel_to_image(&d->img, d->mm.minimap_x + i++, d->mm.minimap_y + height - 1, color);
+// 		put_pixel_to_image(&d->img, d->mm.minimap_x + i++,
+		//  d->mm.minimap_y + height - 1, color);
 // 	i = 0;
 // 	while (i < height)
 // 		put_pixel_to_image(&d->img, d->mm.minimap_x,

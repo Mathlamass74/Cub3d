@@ -89,5 +89,7 @@ void	init_data(t_data *d, char *path)
 		printf("Erreur : impossible d'allouer la mémoire pour la structure sdoor\n");
 		exit(EXIT_FAILURE);
 	}
+	d->sdoor->x = 0;
+	d->sdoor->y = 0;
 }
  
