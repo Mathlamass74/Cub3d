@@ -6,7 +6,7 @@
 /*   By: pcardin <pcardin@student.42lausanne.ch>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/23 14:24:21 by mlepesqu          #+#    #+#             */
-/*   Updated: 2024/10/30 15:19:19 by pcardin          ###   ########.fr       */
+/*   Updated: 2024/10/30 15:24:02 by pcardin          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -75,6 +75,8 @@ void	init_data(t_data *d, char *path)
 	d->move->diry = FALSE;
 	d->move->x = FALSE;
 	d->move->y = FALSE;
+	d->move->lateral_x = FALSE;
+	d->move->lateral_y = FALSE;
 	d->file = file_cpy(path);
 	d->window_closed = false;
 	d->open = 0;

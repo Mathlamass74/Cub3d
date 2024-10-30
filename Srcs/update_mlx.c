@@ -6,7 +6,7 @@
 /*   By: pcardin <pcardin@student.42lausanne.ch>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/23 14:24:21 by mlepesqu          #+#    #+#             */
-/*   Updated: 2024/10/30 14:35:38 by pcardin          ###   ########.fr       */
+/*   Updated: 2024/10/30 15:29:30 by pcardin          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -74,6 +74,6 @@ void	update_mlx(t_data *d)
 	mlx_loop_hook(d->mlx, update, d);
 	if (d->window_closed == true)
 		exit_game(99, d);
-	mlx_mouse_hook(d->win, mouse_click, d);
+	mlx_mouse_hook(d->win, open_door, d);
 	mlx_loop(d->mlx);
 }

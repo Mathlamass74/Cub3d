@@ -6,7 +6,7 @@
 /*   By: pcardin <pcardin@student.42lausanne.ch>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/23 14:24:21 by mlepesqu          #+#    #+#             */
-/*   Updated: 2024/10/30 11:11:43 by pcardin          ###   ########.fr       */
+/*   Updated: 2024/10/30 15:29:43 by pcardin          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -60,7 +60,7 @@ int	is_door_at_position(double x, double y, t_data *d)
 	return (0);
 }
 
-int	mouse_click(int button, int x, int y, t_data *d)
+int	open_door(int button, int x, int y, t_data *d)
 {
 	double	front_x;
 	double	front_y;
@@ -71,7 +71,7 @@ int	mouse_click(int button, int x, int y, t_data *d)
 	front_y = d->player.posy + sin(d->player.player_angle);
 	if (is_door_at_position(front_x, front_y, d))
 	{
-		if (button == MOUSE_LEFT_BUTTON)
+		if (button == MOUSE_LEFT_BUTTON || button == E_KEY)
 			d->map[(int)front_y][(int)front_x] = 'O';
 	}
 	return (0);

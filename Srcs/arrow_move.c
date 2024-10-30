@@ -6,7 +6,7 @@
 /*   By: pcardin <pcardin@student.42lausanne.ch>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/23 14:24:21 by mlepesqu          #+#    #+#             */
-/*   Updated: 2024/10/30 11:10:28 by pcardin          ###   ########.fr       */
+/*   Updated: 2024/10/30 15:41:50 by pcardin          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,6 +16,8 @@ int	key_press(int key, t_data *d)
 {
 	if (key == 53)
 		message("The ESC key pressed.\n", 2, d);
+	if (key == E_KEY)
+		open_door(E_KEY, 0, 0, d);
 	if (key == 13)
 		d->move->x = TRUE;
 	if (key == 1)
