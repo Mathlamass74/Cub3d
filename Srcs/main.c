@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   main.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: pcardin <pcardin@student.42lausanne.ch>    +#+  +:+       +#+        */
+/*   By: mathieu <mathieu@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/23 14:24:21 by mlepesqu          #+#    #+#             */
-/*   Updated: 2024/10/30 14:00:13 by pcardin          ###   ########.fr       */
+/*   Updated: 2024/10/30 22:39:55 by mathieu          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,6 +22,8 @@ int	main(int ac, char **av)
 			exit(exit_game(9, &data));
 		init_data(&data, av[1]);
 		parse(&data);
+		if (data.exit)
+			exit(0);
 		if (!fill_map(&data))
 			exit(0);
 		update_player_dir(&data);

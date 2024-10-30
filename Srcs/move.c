@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   move.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: pcardin <pcardin@student.42lausanne.ch>    +#+  +:+       +#+        */
+/*   By: mathieu <mathieu@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/23 14:24:21 by mlepesqu          #+#    #+#             */
-/*   Updated: 2024/10/30 11:12:08 by pcardin          ###   ########.fr       */
+/*   Updated: 2024/10/30 22:41:20 by mathieu          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -85,18 +85,25 @@ void	move_left_right(t_data *d)
 
 int	mouse_move(int x, int y, t_data *d)
 {
-	int	delta_x;
+	int		delta_x;
+	double	sensi;
+	double	distance;
 
 	(void)y;
-	delta_x = x - (WIN_WIDTH / 2);
-	if (abs(delta_x) < 5)
+	if (x < 0 || x >= WIN_WIDTH || y < 0 || y >= WIN_HEIGHT)
 		return (0);
-	d->player.player_angle += delta_x * (M_PI / 180) * MOUSE_SENSITIVITY;
-	if (d->player.player_angle < 0)
-		d->player.player_angle += 2 * M_PI;
-	else if (d->player.player_angle > 2 * M_PI)
-		d->player.player_angle -= 2 * M_PI;
-	d->player.dirx = cos(d->player.player_angle);
-	d->player.diry = sin(d->player.player_angle);
+	delta_x = x - (WIN_WIDTH / 2);
+	distance = abs(delta_x);
+	sensi = MOUSE_SENSITIVITY * (1 + (distance / (double)(WIN_WIDTH / 2)));
+	if (distance > 5)
+	{
+		d->player.player_angle += delta_x * (M_PI / 180) * sensi;
+		if (d->player.player_angle < 0)
+			d->player.player_angle += 2 * M_PI;
+		else if (d->player.player_angle > 2 * M_PI)
+			d->player.player_angle -= 2 * M_PI;
+		d->player.dirx = cos(d->player.player_angle);
+		d->player.diry = sin(d->player.player_angle);
+	}
 	return (0);
 }
