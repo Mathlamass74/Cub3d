@@ -6,7 +6,7 @@
 /*   By: pcardin <pcardin@student.42lausanne.ch>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/23 14:24:21 by mlepesqu          #+#    #+#             */
-/*   Updated: 2024/10/30 14:13:25 by pcardin          ###   ########.fr       */
+/*   Updated: 2024/10/30 15:20:24 by pcardin          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,7 +24,7 @@
 # include <string.h>
 # include <stdbool.h>
 
-// # define PL fprintf(stderr, "file: %s line: %d pid: %i\n", \
+// # define PL fprintf(stderr, "file: %s line: %d pid: %i\n",
 // 	__FILE__, __LINE__, getpid())
 // # define PF(x) fprintf(stderr, "PF: %f\n", (x));
 // # define PF2(s, x) fprintf(stderr, "%s: %f\n", (s), (x));

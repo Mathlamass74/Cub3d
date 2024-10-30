@@ -6,7 +6,7 @@
 /*   By: pcardin <pcardin@student.42lausanne.ch>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/23 14:24:21 by mlepesqu          #+#    #+#             */
-/*   Updated: 2024/10/30 13:47:37 by pcardin          ###   ########.fr       */
+/*   Updated: 2024/10/30 15:19:19 by pcardin          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -71,6 +71,10 @@ void	init_data(t_data *d, char *path)
 	init_map(d);
 	init_texture_path(d);
 	init_doors(d);
+	d->move->dirx = FALSE;
+	d->move->diry = FALSE;
+	d->move->x = FALSE;
+	d->move->y = FALSE;
 	d->file = file_cpy(path);
 	d->window_closed = false;
 	d->open = 0;
