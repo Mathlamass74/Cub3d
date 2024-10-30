@@ -1,8 +1,19 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   arrow_move.c                                       :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: pcardin <pcardin@student.42lausanne.ch>    +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2023/10/23 14:24:21 by mlepesqu          #+#    #+#             */
+/*   Updated: 2024/10/30 11:10:28 by pcardin          ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
 #include "../Includes/cub3d.h"
 
 int	key_press(int key, t_data *d)
 {
-	//printf("pressed: %d\n", key);
 	if (key == 53)
 		message("The ESC key pressed.\n", 2, d);
 	if (key == 13)

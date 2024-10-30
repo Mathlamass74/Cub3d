@@ -1,3 +1,14 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   update_mlx.c                                       :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: pcardin <pcardin@student.42lausanne.ch>    +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2023/10/23 14:24:21 by mlepesqu          #+#    #+#             */
+/*   Updated: 2024/10/30 11:11:57 by pcardin          ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
 
 #include "../Includes/cub3d.h"
 
@@ -12,7 +23,7 @@ void	draw_zizi(t_data *d)
 	zizi_width = d->zizi_texture.width;
 	zizi_height = d->zizi_texture.height;
 	start_x = (WIN_WIDTH - zizi_width) / 2;
-	start_y = (WIN_HEIGHT - zizi_height) / 1.24;
+	start_y = (WIN_HEIGHT - zizi_height) / 1;
 	t.target_y = 0;
 	while (t.target_y < zizi_height)
 	{

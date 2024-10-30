@@ -1,3 +1,14 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   cub3d.h                                            :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: pcardin <pcardin@student.42lausanne.ch>    +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2023/10/23 14:24:21 by mlepesqu          #+#    #+#             */
+/*   Updated: 2024/10/30 14:13:25 by pcardin          ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
 
 #ifndef CUB3D_H
 # define CUB3D_H
@@ -13,23 +24,20 @@
 # include <string.h>
 # include <stdbool.h>
 
-# define PL fprintf(stderr, "file: %s line: %d pid: %i\n", \
-	__FILE__, __LINE__, getpid())
-# define PF(x) fprintf(stderr, "PF: %f\n", (x));
-# define PF2(s, x) fprintf(stderr, "%s: %f\n", (s), (x));
-# define PINT(x) fprintf(stderr, "PI: %d\n", (x));
-# define PSTR(x) fprintf(stderr, "PS: %s\n", (x));
-# define PI2(s, x) fprintf(stderr, "%s: %d\n", (s), (x));
-# define PS2(s, x) fprintf(stderr, "%s: %s\n", (s), (x));
+// # define PL fprintf(stderr, "file: %s line: %d pid: %i\n", \
+// 	__FILE__, __LINE__, getpid())
+// # define PF(x) fprintf(stderr, "PF: %f\n", (x));
+// # define PF2(s, x) fprintf(stderr, "%s: %f\n", (s), (x));
+// # define PINT(x) fprintf(stderr, "PI: %d\n", (x));
+// # define PSTR(x) fprintf(stderr, "PS: %s\n", (x));
+// # define PI2(s, x) fprintf(stderr, "%s: %d\n", (s), (x));
+// # define PS2(s, x) fprintf(stderr, "%s: %s\n", (s), (x));
 
+# define FOV 60
 # define WIN_WIDTH 1216
 # define WIN_HEIGHT 1280
 # define MOVE_SPEED 0.05
 # define MOVE_STEP 0.05
-# define ROT_SPEED
-# define PI 3.1415926535
-# define P2 PI/2
-# define P3 3*PI/2
 # define DR 0.0174533 //1 degré en radian
 # define MINIMAP_WIDTH 256
 # define MINIMAP_HEIGHT 205
@@ -38,7 +46,6 @@
 # define PLAYER_SIZE 4
 # define NUM_RAYS 60
 # define RAY_LENGTH 2
-# define FOV 90
 # define TRUE 1
 # define FALSE 0
 # define MINIMAP_SCALE 32
@@ -115,8 +122,6 @@ typedef struct s_ray_params
 	double		dist_y;
 	int			step_x;
 	int			step_y;
-	double		draw_err;
-	int			dashed;
 }				t_ray_params;
 
 typedef struct s_move
@@ -128,7 +133,6 @@ typedef struct s_move
 	bool	lateral_y;
 	bool	dirx;
 	bool	diry;
-	bool	dirz;
 }	t_move;
 
 typedef struct s_mini
@@ -162,7 +166,6 @@ typedef struct s_data
 	int				map_char_counter;
 	t_player		player;
 	char			**file;
-	int				size_of_file;
 	int				map_width;
 	int				map_height;
 	unsigned int	floor_color;
@@ -185,24 +188,14 @@ typedef struct s_data
 	char			*door_o_path;
 	char			*door_c_path;
 	char			*zizi_path;
-	int				draw_color;
-	int				mouse_x;
-	int				mouse_y;
 	bool			window_closed;
-	int				move2;
-	int				x_door;
-	int				y_door;
-	int				door;
 	int				open;
 	int				hit;
 	int				map_x;
 	int				map_y;
-	t_target		check_case;
 	int				cross_door;
-	double			dist;
 	double			hit_pos;
 	t_door			*sdoor;
-	FILE			*file_;
 	double			ray_dist;
 }				t_data;
 
@@ -213,9 +206,9 @@ void	init_ray_params(t_data *d, double dir_x, double dir_y);
 void	init_minimap(t_data *d);
 void	init_textures(t_data *d);
 int		parse_color(const char *path);
-void	create_minimap_window(t_data *d);
 void	init_image(t_data *d);
-int		init_hit_pos(t_data *d, int ray_dist, t_target *t);
+void	init_texture_path(t_data *d);
+void	init_doors(t_data *d);
 
 // check
 int		check_format_cub(char *file);
@@ -239,26 +232,22 @@ char	**file_cpy(char *path);
 void	ft_map_len(t_data *d, int i);
 int		fill_map(t_data *d);
 int		check_init_done(t_data *d);
-void	print_all(t_data *data);
 void	free_cube(t_data *d);
 void	message(char *msg, int n, t_data *d);
-bool	is_decimal(double n);
 int		close_window(t_data *d);
 void	set_wall_face(t_data *d, t_target *target, double side);
 int		mouse_click(int button, int x, int y, t_data *d);
-void	print_map(t_data *d);
 int		set_face_side(t_data *d);
-void	init_wall_dimensions(double *start_y, double wall_height, t_target *t);
+int		init_wall_dimensions(double *start_y, double wall_height, t_target *t);
+void	init_texture_pos(t_data *d, t_target *t, double ray_angle);
 
 // draw
-int		draw_map(t_data *d);
 void	draw_minimap(t_data *d);
 void	draw_multiple_rays(t_data *d, double dir_x, double dir_y);
-void	draw_player(t_data *d, double pos_x, double pos_y);
 void	draw_rectangle(t_data *d, int color, int size, int o);
 void	put_pixel_to_image(t_img *img, int x, int y, int color);
-int		get_pixel_from_texture(t_text *texture, int x, int y);
 void	render_floor_ceiling(t_data *d);
+int		get_pixel_from_texture(t_text *texture, int x, int y);
 
 // move
 int		key_press(int key, t_data *d);
@@ -266,7 +255,6 @@ int		key_release(int key, t_data *d);
 void	move_front_back(t_data *d);
 void	move_left_right(t_data *d);
 int		mouse_move(int x, int y, t_data *d);
-void	check_door(t_data *d, int key, int x, int y);
 int		arrow_move(t_data *d);
 void	update_pos(t_data *data);
 

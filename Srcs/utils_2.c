@@ -1,4 +1,42 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   utils_2.c                                          :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: pcardin <pcardin@student.42lausanne.ch>    +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2023/10/23 14:24:21 by mlepesqu          #+#    #+#             */
+/*   Updated: 2024/10/30 11:11:43 by pcardin          ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
 #include "../Includes/cub3d.h"
+
+void	init_ray_params(t_data *d, double dir_x, double dir_y)
+{
+	d->ray.dif_abs_x = fabs(1 / dir_x);
+	d->ray.dif_abs_y = fabs(1 / dir_y);
+	if (dir_x < 0)
+	{
+		d->ray.step_x = -1;
+		d->ray.dist_x = (d->player.posx - d->map_x) * d->ray.dif_abs_x;
+	}
+	else
+	{
+		d->ray.step_x = 1;
+		d->ray.dist_x = (d->map_x + 1.0 - d->player.posx) * d->ray.dif_abs_x;
+	}
+	if (dir_y < 0)
+	{
+		d->ray.step_y = -1;
+		d->ray.dist_y = (d->player.posy - d->map_y) * d->ray.dif_abs_y;
+	}
+	else
+	{
+		d->ray.step_y = 1;
+		d->ray.dist_y = (d->map_y + 1.0 - d->player.posy) * d->ray.dif_abs_y;
+	}
+}
 
 int	is_possible_move(t_data *d, double move_angle, double step)
 {

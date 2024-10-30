@@ -1,3 +1,15 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   draw.c                                             :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: pcardin <pcardin@student.42lausanne.ch>    +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2023/10/23 14:24:21 by mlepesqu          #+#    #+#             */
+/*   Updated: 2024/10/30 11:11:07 by pcardin          ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
 #include "../Includes/cub3d.h"
 
 int	get_pixel_from_texture(t_text *texture, int x, int y)
@@ -37,17 +49,12 @@ double	calcul_dist(t_data *d, t_target *target, double dir_x, double dir_y)
 		if (d->map[d->map_y][d->map_x] != '0'
 			&& d->map[d->map_y][d->map_x] != 'O'
 			&& d->map[d->map_y][d->map_x] != 'C')
-		{
-			d->hit = 1;
-			target->target_x = d->map_x;
-			target->target_y = d->map_y;
 			set_wall_face(d, target, side);
-		}
 	}
 	if (side == 0)
-		return ((d->map_x - d->player.posx + (1 - d->ray.step_x) / 2) / dir_x);
+		return (d->ray.dist_x - d->ray.dif_abs_x);
 	else
-		return ((d->map_y - d->player.posy + (1 - d->ray.step_y) / 2) / dir_y);
+		return (d->ray.dist_y - d->ray.dif_abs_y);
 }
 
 void	render_wall_slice(t_data *d, int ray_ind, t_target *t, double ray_angle)
@@ -60,25 +67,22 @@ void	render_wall_slice(t_data *d, int ray_ind, t_target *t, double ray_angle)
 
 	tex_y_start_offset = 0;
 	texture = get_wall_texture(d, t);
-	wall_height = WIN_HEIGHT / (d->ray_dist * cos(d->player.player_angle - ray_angle));
+	wall_height = \
+		WIN_HEIGHT / (d->ray_dist * cos(d->player.player_angle - ray_angle));
 	i = init_wall_dimensions(&start_y, wall_height, t);
-	init_ray_hit_pos(d, t, ray_angle);
-	if (t->face == 'N' || t->face == 'S' || t->face == 'D') // D??
-		d->hit_pos = d->player.posy + d->ray_dist * sin(ray_angle);
-	else
-		d->hit_pos = d->player.posx + d->ray_dist * cos(ray_angle);
+	init_texture_pos(d, t, ray_angle);
 	texture->tex_x = (d->hit_pos - floor(d->hit_pos)) * texture->width;
 	if (WIN_HEIGHT / 2 - wall_height / 2 < 0)
-		tex_y_start_offset = ((-((WIN_HEIGHT / 2) - (wall_height / 2))) / wall_height) * texture->height;
+		tex_y_start_offset = ((-((WIN_HEIGHT / 2) - (wall_height / 2))) \
+			/ wall_height) * texture->height;
 	while (i++ < t->end_y)
 	{
-		texture->tex_y = (((i - start_y) * texture->height) / wall_height) + tex_y_start_offset;
-		put_pixel_to_image(&d->img, ray_ind, i,
+		texture->tex_y = (((i - start_y) * texture->height) / wall_height) \
+			+ tex_y_start_offset;
+		put_pixel_to_image(&d->img, ray_ind, i, \
 			get_pixel_from_texture(texture, texture->tex_x, texture->tex_y));
 	}
 }
-		// if (d->file_ != NULL)
-		// 	fprintf(d->file_, "Ray Index: %d, tex_x: %d, tex_y: %d, ray_dist: %f\n", ray_ind, texture->tex_x, texture->tex_y, d->ray_dist);
 
 void	draw_multiple_rays(t_data *d, double dir_x, double dir_y)
 {
@@ -96,14 +100,6 @@ void	draw_multiple_rays(t_data *d, double dir_x, double dir_y)
 		dir_y = sin(ray_angle);
 		d->ray_dist = calcul_dist(d, &t, dir_x, dir_y);
 		render_wall_slice(d, i, &t, ray_angle);
-		if (i > 100)
-		{
-			if (d->file_ != NULL)
-			{
-				fclose(d->file_);
-				d->file_ = NULL;
-			}
-		}
 		i++;
 	}
 }

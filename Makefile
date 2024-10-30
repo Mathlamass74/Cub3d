@@ -17,11 +17,29 @@ LIBFT_INC = -I $(LIBFTDIR)/Includes
 LIBFT_LINK = -L $(LIBFTDIR) -lft
 
 INCLUDES = -I Includes $(LIBFT_INC)
-CUBE_DIR = Srcs
-CUBE_SRC = $(wildcard $(CUBE_DIR)/*.c)
-OBJ_DIR = obj/
+SRCS = \
+	Srcs/main.c \
+	Srcs/update_mlx.c \
+	Srcs/arrow_move.c \
+	Srcs/check.c \
+	Srcs/check_2.c \
+	Srcs/draw.c \
+	Srcs/exit.c \
+	Srcs/free.c \
+	Srcs/init_data.c \
+	Srcs/init_data_2.c \
+	Srcs/init_utils.c \
+	Srcs/minimap.c \
+	Srcs/move.c \
+	Srcs/parse.c \
+	Srcs/parse_utils.c \
+	Srcs/update_map.c \
+	Srcs/update_player.c \
+	Srcs/update_texture.c \
+	Srcs/utils.c \
+	Srcs/utils_2.c
 
-SRCS = $(CUBE_SRC)
+OBJ_DIR = obj/
 OBJ = $(patsubst %.c,$(OBJ_DIR)%.o,$(SRCS))
 
 $(OBJ_DIR)%.o: %.c

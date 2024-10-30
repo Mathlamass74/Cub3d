@@ -1,3 +1,15 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   utils.c                                            :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: pcardin <pcardin@student.42lausanne.ch>    +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2023/10/23 14:24:21 by mlepesqu          #+#    #+#             */
+/*   Updated: 2024/10/30 11:11:01 by pcardin          ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
 #include "../Includes/cub3d.h"
 
 void	message(char *msg, int n, t_data *d)
@@ -48,7 +60,7 @@ void	set_wall_face(t_data *d, t_target *target, double side)
 	{
 		if (d->map[d->map_y][d->map_x] == 'D')
 			target->face = 'D';
-		else if (d->player.posx < target->target_x)
+		else if (d->player.posx < d->map_x)
 			target->face = 'S';
 		else
 			target->face = 'N';
@@ -57,11 +69,12 @@ void	set_wall_face(t_data *d, t_target *target, double side)
 	{
 		if (d->map[d->map_y][d->map_x] == 'D')
 			target->face = 'P';
-		else if (d->player.posy < target->target_y)
+		else if (d->player.posy < d->map_y)
 			target->face = 'E';
 		else
 			target->face = 'W';
 	}
+	d->hit = 1;
 }
 
 int	set_face_side(t_data *d)

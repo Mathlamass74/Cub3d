@@ -1,3 +1,14 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   update_player.c                                    :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: pcardin <pcardin@student.42lausanne.ch>    +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2023/10/23 14:24:21 by mlepesqu          #+#    #+#             */
+/*   Updated: 2024/10/30 11:11:52 by pcardin          ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
 
 #include "../Includes/cub3d.h"
 
@@ -18,14 +29,14 @@ void	update_player_dir(t_data *d)
 	}
 	else if (d->player.dir == 'E')
 	{
-		d->player.dirx = 1;
 		d->player.diry = 0;
+		d->player.dirx = 1;
 		d->player.player_angle = 0;
 	}
 	else if (d->player.dir == 'W')
 	{
-		d->player.dirx = -1;
 		d->player.diry = 0;
+		d->player.dirx = -1;
 		d->player.player_angle = M_PI;
 	}
 }

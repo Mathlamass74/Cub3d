@@ -1,39 +1,16 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   main.c                                             :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: pcardin <pcardin@student.42lausanne.ch>    +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2023/10/23 14:24:21 by mlepesqu          #+#    #+#             */
+/*   Updated: 2024/10/30 14:00:13 by pcardin          ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
 
 #include "../Includes/cub3d.h"
-
-void	print_map(t_data *d)
-{
-	int	i;
-	int	j;
-
-	i = 0;
-	j = 0;
-	while (i < d->map_rows)
-	{
-		j = 0;
-		while (j < d->map_lgcol)
-		{
-			printf("%c", d->map[i][j]);
-			j++;
-		}
-		printf("\n");
-		i++;
-	}
-}
-
-void	print_all(t_data *d)
-{
-	printf("text_n_path : %s\n", d->text_n_path);
-	printf("text_s_path : %s\n", d->text_s_path);
-	printf("text_w_path : %s\n", d->text_w_path);
-	printf("text_e_path : %s\n", d->text_e_path);
-	printf("ceiling_path : %s\n", d->ceiling_path);
-	printf("floor_path : %s\n", d->floor_path);
-	printf("player direction : %c\n", d->player.dir);
-	printf("player posx : %f\n", d->player.posx);
-	printf("player posy : %f\n", d->player.posy);
-}
-	//print_map(d);
 
 int	main(int ac, char **av)
 {
@@ -48,16 +25,8 @@ int	main(int ac, char **av)
 		if (!fill_map(&data))
 			exit(0);
 		update_player_dir(&data);
-		data.file_ = fopen("tex_x_values.txt", "w");
-		if (data.file_ == NULL)
-		{
-			printf("Erreur lors de l'ouverture du fichier.\n");
-			return (0);
-		}
 		update_mlx(&data);
 		mlx_destroy_image(data.mlx, data.img.img_ptr);
 	}
 	return (0);
 }
-
-// Wildcards interdites dans makefile
