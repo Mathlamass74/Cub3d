@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   parse_utils.c                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: pcardin <pcardin@student.42lausanne.ch>    +#+  +:+       +#+        */
+/*   By: mlepesqu <mlepesqu@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/23 14:24:21 by mlepesqu          #+#    #+#             */
-/*   Updated: 2024/10/30 11:12:04 by pcardin          ###   ########.fr       */
+/*   Updated: 2024/10/31 10:22:53 by mlepesqu         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -76,7 +76,7 @@ void	ft_map_len(t_data *d, int i)
 			d->map_rows++;
 		else if (d->file[i][0] == '\n')
 			break ;
-		while (d->file[i][j] && d->file[i][j] != '\n')
+		while (d->file[i][j])
 			j++;
 		if (j >= d->map_lgcol)
 			d->map_lgcol = j + 2;

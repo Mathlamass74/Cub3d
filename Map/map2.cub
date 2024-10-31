@@ -1,11 +1,11 @@
 NO      textures/Luffy.xpm
-SO 			textures/Boat.xpm
-EA  	 	 	textures/Logo_black.xpm
-WE textures/Logo_white.xpm
+SO 			textures/Boat.xpm	
+EA  	 				 	textures/Logo_black.xpm
+WE textures/Logo_white.xpm 
 
 F 164,169,20
 C 153,204,255
 
-111
-1N1
-111
+11
+1N111
+11

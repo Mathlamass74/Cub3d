@@ -3,16 +3,16 @@
 /*                                                        :::      ::::::::   */
 /*   parse.c                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: mathieu <mathieu@student.42.fr>            +#+  +:+       +#+        */
+/*   By: mlepesqu <mlepesqu@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/23 14:24:21 by mlepesqu          #+#    #+#             */
-/*   Updated: 2024/10/30 22:41:41 by mathieu          ###   ########.fr       */
+/*   Updated: 2024/10/31 11:27:05 by mlepesqu         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../Includes/cub3d.h"
 
-int	parse_map_utils(t_data *d, int i)
+int	  parse_map_utils(t_data *d, int i)
 {
 	int	j;
 
@@ -42,6 +42,9 @@ void	parse_map(t_data *d, int i)
 {
 	int	j;
 
+	if (d->c_tx.no > 1 || d->c_tx.so > 1 || d->c_tx.ea > 1
+		|| d->c_tx.we > 1 || d->c_tx.fl > 1 || d->c_tx.ce > 1)
+		return ;
 	if (!parse_map_utils(d, i))
 		return ;
 	ft_map_len(d, i);
@@ -62,10 +65,56 @@ void	parse_map(t_data *d, int i)
 		i++;
 	}
 	update_map(d, i - 1, 0);
-	if (check_init_done(d))
-		exit(exit_game(4, d));
 }
 
+int	check_values(t_data *d)
+{
+	int	i;
+
+	i = 0;
+	while (d->file[i] && d->file[i][0] != ' ' && d->file[i][0] != '1')
+	{
+		if (ft_strncmp(d->file[i], "NO ", 3)
+			&& ft_strncmp(d->file[i], "SO ", 3)
+			&& ft_strncmp(d->file[i], "EA ", 3)
+			&& ft_strncmp(d->file[i], "WE ", 3)
+			&& ft_strncmp(d->file[i], "F ", 2)
+			&& ft_strncmp(d->file[i], "C ", 2)
+			&& ft_strncmp(d->file[i], "\n", 1))
+			exit(exit_game(4, d));
+		i++;
+	}
+	return (0);
+}
+
+void	parse_2(t_data *d, int i)
+{
+	if (!ft_strncmp(d->file[i], "NO ", 3))
+	{
+		d->text_n_path = ft_strdup_magic(d->file[i] + 2);
+		d->c_tx.no++;
+	}
+	else if (!ft_strncmp(d->file[i], "SO ", 3))
+	{
+		d->text_s_path = ft_strdup_magic(d->file[i] + 2);
+		d->c_tx.so++;
+	}
+	else if (!ft_strncmp(d->file[i], "EA ", 3))
+	{
+		d->text_e_path = ft_strdup_magic(d->file[i] + 2);
+		d->c_tx.ea++;
+	}
+	else if (!ft_strncmp(d->file[i], "WE ", 3))
+	{
+		d->text_w_path = ft_strdup_magic(d->file[i] + 2);
+		d->c_tx.we++;
+	}
+	else if (!ft_strncmp(d->file[i], "F ", 2))
+	{
+		d->floor_path = ft_strdup_magic(d->file[i] + 1);
+		d->c_tx.fl++;
+	}
+}
 // On parse le fichier map pour vérifier
 // que toutes les infos nécessaires sont bien présentes
 void	parse(t_data *d)
@@ -73,24 +122,25 @@ void	parse(t_data *d)
 	int	i;
 
 	i = 0;
+	if (check_values(d))
+		return ;
 	while (d->file[i])
 	{
-		if (!d->text_n_path && !ft_strncmp(d->file[i], "NO ", 3))
-			d->text_n_path = ft_strdup_magic(d->file[i] + 2);
-		else if (!d->text_s_path && !ft_strncmp(d->file[i], "SO ", 3))
-			d->text_s_path = ft_strdup_magic(d->file[i] + 2);
-		else if (!d->text_e_path && !ft_strncmp(d->file[i], "EA ", 3))
-			d->text_e_path = ft_strdup_magic(d->file[i] + 2);
-		else if (!d->text_w_path && !ft_strncmp(d->file[i], "WE ", 3))
-			d->text_w_path = ft_strdup_magic(d->file[i] + 2);
-		else if (!d->floor_path && !ft_strncmp(d->file[i], "F ", 2))
-			d->floor_path = ft_strdup_magic(d->file[i] + 1);
-		else if (!d->ceiling_path && !ft_strncmp(d->file[i], "C ", 2))
+		parse_2(d, i);
+		if (!ft_strncmp(d->file[i], "C ", 2))
+		{
 			d->ceiling_path = ft_strdup_magic(d->file[i] + 1);
+			d->c_tx.ce++;
+		}
 		else if (d->file[i][0] != '\n' && d->text_n_path && d->text_s_path
 			&& d->text_e_path && d->text_w_path && d->floor_path
-				&& d->ceiling_path)
+				&& d->ceiling_path && d->c_tx.no == 1 && d->c_tx.so == 1
+				&& d->c_tx.ea == 1 && d->c_tx.we == 1 && d->c_tx.fl == 1
+				&& d->c_tx.ce == 1)
 			return (parse_map(d, i));
 		i++;
 	}
+	
+	if (check_init_done(d))
+		exit(exit_game(4, d));
 }

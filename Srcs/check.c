@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   check.c                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: pcardin <pcardin@student.42lausanne.ch>    +#+  +:+       +#+        */
+/*   By: mlepesqu <mlepesqu@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/23 14:24:21 by mlepesqu          #+#    #+#             */
-/*   Updated: 2024/10/30 11:10:54 by pcardin          ###   ########.fr       */
+/*   Updated: 2024/10/31 11:17:56 by mlepesqu         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -69,6 +69,13 @@ int	fill_map(t_data *d)
 
 int	check_init_done(t_data *d)
 {
+	if (d->c_tx.no > 1 || d->c_tx.so > 1 || d->c_tx.ea > 1
+		|| d->c_tx.we > 1 || d->c_tx.fl > 1
+		|| d->c_tx.ce > 1)
+	{
+		d->exit = 256;
+		return (exit_game(10, d));
+	}
 	if (d->map && d->text_n_path && d->text_s_path && d->text_e_path
 		&& d->text_w_path && d->floor_path && d->ceiling_path)
 		return (0);

@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   cub3d.h                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: mathieu <mathieu@student.42.fr>            +#+  +:+       +#+        */
+/*   By: mlepesqu <mlepesqu@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/23 14:24:21 by mlepesqu          #+#    #+#             */
-/*   Updated: 2024/10/30 22:38:37 by mathieu          ###   ########.fr       */
+/*   Updated: 2024/10/31 10:15:03 by mlepesqu         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -149,6 +149,16 @@ typedef struct s_door
 	int				y;
 }				t_door;
 
+typedef struct s_check
+{
+	int				no;
+	int				so;
+	int				ea;
+	int				we;
+	int				fl;
+	int				ce;
+}				t_check;
+
 typedef struct s_data
 {
 	void			*mlx;
@@ -195,6 +205,7 @@ typedef struct s_data
 	t_door			*sdoor;
 	double			ray_dist;
 	int				exit;
+	t_check			c_tx;
 }				t_data;
 
 // init
