@@ -6,7 +6,7 @@
 /*   By: mlepesqu <mlepesqu@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/23 14:24:21 by mlepesqu          #+#    #+#             */
-/*   Updated: 2024/10/31 11:34:07 by mlepesqu         ###   ########.fr       */
+/*   Updated: 2024/10/31 11:51:22 by mlepesqu         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -116,6 +116,7 @@ void	parse_2(t_data *d, int i)
 		d->c_tx.fl++;
 	}
 }
+
 // On parse le fichier map pour vérifier
 // que toutes les infos nécessaires sont bien présentes
 void	parse(t_data *d)
@@ -141,7 +142,6 @@ void	parse(t_data *d)
 			return (parse_map(d, i));
 		i++;
 	}
-	
 	if (check_init_done(d))
 		exit(exit_game(4, d));
 }

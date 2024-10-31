@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   ft_isnumber.c                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: pcardin <pcardin@student.42lausanne.ch>    +#+  +:+       +#+        */
+/*   By: mlepesqu <mlepesqu@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/09 12:57:31 by mlepesqu          #+#    #+#             */
-/*   Updated: 2024/10/31 10:54:10 by pcardin          ###   ########.fr       */
+/*   Updated: 2024/10/31 12:06:23 by mlepesqu         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,7 +20,7 @@ int	ft_isnumber(char *str)
 	while (str[++i])
 	{
 		if (str[i] >= 48 && str[i] <= 57)
-			continue;
+			continue ;
 		else
 			return (0);
 	}

@@ -6,7 +6,7 @@
 /*   By: mlepesqu <mlepesqu@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/23 14:24:21 by mlepesqu          #+#    #+#             */
-/*   Updated: 2024/10/31 11:34:20 by mlepesqu         ###   ########.fr       */
+/*   Updated: 2024/10/31 12:05:57 by mlepesqu         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,15 +23,6 @@
 # include <unistd.h>
 # include <string.h>
 # include <stdbool.h>
-
-# define PL fprintf(stderr, "file: %s line: %d pid: %i\n", \
-	__FILE__, __LINE__, getpid())
-# define PF(x) fprintf(stderr, "PF: %f\n", (x));
-# define PF2(s, x) fprintf(stderr, "%s: %f\n", (s), (x));
-# define PINT(x) fprintf(stderr, "PI: %d\n", (x));
-# define PSTR(x) fprintf(stderr, "PS: %s\n", (x));
-# define PI2(s, x) fprintf(stderr, "%s: %d\n", (s), (x));
-# define PS2(s, x) fprintf(stderr, "%s: %s\n", (s), (x));
 
 # define FOV 60
 # define WIN_WIDTH 1216
