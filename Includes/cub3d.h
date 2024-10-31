@@ -6,7 +6,7 @@
 /*   By: mlepesqu <mlepesqu@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/23 14:24:21 by mlepesqu          #+#    #+#             */
-/*   Updated: 2024/10/31 10:15:03 by mlepesqu         ###   ########.fr       */
+/*   Updated: 2024/10/31 11:34:20 by mlepesqu         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -249,6 +249,7 @@ void	free_cube(t_data *d);
 void	message(char *msg, int n, t_data *d);
 void	set_wall_face(t_data *d, t_target *target, double side);
 void	init_texture_pos(t_data *d, t_target *t, double ray_angle);
+void	verify_rgb(t_data *d);
 
 // draw
 int		get_pixel_from_texture(t_text *texture, int x, int y);
