@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   update_player.c                                    :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: pcardin <pcardin@student.42lausanne.ch>    +#+  +:+       +#+        */
+/*   By: mathieu <mathieu@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/23 14:24:21 by mlepesqu          #+#    #+#             */
-/*   Updated: 2024/10/30 11:11:52 by pcardin          ###   ########.fr       */
+/*   Updated: 2024/10/30 22:41:54 by mathieu          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -67,5 +67,5 @@ void	update_pos(t_data *d)
 	if (((int)d->player.posx != d->sdoor->x
 			|| (int)d->player.posy != d->sdoor->y)
 		&& d->map[d->sdoor->y][d->sdoor->x] == 'C')
-				d->map[d->sdoor->y][d->sdoor->x] = 'D';
+		d->map[d->sdoor->y][d->sdoor->x] = 'D';
 }

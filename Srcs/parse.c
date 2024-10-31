@@ -6,7 +6,7 @@
 /*   By: pcardin <pcardin@student.42lausanne.ch>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/23 14:24:21 by mlepesqu          #+#    #+#             */
-/*   Updated: 2024/10/31 10:48:12 by pcardin          ###   ########.fr       */
+/*   Updated: 2024/10/31 11:15:53 by pcardin          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,12 +32,39 @@ void	verify_rgb(t_data *d)
 	}
 }
 
+int	parse_map_utils(t_data *d, int i)
+{
+	int	j;
+
+	while (d->file[i])
+	{
+		j = 0;
+		while (d->file[i][j])
+		{
+			if (d->file[i][j] != '0' && d->file[i][j] != '1'
+				&& d->file[i][j] != 'N' && d->file[i][j] != 'S'
+				&& d->file[i][j] != 'E' && d->file[i][j] != 'W'
+				&& d->file[i][j] != 'D' && d->file[i][j] != ' '
+				&& d->file[i][j] != '\n')
+			{
+				d->exit = 1;
+				return (exit_game(6, d));
+			}
+			j++;
+		}
+		i++;
+	}
+	return (1);
+}
+
 // On copie la map ligne par ligne depuis data->file
 void	parse_map(t_data *d, int i)
 {
 	int	j;
 
 	verify_rgb(d);
+	if (!parse_map_utils(d, i))
+		return ;
 	ft_map_len(d, i);
 	update_map(d, i, 0);
 	while (d->file[i])
@@ -56,6 +83,8 @@ void	parse_map(t_data *d, int i)
 		i++;
 	}
 	update_map(d, i - 1, 0);
+	if (check_init_done(d))
+		exit(exit_game(4, d));
 }
 
 // On parse le fichier map pour vérifier
@@ -85,6 +114,4 @@ void	parse(t_data *d)
 			return (parse_map(d, i));
 		i++;
 	}
-	if (check_init_done(d))
-		exit(exit_game(4, d));
 }

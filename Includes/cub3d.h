@@ -6,7 +6,7 @@
 /*   By: pcardin <pcardin@student.42lausanne.ch>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/23 14:24:21 by mlepesqu          #+#    #+#             */
-/*   Updated: 2024/10/31 10:35:14 by pcardin          ###   ########.fr       */
+/*   Updated: 2024/10/31 11:15:59 by pcardin          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -194,6 +194,7 @@ typedef struct s_data
 	double			hit_pos;
 	t_door			*sdoor;
 	double			ray_dist;
+	int				exit;
 }				t_data;
 
 // init
