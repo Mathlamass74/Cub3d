@@ -6,7 +6,7 @@
 /*   By: pcardin <pcardin@student.42lausanne.ch>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/23 14:24:21 by mlepesqu          #+#    #+#             */
-/*   Updated: 2024/10/30 15:37:55 by pcardin          ###   ########.fr       */
+/*   Updated: 2024/10/31 10:35:14 by pcardin          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,14 +24,14 @@
 # include <string.h>
 # include <stdbool.h>
 
-// # define PL fprintf(stderr, "file: %s line: %d pid: %i\n",
-// 	__FILE__, __LINE__, getpid())
-// # define PF(x) fprintf(stderr, "PF: %f\n", (x));
-// # define PF2(s, x) fprintf(stderr, "%s: %f\n", (s), (x));
-// # define PINT(x) fprintf(stderr, "PI: %d\n", (x));
-// # define PSTR(x) fprintf(stderr, "PS: %s\n", (x));
-// # define PI2(s, x) fprintf(stderr, "%s: %d\n", (s), (x));
-// # define PS2(s, x) fprintf(stderr, "%s: %s\n", (s), (x));
+# define PL fprintf(stderr, "file: %s line: %d pid: %i\n", \
+	__FILE__, __LINE__, getpid())
+# define PF(x) fprintf(stderr, "PF: %f\n", (x));
+# define PF2(s, x) fprintf(stderr, "%s: %f\n", (s), (x));
+# define PINT(x) fprintf(stderr, "PI: %d\n", (x));
+# define PSTR(x) fprintf(stderr, "PS: %s\n", (x));
+# define PI2(s, x) fprintf(stderr, "%s: %d\n", (s), (x));
+# define PS2(s, x) fprintf(stderr, "%s: %s\n", (s), (x));
 
 # define FOV 60
 # define WIN_WIDTH 1216

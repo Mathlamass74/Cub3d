@@ -6,7 +6,7 @@
 /*   By: pcardin <pcardin@student.42lausanne.ch>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/23 14:24:21 by mlepesqu          #+#    #+#             */
-/*   Updated: 2024/10/30 11:11:59 by pcardin          ###   ########.fr       */
+/*   Updated: 2024/10/31 10:04:45 by pcardin          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,7 +30,7 @@ void	update_map(t_data *d, int i, int j)
 		if ((d->map_index == 0 || d->map_index == d->map_rows - 1)
 			|| (j == 0 || j == d->map_lgcol - 1))
 			d->map[d->map_index][j] = '9';
-		else if (d->file[i][k] == ' ')
+		else if (d->file[i][k] == ' ' || d->file[i][k] == '\n')
 		{
 			d->map[d->map_index][j] = '9';
 			k++;
