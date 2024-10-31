@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   update_texture.c                                   :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: pcardin <pcardin@student.42lausanne.ch>    +#+  +:+       +#+        */
+/*   By: mlepesqu <mlepesqu@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/23 14:24:21 by mlepesqu          #+#    #+#             */
-/*   Updated: 2024/10/30 11:11:48 by pcardin          ###   ########.fr       */
+/*   Updated: 2024/10/31 09:40:47 by mlepesqu         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,7 +18,7 @@ void	load_texture(t_data *d, t_text *texture, char *file_path)
 			&texture->width, &texture->height);
 	if (!texture->text_ptr)
 	{
-		printf("Erreur : Impossible de charger la texture %s\n", file_path);
+		printf("Error\nImpossible de charger la texture %s\n", file_path);
 		exit(EXIT_FAILURE);
 	}
 	texture->addr = mlx_get_data_addr(texture->text_ptr,
