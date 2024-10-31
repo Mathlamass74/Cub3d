@@ -6,7 +6,7 @@
 /*   By: mlepesqu <mlepesqu@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/23 14:24:21 by mlepesqu          #+#    #+#             */
-/*   Updated: 2024/10/31 11:34:13 by mlepesqu         ###   ########.fr       */
+/*   Updated: 2024/10/31 12:02:56 by mlepesqu         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -88,6 +88,32 @@ void	ft_map_len(t_data *d, int i)
 		exit(exit_game(2, d));
 }
 
+void	free_rgb(char **rgb1, char **rgb2)
+{
+	int	i;
+
+	i = 0;
+	if (rgb1)
+	{
+		while (rgb1[i])
+		{
+			free(rgb1[i]);
+			i++;
+		}
+		free(rgb1);
+	}
+	i = 0;
+	if (rgb2)
+	{
+		while (rgb2[i])
+		{
+			free(rgb2[i]);
+			i++;
+		}
+		free(rgb2);
+	}
+}
+
 void	verify_rgb(t_data *d)
 {
 	char	**floor;
@@ -95,15 +121,19 @@ void	verify_rgb(t_data *d)
 	int		i;
 
 	i = 0;
-	floor = ft_split(d->floor_path, ',');	
-	ceiling = ft_split(d->ceiling_path, ',');	
+	floor = ft_split(d->floor_path, ',');
+	ceiling = ft_split(d->ceiling_path, ',');
 	while (i < 3 && ceiling[i] && floor[i])
 	{
 		if (ft_atoi(ceiling[i]) < 0 || ft_atoi(ceiling[i]) > 255
 			|| ft_atoi(floor[i]) < 0 || ft_atoi(floor[i]) > 255
 			|| !ft_isnumber(floor[i])
 			|| !ft_isnumber(ceiling[i]))
+		{
+			free_rgb(floor, ceiling);
 			(exit_game(4, d), exit(EXIT_FAILURE));
+		}
 		i++;
 	}
+	free_rgb(floor, ceiling);
 }

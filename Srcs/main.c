@@ -6,28 +6,12 @@
 /*   By: mlepesqu <mlepesqu@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/23 14:24:21 by mlepesqu          #+#    #+#             */
-/*   Updated: 2024/10/31 10:36:15 by mlepesqu         ###   ########.fr       */
+/*   Updated: 2024/10/31 11:51:02 by mlepesqu         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../Includes/cub3d.h"
 
-void	printmap(t_data *d)\
-{
-	int	i = 0;
-	int j;
-	while (d->map[i])
-	{
-		j = 0;
-		while (d->map[i][j])
-		{
-			printf("%c", d->map[i][j]);
-			j++;
-		}
-		printf("\n");
-		i++;
-	}
-}
 int	main(int ac, char **av)
 {
 	t_data	data;
